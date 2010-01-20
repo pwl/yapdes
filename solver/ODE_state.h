@@ -20,5 +20,8 @@ struct _ODE_state
   long int i;			/**< Step number */
 };
 
+ODE_state * ODE_state_init( int N, int * length );
+
+void ODE_state_free( ODE_state * );
 
 #endif /* _ODE_STATE_H_ */

@@ -12,16 +12,16 @@ struct _ODE_module
   void (*stop)( ODE_module *);
   void (*data_free)( ODE_module *);
 
-  struct _ODE_solver * solver;		/**< solver to which module is
+  struct _ODE_solver * solver;	/**< solver to which module is
 				   assigned */
 
-  ODE_module_trigger ** triggers;	/**< triggers assigned to this
+  ODE_module_trigger ** triggers; /**< triggers assigned to this
 					   module */
   int trig_num;			/**< number of triggers added, TODO:
 				   to be changed */
 
-  char * name;  /* name of the module TODO: decrease table size */
-  void * data;	   /* data specific to a particular module */
+  char * name;	    /* name of the module TODO: decrease table size */
+  void * data;	    /* data specific to a particular module */
 };
 
 ODE_module * module_init_common ( void );

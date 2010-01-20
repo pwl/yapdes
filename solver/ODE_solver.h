@@ -12,6 +12,7 @@ struct _ODE_solver
   ODE_state * state;
   ODE_module * modules;
   ODE_uint status;
+  char * output_dir;
 };
 
 ODE_solver * ODE_solver_init( void );

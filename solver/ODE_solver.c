@@ -9,7 +9,6 @@ ODE_solver * ODE_solver_init ( void )
 
 int ODE_solver_run ()
 {
-
   return 0;
 }
 

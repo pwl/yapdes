@@ -1,7 +1,10 @@
 #ifndef _ODE_SPLITTED_TABLE_H_
 #define _ODE_SPLITTED_TABLE_H_
 
-typedef _ODE_splitted_table ODE_splitted_table;
+#include "ODE_common.h"
+
+
+typedef struct _ODE_splitted_table ODE_splitted_table;
 
 struct _ODE_splitted_table
 {

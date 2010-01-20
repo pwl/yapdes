@@ -1,0 +1,34 @@
+#			#
+#	Makefile	#
+#			#
+
+#finds all .c files and replaces the .c with .o
+OBJECTS = $(patsubst %.c,%.o,$(wildcard *.c))
+#finds all directories in this folder
+DIRS = $(patsubst %/,%,$(wildcard */))
+
+# default: $(OBJECTS)
+
+project: $(DIRS) $(OBJECTS)
+	@ar rs $(ARCHIVE) $(OBJECTS)
+	@rm -f $(OBJECTS)
+
+# compiles all the .c files into .o files
+$(OBJECTS): %.o: %.c %.h
+	@$(CC) $(FLAGS) -I $(INCLUDES) -c -o $@ $<
+	@echo "\033[1m$<\033[0m"
+
+# $(OBJECTS): %.o: %.c %.h
+# 	echo "$(CC) $(FLAGS) -I $(INCLUDES) -c -o $@ $<"
+# 	$(CC) $(FLAGS) -I $(INCLUDES) -c -o $@ $<
+
+# OBJECTS are temporarly made .PHONY
+.PHONY: clean $(DIRS) #$(OBJECTS)
+
+# recursively make all subdirectories
+$(DIRS):
+	@$(MAKE) --no-print-directory -eC $@ project
+
+clean:
+	@rm -f *.o *.a
+	@for d in $(DIRS); do $(MAKE) -eC "$${d}" $@; done

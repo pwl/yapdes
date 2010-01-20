@@ -1,7 +1,7 @@
 #ifndef _ODE_MODULES_H_
 #define _ODE_MODULES_H_
 
-#include "ODE_modules_trigger.h"
+#include "module_triggers/ODE_module_trigger.h"
 
 typedef struct _ODE_module ODE_module;
 
@@ -12,7 +12,7 @@ struct _ODE_module
   void (*free)( ODE_module *);
   void (*data_free)( ODE_module *);
 
-  ODE_solver * solver;		/**< solver to which module is
+  struct _ODE_solver * solver;		/**< solver to which module is
 				   assigned */
 
   ODE_module_trigger ** triggers;	/**< triggers assigned to this

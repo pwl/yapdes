@@ -1,18 +1,19 @@
 #include "ODE_solver.h"
 
 
-ODE_solver_init ( void )
+ODE_solver * ODE_solver_init ( void )
 {
-
+  return malloc( sizeof( ODE_solver ) );
 }
 
 
-ODE_solver_status ODE_solver_run ()
+int ODE_solver_run ()
 {
 
+  return 0;
 }
 
-ODE_solver_free (ODE_solver * s)
+void ODE_solver_free (ODE_solver * s)
 {
 
 }

@@ -15,8 +15,8 @@ project: $(DIRS) $(OBJECTS)
 
 # compiles all the .c files into .o files
 $(OBJECTS): %.o: %.c %.h
-	@$(CC) $(FLAGS) -I $(INCLUDES) -c -o $@ $<
 	@echo "\033[1m$<\033[0m"
+	@$(CC) $(FLAGS) -I $(INCLUDES) -c -o $@ $<
 
 # $(OBJECTS): %.o: %.c %.h
 # 	echo "$(CC) $(FLAGS) -I $(INCLUDES) -c -o $@ $<"

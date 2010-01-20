@@ -1,0 +1,30 @@
+* Modules
+  - in main loop run by triggering functions
+  - trigger per module (default trigger)
+  - run times counter
+
+
+* Solver
+  - minimal initialization first
+  - status! (READY, PAUSE, STOP, etc.)
+  - data initialization/allocation by modules, status DATA_READY
+
+* Triggers
+  - test function
+  - action to perform
+
+
+* main loop draft
+
+  solver_init
+  - alloc memory
+
+  module_add
+  - add module to solver
+
+  solver_run
+  - init modules from start list
+  - init stepper
+  - loop stepper with modules, stop with status
+  - stop
+

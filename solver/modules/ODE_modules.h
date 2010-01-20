@@ -7,9 +7,9 @@ typedef struct _ODE_module ODE_module;
 
 struct _ODE_module
 {
-  void (*init)( ODE_module *);
+  void (*start)( ODE_module *);
   void (*run)( ODE_module *);
-  void (*free)( ODE_module *);
+  void (*stop)( ODE_module *);
   void (*data_free)( ODE_module *);
 
   struct _ODE_solver * solver;		/**< solver to which module is
@@ -23,6 +23,8 @@ struct _ODE_module
   char * name;  /* name of the module TODO: decrease table size */
   void * data;	   /* data specific to a particular module */
 };
+
+ODE_module * module_init_common ( void );
 
 void ODE_module_add_trigger ( ODE_module *, ODE_module_trigger * );
 

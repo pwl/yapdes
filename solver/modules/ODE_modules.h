@@ -24,7 +24,7 @@ struct _ODE_module
   void * data;	    /* data specific to a particular module */
 };
 
-ODE_module * module_init_common ( void );
+ODE_module * ODE_module_init_common ( void );
 
 void ODE_module_add_trigger ( ODE_module *, ODE_module_trigger * );
 

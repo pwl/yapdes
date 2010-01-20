@@ -18,7 +18,7 @@ void module_test_stop ( ODE_module * m )
 
 ODE_module * ODE_module_module_test_init ( )
 {
-  ODE_module * m = module_init_common ();
+  ODE_module * m = ODE_module_init_common ();
 
   m->start =
     module_test_start;

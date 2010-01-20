@@ -1,6 +1,6 @@
 #include "ODE_modules.h"
 
-ODE_module * module_init_common ( void )
+ODE_module * ODE_module_init_common ( void )
 {
   ODE_module * m = malloc( sizeof( ODE_module ) );
   m->trig_num = 0;

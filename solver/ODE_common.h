@@ -8,12 +8,24 @@
 #define ODE_uint unsigned int
 
 
+/* default maximum capacity for triggers and modules */
 #define MAX_TRIG_NUMB 10
 #define MAX_MOD_NUMB 30
 
+/* solver states */
 #define SOLVER_INITIALIZED 0x01
 #define SOLVER_STATE_READY 0x02
 #define SOLVER_MODULES_READY 0x04
 #define SOLVER_READY 0x08
+
+/* trigger run times */
+#define TRIG_RUN_NEVER   0x00
+#define TRIG_RUN_START   0x01
+#define TRIG_RUN_STEP    0x02
+#define TRIG_RUN_STOP    0x04
+#define TRIG_RIN_ALWAYS  0x08
+
+/* default run_time for trigger */
+#define TRIG_RUN_DEFAULT TRIG_RUN_NEVER
 
 #endif /* _ODE_COMMON_H_ */

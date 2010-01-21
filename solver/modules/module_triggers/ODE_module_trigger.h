@@ -14,7 +14,13 @@ struct _ODE_module_trigger
   struct _ODE_module * module;	/**< module to which this trigger is
 				  assigned to */
 
+  ODE_uint run_time;
   void * data;
 };
+
+
+ODE_module_trigger * ODE_module_trigger_init_common ();
+
+
 
 #endif /* _ODE_MODULE_TRIGGER_H_ */

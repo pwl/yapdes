@@ -1,2 +1,4 @@
 libyapdes.a
 *.o
+doc/*
+*.bak

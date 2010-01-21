@@ -1,11 +1,9 @@
 #ifndef _ODE_SOLVER_H_
 #define _ODE_SOLVER_H_
 
-#include "ODE_common.h"
+#include "ODE_typedefs.h"
 #include "modules/ODE_modules.h"
 #include "ODE_state.h"
-
-typedef struct _ODE_solver ODE_solver;
 
 struct _ODE_solver
 {
@@ -14,17 +12,21 @@ struct _ODE_solver
   int mod_num;
 
   ODE_uint status;
-  char * output_dir;
-
+  ODE_uint run_time;
+  char output_dir[100];
 };
 
 ODE_solver * ODE_solver_init( void );
 
 void ODE_solver_free ( ODE_solver * );
 
-int ODE_solver_run ( void );
+int ODE_solver_run ( ODE_solver * );
 
-ODE_module ** ODE_modules_init( void );
+int ODE_solver_add_module( ODE_solver * s, ODE_module * m );
+
+int ODE_solver_modules_init( ODE_solver * );
+
+int ODE_solver_modules_free( ODE_solver * s );
 
 int ODE_module_add ( ODE_solver *, ODE_module * );
 

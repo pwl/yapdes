@@ -6,12 +6,12 @@
 #include "stdio.h"
 #include "stdlib.h"
 
-void trigger_test_start ( ODE_module_trigger * );
+int trigger_test_start ( ODE_module_trigger * );
 
-void trigger_test_stop( ODE_module_trigger * );
+int trigger_test_stop( ODE_module_trigger * );
 
 int trigger_test_test ( ODE_module_trigger * );
 
-ODE_module_trigger * ODE_module_trigger_test_init ( );
+ODE_module_trigger * ODE_module_trigger_test_init ( void );
 
 #endif /* _TRIGGER_TEST_H_ */

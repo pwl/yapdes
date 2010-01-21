@@ -4,11 +4,11 @@
 #include "ODE_modules.h"
 
 /* standard module functions */
-void module_test_start ( ODE_module * );
+int module_test_init ( ODE_module * );
 
-void module_test_run ( ODE_module * );
+int module_test_run ( ODE_module * );
 
-void module_test_stop ( ODE_module * );
+int module_test_free ( ODE_module * );
 
 /* module init function, can be programmed to take any arguments,
    and is called by the user */

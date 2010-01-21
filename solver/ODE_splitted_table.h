@@ -2,7 +2,6 @@
 #define _ODE_SPLITTED_TABLE_H_
 
 #include "ODE_table.h"
-#include "ODE_common.h"
 
 
 typedef struct _ODE_splitted_table ODE_splitted_table;

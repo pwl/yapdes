@@ -1,14 +1,14 @@
 #include "trigger_test.h"
 
-void trigger_test_start ( ODE_module_trigger * t)
+int trigger_test_start ( ODE_module_trigger * t)
 {
-  printf("trigger_test_starting\n");
+  return printf("trigger_test_starting\n");
 }
 
 
-void trigger_test_stop ( ODE_module_trigger * t)
+int  trigger_test_stop ( ODE_module_trigger * t)
 {
-  printf("trigger_test stopping\n");
+  return printf("trigger_test stopping\n");
 }
 
 

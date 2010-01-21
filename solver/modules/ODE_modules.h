@@ -1,18 +1,18 @@
 #ifndef _ODE_MODULES_H_
 #define _ODE_MODULES_H_
 
-#include "module_triggers/ODE_module_trigger.h"
-
-typedef struct _ODE_module ODE_module;
+#include "ODE_typedefs.h"
+#include "ODE_solver.h"
+#include "modules/module_triggers/ODE_module_trigger.h"
 
 struct _ODE_module
 {
-  void (*start)( ODE_module *);
-  void (*run)( ODE_module *);
-  void (*stop)( ODE_module *);
-  void (*data_free)( ODE_module *);
+  int (*init)( ODE_module *);
+  int (*run)( ODE_module *);
+  int (*free)( ODE_module *);
+  int (*data_free)( ODE_module *);
 
-  struct _ODE_solver * solver;	/**< solver to which module is
+  ODE_solver * solver;	/**< solver to which module is
 				   assigned */
 
   ODE_module_trigger ** triggers; /**< triggers assigned to this
@@ -26,6 +26,8 @@ struct _ODE_module
 
 ODE_module * ODE_module_init_common ( void );
 
-void ODE_module_add_trigger ( ODE_module *, ODE_module_trigger * );
+int ODE_module_add_trigger ( ODE_module *, ODE_module_trigger * );
+
+int ODE_module_run_triggers ( ODE_module * );
 
 #endif /* _ODE_MODULES_H_ */

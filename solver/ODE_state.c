@@ -14,6 +14,7 @@ ODE_state * ODE_state_init ( int N, int * length )
   return st;
 }
 
+
 void ODE_state_free ( ODE_state * st)
 {
   ODE_splitted_table_free( st->f );

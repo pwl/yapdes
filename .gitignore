@@ -1,4 +1,8 @@
-libyapdes.a
-*.o
-doc/*
-*.bak
+*
+# libyapdes.a
+# *.o
+# doc/*
+# *.bak
+# test
+!solver
+!*.[ch]

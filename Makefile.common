@@ -9,6 +9,9 @@ DIRS = $(patsubst %/,%,$(wildcard */))
 
 # default: $(OBJECTS)
 
+
+.PHONY: clean $(DIRS) #$(OBJECTS)
+
 project: $(DIRS) $(OBJECTS)
 	@ar rs $(ARCHIVE) $(OBJECTS)
 	@rm -f $(OBJECTS)
@@ -23,7 +26,6 @@ $(OBJECTS): %.o: %.c %.h
 # 	$(CC) $(FLAGS) -I $(INCLUDES) -c -o $@ $<
 
 # OBJECTS are temporarly made .PHONY
-.PHONY: clean $(DIRS) #$(OBJECTS)
 
 # recursively make all subdirectories
 $(DIRS):

@@ -20,7 +20,7 @@ export INCLUDES = $(PWD)/solver
 DIRS = solver
 # $(patsubst %/,%,$(wildcard */))
 
-.PHONY : clean $(DIRS) #project test
+.PHONY : clean $(DIRS) projekty
 
 project: CLEAR_AR $(DIRS)
 

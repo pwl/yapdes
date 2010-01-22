@@ -39,7 +39,8 @@ int ODE_solver_modules_free( ODE_solver * s )
   for (i = 0; i < s->mod_num; ++i)
     {
       m = s->modules[i];
-      if( (ret_val = m->free( m )) < 0 )
+      if( (ret_val = m->free( m )) < 0 ||
+	  (ret_val = ODE_module_free_common( m )) < 0 )
 	return ret_val;
     }
 
@@ -85,10 +86,10 @@ int ODE_solver_add_module( ODE_solver * s, ODE_module * m )
 int ODE_solver_run ( ODE_solver * s )
 {
   /* initialize modules and set the apropriate solver status */
-  if ( ODE_solver_modules_init( s ) == 0 )
-    s->status |= SOLVER_ST_MODULES_READY;
-  else
-    return 1;
+  if ( ODE_solver_modules_init( s ) < 0 )
+    return -1;
+
+  s->status |= SOLVER_ST_MODULES_READY;
 
   s->run_time = SOLVER_RUN_START;
   ODE_solver_modules_run( s );

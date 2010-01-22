@@ -10,6 +10,15 @@ ODE_module * ODE_module_init_common ( void )
   return m;
 }
 
+int ODE_module_free_common ( ODE_module * m )
+{
+  ODE_module_triggers_free( m );
+  free( m->triggers );
+  free( m );
+  return 0;
+}
+
+
 int ODE_module_add_trigger (ODE_module * m, ODE_module_trigger * t)
 {
   if( m->trig_num >= MAX_TRIG_NUMB )
@@ -40,3 +49,22 @@ int ODE_module_run_triggers ( ODE_module * m )
 
   return ret_val;
 }
+
+int ODE_module_triggers_free ( ODE_module * m )
+{
+  int i;
+  int ret_val;
+  ODE_module_trigger * tr;
+
+  for (i = 0; i < m->trig_num; ++i)
+    {
+      tr = m->triggers[i];
+      if( (ret_val = tr->free( tr )) < 0 ||
+	  (ret_val = ODE_module_trigger_free_common( tr )) < 0 )
+	return ret_val;
+    }
+
+  return 0;
+}
+
+

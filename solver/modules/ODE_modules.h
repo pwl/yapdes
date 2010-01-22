@@ -26,8 +26,13 @@ struct _ODE_module
 
 ODE_module * ODE_module_init_common ( void );
 
+int ODE_module_free_common ( ODE_module * m );
+
 int ODE_module_add_trigger ( ODE_module *, ODE_module_trigger * );
 
 int ODE_module_run_triggers ( ODE_module * );
+
+int ODE_module_triggers_free ( ODE_module * m );
+
 
 #endif /* _ODE_MODULES_H_ */

@@ -20,10 +20,9 @@ export INCLUDES = $(PWD)/solver
 DIRS = solver
 # $(patsubst %/,%,$(wildcard */))
 
-.PHONY : clean $(DIRS) project test
+.PHONY : clean $(DIRS) #project test
 
 project: CLEAR_AR $(DIRS)
-
 
 test: project test.o $(DIRS)
 	$(CC) $(FLAGS) $(LIBS) -I $(INCLUDES) test.o $(ARCHIVE) -o $@
@@ -32,7 +31,7 @@ test.o: test.c test.h
 	$(CC) $(FLAGS) -I $(INCLUDES) -c -o $@ $<
 
 CLEAR_AR:
-	@rm libyapdes.a
+	@rm -f libyapdes.a
 	@ar rs libyapdes.a
 
 $(DIRS):

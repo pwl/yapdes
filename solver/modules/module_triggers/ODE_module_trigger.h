@@ -8,11 +8,11 @@
 
 struct _ODE_module_trigger
 {
-  int (*start)( ODE_module_trigger *);
-  int (*stop)( ODE_module_trigger *);
+  int (*init)( ODE_module_trigger *);
+  int (*free)( ODE_module_trigger *);
   int (*test)( ODE_module_trigger *);
 
-  struct _ODE_module * module;	/**< module to which this trigger is
+  ODE_module * module;	/**< module to which this trigger is
 				  assigned to */
 
   ODE_uint run_time;
@@ -22,6 +22,6 @@ struct _ODE_module_trigger
 
 ODE_module_trigger * ODE_module_trigger_init_common ();
 
-
+int ODE_module_trigger_free_common( ODE_module_trigger * tr );
 
 #endif /* _ODE_MODULE_TRIGGER_H_ */

@@ -12,7 +12,6 @@ int module_test_run ( ODE_module * m )
 
 int module_test_free ( ODE_module * m )
 {
-  free( m );
   return printf("module_test stop\n");
 }
 

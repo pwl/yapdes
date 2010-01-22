@@ -7,11 +7,17 @@ ODE_module_trigger * ODE_module_trigger_init_common ( void )
   mt->run_time = TRIG_RUN_DEFAULT; /* default run_time for trigger */
 
   /* TODO: can be set to some useful value by default */
-  mt->start = NULL;
-  mt->stop = NULL;
+  mt->init = NULL;
+  mt->free = NULL;
   mt->test = NULL;
   mt->module = NULL;
   mt->data = NULL;
 
   return mt;
+}
+
+int ODE_module_trigger_free_common( ODE_module_trigger * tr )
+{
+  free( tr );
+  return 0;
 }

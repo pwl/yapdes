@@ -2,6 +2,7 @@
 #	Makefile	#
 #			#
 
+
 export SHELL = /bin/bash
 export CC = cc
 export CFLAGS = -ansi -pedantic -Wall

@@ -41,3 +41,4 @@ $(DIRS):
 clean:
 	@rm -f *.o libyapdes.a
 	@for d in $(DIRS); do $(MAKE) -eC "$${d}" $@; done
+# my flags (mmal)

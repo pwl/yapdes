@@ -4,8 +4,14 @@ ODE_module * ODE_module_init_common ( void )
 {
   ODE_module * m = malloc( sizeof( ODE_module ) );
 
+  m->times_run = 0;
   m->trig_num = 0;
   m->triggers = malloc( MAX_TRIG_NUMB * sizeof( ODE_module_trigger ) );
+
+  m->init = NULL;
+  m->run = NULL;
+  m->free = NULL;
+  m->data_free = NULL;
 
   return m;
 }

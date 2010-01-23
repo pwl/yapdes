@@ -4,10 +4,12 @@
   - run times counter
 
 
-* Solver
-  - minimal initialization first
-  - status! (READY, PAUSE, STOP, etc.)
-  - data initialization/allocation by modules, status DATA_READY
+* TODO Solver [0/1]
+  - [ ] minimal initialization first
+  - [ ] status! (READY, PAUSE, STOP, etc.)
+  - [ ] data initialization/allocation by modules, status DATA_READY
+    or something
+  - [ ] list of spatial derivative generators
 
 * Triggers
   - test function
@@ -28,3 +30,12 @@
   - loop stepper with modules, stop with status
   - stop
 
+* stepper
+
+** stepping algorithm needs
+   - current time
+   - current step size
+   - error bounds
+   - function generating rhs of f'=F(f,t)
+   - pointer to parameters of any kind (void * solver) to change
+     status and store temporary data

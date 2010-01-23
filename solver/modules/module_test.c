@@ -26,8 +26,6 @@ ODE_module * ODE_module_module_test_init ( void )
     module_test_run;
   m->free =
     module_test_free;
-  m->data_free =
-    NULL;
 
   return m;
 }

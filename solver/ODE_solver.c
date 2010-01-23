@@ -6,7 +6,8 @@ ODE_solver * ODE_solver_init ( void )
   s->modules = malloc( MAX_MOD_NUMB * sizeof( ODE_module * ) );
   s->mod_num = 0;		/**< number of modules loaded */
   s->run_time = SOLVER_RUN_NOT_RUNNING; /**< what stage of running are we? */
-  s->status = SOLVER_ST_INITIALIZED; /**< what stage of solving the
+  s->status = SOLVER_ST_INITIALIZED
+    | SOLVER_ST_MODULES_READY;	/**< what stage of solving the
 				     equation are we? */
   return s;
 }
@@ -60,38 +61,48 @@ int ODE_solver_modules_run( ODE_solver * s )
 					    triggers and find out if
 					    module shall be run */
 	if( (ret_val = m->run( m )) < 0 )
-	  /* printf("here\n"); */
 	  return ret_val;
     }
 
   return 0;
 }
 
-/* TODO: inform the user, or log! */
-int ODE_solver_add_module( ODE_solver * s, ODE_module * m )
+/* TODO: inform the user or log! */
+int ODE_solver_module_add( ODE_solver * s, ODE_module * m )
 {
+  int ret_val;
+
   /* too many modules are loaded */
   if ( s->mod_num >= MAX_MOD_NUMB )
-    return 1;
+    return -1;			/* the return value may be confusing
+				   and overlap the return code of
+				   module in the line below */
 
-  else
-    {
-      s->modules[s->mod_num] = m;
-      s->mod_num++;
-      m->solver = s;
-    }
+  /* module failed to initalize */
+  if( (ret_val = m->init( m ) ) < 0 )
+    return ret_val;
+
+  /* if everything went right module is added to solver */
+  s->modules[s->mod_num] = m;
+  s->mod_num++;
+  m->solver = s;
+
   return 0;
 }
 
 int ODE_solver_run ( ODE_solver * s )
 {
-  /* initialize modules and set the apropriate solver status */
-  if ( ODE_solver_modules_init( s ) < 0 )
-    return -1;
-
-  s->status |= SOLVER_ST_MODULES_READY;
-
   s->run_time = SOLVER_RUN_START;
+  ODE_solver_modules_run( s );
+
+  s->run_time = SOLVER_RUN_STEP;
+  while( s->status & SOLVER_ST_READY && 0 )
+    {
+      /* stepper is going to be called here */
+      ODE_solver_modules_run( s );
+    }
+
+  s->run_time = SOLVER_RUN_STOP;
   ODE_solver_modules_run( s );
 
   return 0;
@@ -99,14 +110,15 @@ int ODE_solver_run ( ODE_solver * s )
 
 void ODE_solver_free (ODE_solver * s)
 {
-  if ( s->status & SOLVER_ST_MODULES_READY )
-    ODE_solver_modules_free( s );
+  /* free any of the properly initalized modules */
+  ODE_solver_modules_free( s );
 
+  /* free the module list */
   free( s->modules );
 
+  /* if any module has initialized state then free it */
   if ( s->status & SOLVER_ST_STATE_READY )
     ODE_state_free( s->state );
 
   free( s );
 }
-

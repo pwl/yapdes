@@ -23,6 +23,8 @@
 #define MAX_TRIG_NUMB 10
 #define MAX_MOD_NUMB 30
 
+#define MODULE_TYPE_SIZE 100
+
 /* solver states */
 #define SOLVER_ST_INITIALIZED 0x01
 #define SOLVER_ST_STATE_READY 0x02

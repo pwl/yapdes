@@ -20,7 +20,7 @@ struct _ODE_module
   int trig_num;			/**< number of triggers added, TODO:
 				   to be changed */
 
-  char * name;	    /* name of the module TODO: decrease table size */
+  char * type;	    /* name of the module TODO: decrease table size */
   void * data;	    /* data specific to a particular module */
   int times_run;
   int times_run_failed;
@@ -37,6 +37,8 @@ int ODE_module_add_trigger ( ODE_module *, ODE_module_trigger * );
 int ODE_module_run_triggers ( ODE_module * );
 
 int ODE_module_triggers_free ( ODE_module * m );
+
+int ODE_module_print ( ODE_module * m );
 
 
 #endif /* _ODE_MODULES_H_ */

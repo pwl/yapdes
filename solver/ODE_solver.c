@@ -56,7 +56,6 @@ int ODE_solver_modules_run( ODE_solver * s )
   for (i = 0; i < s->mod_num; ++i)
     {
       m = s->modules[i];
-
       /* TODO: do something with the return value of this, print, log? */
       ODE_module_run_common( m );
     }

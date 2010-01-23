@@ -9,6 +9,10 @@ ODE_module * ODE_module_init_common ( void )
   m->trig_num = 0;
   m->triggers = malloc( MAX_TRIG_NUMB * sizeof( ODE_module_trigger ) );
 
+  m->data = NULL;
+  m->solver = NULL;
+  m->type = malloc( MODULE_TYPE_SIZE * sizeof( char ) );
+
   m->init = NULL;
   m->run = NULL;
   m->free = NULL;
@@ -94,4 +98,15 @@ int ODE_module_triggers_free ( ODE_module * m )
   return 0;
 }
 
+int ODE_module_print ( ODE_module * m )
+{
 
+  printf("M: Type: %s\n", m->type);
+  printf("M: Number of triggers assigned: %i\n",m->trig_num);
+  printf("M: Times run: %i\n",m->times_run);
+  printf("M: Times failed to run: %i\n",m->times_run_failed);
+  printf("M: Data structure assigned: %s\n",m->data?"Yes":"No");
+  printf("M: Solver assigned: %s\n", m->solver?"Yes":"No");
+
+  return 0;
+}

@@ -4,6 +4,7 @@
 #include "ODE_typedefs.h"
 #include "modules/ODE_modules.h"
 #include "ODE_state.h"
+#include "ODE_stepper.h"
 
 struct _ODE_solver
 {
@@ -13,6 +14,7 @@ struct _ODE_solver
 
   ODE_uint status;
   ODE_uint run_time;
+  ODE_stepper ** stepper;
   char output_dir[100];
 };
 
@@ -22,12 +24,14 @@ void ODE_solver_free ( ODE_solver * );
 
 int ODE_solver_run ( ODE_solver * );
 
-int ODE_solver_add_module( ODE_solver * s, ODE_module * m );
+int ODE_solver_add_module( ODE_solver * , ODE_module * );
 
 int ODE_solver_modules_init( ODE_solver * );
 
-int ODE_solver_modules_free( ODE_solver * s );
+int ODE_solver_modules_free( ODE_solver * );
 
 int ODE_module_add ( ODE_solver *, ODE_module * );
+
+int ODE_solver_add_stepper ( ODE_solver *, ODE_stepper * );
 
 #endif /* _ODE_SOLVER_H_ */

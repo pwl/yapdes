@@ -12,8 +12,6 @@
   - [ ] list of spatial derivative generators
 
 * Triggers
-  - test function
-  - action to perform
 
 
 * main loop draft

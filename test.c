@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
 
   ODE_module_add_trigger( m, t );
 
-  ODE_solver_module_add( s, m );
+  ODE_solver_add_module( s, m );
 
   ODE_solver_run(s);
 

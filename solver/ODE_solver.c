@@ -52,23 +52,20 @@ int ODE_solver_modules_run( ODE_solver * s )
 {
   int i;
   ODE_module * m;
-  int ret_val;
 
   for (i = 0; i < s->mod_num; ++i)
     {
       m = s->modules[i];
-      if( ODE_module_run_triggers( m ) ) /* this will run the
-					    triggers and find out if
-					    module shall be run */
-	if( (ret_val = m->run( m )) < 0 )
-	  return ret_val;
+
+      /* TODO: do something with the return value of this, print, log? */
+      ODE_module_run_common( m );
     }
 
   return 0;
 }
 
 /* TODO: inform the user or log! */
-int ODE_solver_module_add( ODE_solver * s, ODE_module * m )
+int ODE_solver_add_module( ODE_solver * s, ODE_module * m )
 {
   int ret_val;
 

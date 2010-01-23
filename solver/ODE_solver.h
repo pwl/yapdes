@@ -22,7 +22,7 @@ void ODE_solver_free ( ODE_solver * );
 
 int ODE_solver_run ( ODE_solver * );
 
-int ODE_solver_module_add( ODE_solver * s, ODE_module * m );
+int ODE_solver_add_module( ODE_solver * s, ODE_module * m );
 
 int ODE_solver_modules_init( ODE_solver * );
 

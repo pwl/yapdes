@@ -23,9 +23,12 @@ struct _ODE_module
   char * name;	    /* name of the module TODO: decrease table size */
   void * data;	    /* data specific to a particular module */
   int times_run;
+  int times_run_failed;
 };
 
 ODE_module * ODE_module_init_common ( void );
+
+int ODE_module_run_common( ODE_module * m );
 
 int ODE_module_free_common ( ODE_module * m );
 

@@ -5,6 +5,7 @@ ODE_module * ODE_module_init_common ( void )
   ODE_module * m = malloc( sizeof( ODE_module ) );
 
   m->times_run = 0;
+  m->times_run_failed = 0;
   m->trig_num = 0;
   m->triggers = malloc( MAX_TRIG_NUMB * sizeof( ODE_module_trigger ) );
 
@@ -14,6 +15,25 @@ ODE_module * ODE_module_init_common ( void )
   m->data_free = NULL;
 
   return m;
+}
+
+int ODE_module_run_common( ODE_module * m )
+{
+  int ret_val;
+
+  if( ! ODE_module_run_triggers( m ) )
+    return -1;			/* TODO: return value may overlap the
+				   return code of m->run */
+
+  if( (ret_val = m->run( m ) ) < 0 )
+    {
+      m->times_run_failed++;
+      return ret_val;
+    }
+
+  m->times_run++;
+
+  return 0;
 }
 
 int ODE_module_free_common ( ODE_module * m )
@@ -48,9 +68,10 @@ int ODE_module_run_triggers ( ODE_module * m )
       tr = m->triggers[i];
       ret_val =
 	ret_val			/* ret_val is positive */
-	|| (tr->test( tr )	/* test is positive */
-	    && (tr->run_time
-	    	& m->solver->run_time)); /* run_times match */
+	|| ((tr->run_time
+	     & m->solver->run_time) /* run_times match */
+	    && (tr->test( tr ))	   /* test is positive */
+	    );
     }
 
   return ret_val;

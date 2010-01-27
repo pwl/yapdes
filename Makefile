@@ -4,13 +4,20 @@
 
 export SHELL = /bin/bash
 export CC = cc
-export CFLAGS = -ansi -pedantic -Wall
+export WFLAGS = -ansi -pedantic -Wall \
+       -Wmissing-prototypes -Wstrict-prototypes \
+       -Wshadow \
+       -Wpointer-arith -Wcast-qual -Wcast-align \
+       -Wwrite-strings -Wnested-externs \
+       -fshort-enums -fno-common -Dinline=
+
+export CFLAGS = $(WFLAGS)
        # -Wpointer-arith -Wcast-qual -Wcast-align\
        # -Wwrite-strings -Wnested-externs\
        # -fshort-enums -fno-common
        # -Wmissing-prototypes -Wstrict-prototypes
        # -Wconversion -Wshadow
-export OFLAGS = # -O3 # left empty for debuggin reasons
+export OFLAGS = -O2 # left empty for debuggin reasons
 export GDBFLAGS = -ggdb
 export FLAGS = $(CFLAGS) $(OFLAGS) $(GDBFLAGS)
 export LIBS = -lm -lgsl -lgslcblas # -lfftw3

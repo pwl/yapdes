@@ -20,7 +20,7 @@ struct _ODE_module_trigger
 };
 
 
-ODE_module_trigger * ODE_module_trigger_init_common ();
+ODE_module_trigger * ODE_module_trigger_init_common ( void );
 
 int ODE_module_trigger_free_common( ODE_module_trigger * tr );
 

@@ -20,7 +20,7 @@ ODE_module * ODE_module_module_test_init ( void )
 {
   ODE_module * m = ODE_module_init_common ();
 
-  m->type = "Test module";
+  sprintf( m->type, "Test module" );
 
   m->init =
     module_test_init;

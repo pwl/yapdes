@@ -28,6 +28,8 @@ int ODE_solver_add_module( ODE_solver * , ODE_module * );
 
 int ODE_solver_modules_init( ODE_solver * );
 
+int ODE_solver_modules_run( ODE_solver * );
+
 int ODE_solver_modules_free( ODE_solver * );
 
 int ODE_module_add ( ODE_solver *, ODE_module * );

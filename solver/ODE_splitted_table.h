@@ -55,4 +55,9 @@ int ODE_splitted_table_get( ODE_splitted_table * st, int n, ODE_table * t );
 
 ODE_R * ODE_splitted_table_to_ptr( ODE_splitted_table * st, int n );
 
+int ODE_splitted_table_to_table( ODE_splitted_table * st, int n, ODE_table * t );
+
+int ODE_splitted_table_get_table( ODE_splitted_table * st, int n, ODE_table * t );
+
+
 #endif /* _ODE_SPLITTED_TABLE_H_ */

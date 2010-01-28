@@ -2,6 +2,7 @@
 #	Makefile	#
 #			#
 
+
 export SHELL = /bin/bash
 export CC = cc
 export WFLAGS = -ansi -pedantic -Wall \
@@ -27,7 +28,7 @@ export INCLUDES = $(PWD)/solver
 DIRS = solver
 # $(patsubst %/,%,$(wildcard */))
 
-.PHONY : clean $(DIRS) #project test
+.PHONY : clean $(DIRS) projekty
 
 project: CLEAR_AR $(DIRS)
 
@@ -47,3 +48,4 @@ $(DIRS):
 clean:
 	@rm -f *.o libyapdes.a
 	@for d in $(DIRS); do $(MAKE) -eC "$${d}" $@; done
+# my flags (mmal)

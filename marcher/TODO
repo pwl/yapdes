@@ -1,0 +1,16 @@
+/**
+* @file   TODO
+* @author Maciej Maliborski <maciej.maliborski@gmail.com>
+* @date   Sat Mar  6 13:54:07 2010
+* 
+* @brief  
+* 
+* 
+*/
+
+[ ] all floating point constatns should have suffix '.L'. This improves
+    the precision for long double variables, but there is no impact on
+    the variable type double.
+[ ] long double versions of math functions should be used if we use
+    long double variables
+

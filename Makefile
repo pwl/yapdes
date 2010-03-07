@@ -6,11 +6,12 @@
 export SHELL = /bin/bash
 export CC = cc
 export WFLAGS = -ansi -pedantic -Wall \
-       -Wmissing-prototypes -Wstrict-prototypes \
-       -Wshadow \
-       -Wpointer-arith -Wcast-qual -Wcast-align \
-       -Wwrite-strings -Wnested-externs \
-       -fshort-enums -fno-common -Dinline=
+#        -Wshadow \
+#        -Wmissing-prototypes -Wstrict-prototypes \
+#        -Wpointer-arith -Wcast-qual -Wcast-align \
+#        -Wwrite-strings -Wnested-externs \
+#        -fshort-enums -fno-common -Dinline=
+
 
 export CFLAGS = $(WFLAGS)
        # -Wpointer-arith -Wcast-qual -Wcast-align\
@@ -24,8 +25,8 @@ export FLAGS = $(CFLAGS) $(OFLAGS) $(GDBFLAGS)
 export LIBS = -lm -lgsl -lgslcblas # -lfftw3
 export ARCHIVE = $(PWD)/libyapdes.a
 export MAKEFILES = $(PWD)/Makefile.common
-export INCLUDES = $(PWD)/solver
-DIRS = solver
+export INCLUDES = $(PWD)/marcher
+DIRS = error marcher marcher/step_type marcher/control_type
 # $(patsubst %/,%,$(wildcard */))
 
 .PHONY : clean $(DIRS) projekty
@@ -48,4 +49,4 @@ $(DIRS):
 clean:
 	@rm -f *.o libyapdes.a
 	@for d in $(DIRS); do $(MAKE) -eC "$${d}" $@; done
-# my flags (mmal)
+

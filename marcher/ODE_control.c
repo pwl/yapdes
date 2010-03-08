@@ -1,4 +1,4 @@
-#include "ODE_marcher_common.h"
+#include "ODE_control.h"
 
 /**
  * @file   ODE_control.c
@@ -46,7 +46,7 @@ ODE_step_control * ODE_step_control_alloc ( const ODE_step_control_type * T )
   
   /* checking memory allocation correctness */
   if( c==0 ) {
-      ODE_ERROR( "memory allocation for ODE_step_control", NULL );
+      _ODE_ERROR( "memory allocation for ODE_step_control", 0 );
   }
   
   c->type = T; /* pointing ODE_step_control_type */
@@ -57,7 +57,7 @@ ODE_step_control * ODE_step_control_alloc ( const ODE_step_control_type * T )
   /* checking memory allocation correctness */
   if( c->state == 0 ) {
       free( c );
-      ODE_ERROR( "memory allocation for ODE_step_control_type", NULL );
+      _ODE_ERROR( "memory allocation for ODE_step_control_type", 0 );
   }
   
   return c;
@@ -137,7 +137,7 @@ const char * ODE_step_control_name ( const ODE_step_control * c )
  * 
  * @param c pointer to the ODE_step_control
  */
-void ODE_step_control_free ( ODE_control * c )
+void ODE_step_control_free ( ODE_step_control * c )
 {
   c->type->free( c->state );
   free( c );

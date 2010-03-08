@@ -62,7 +62,7 @@ static void * rkf45_alloc ( size_t dim )
 
   /* checking memory allocation correctness */
   if( state==0 ) {
-      ODE_ERROR( " memory allocation for rkf45_state", 0 );
+      _ODE_ERROR( " memory allocation for rkf45_state", 0 );
   }
 
   /* allocating memory for rkf45 state type components */
@@ -70,7 +70,7 @@ static void * rkf45_alloc ( size_t dim )
   state->k1 = (ODE_R *) malloc( dim*sizeof( ODE_R ) );
   if( state->k1==0 ) {
       free( state );
-      ODE_ERROR( "memory allocation for k1", 0 );
+      _ODE_ERROR( "memory allocation for k1", 0 );
   }
 
   /* k2 */
@@ -78,7 +78,7 @@ static void * rkf45_alloc ( size_t dim )
   if( state->k2==0 ) {
       free( state->k1 );
       free( state );
-      ODE_ERROR( "memory allocation for k2", 0 );
+      _ODE_ERROR( "memory allocation for k2", 0 );
   }
 
   /* k3 */
@@ -87,7 +87,7 @@ static void * rkf45_alloc ( size_t dim )
       free( state->k2 );
       free( state->k1 );
       free( state );
-      ODE_ERROR( "memory allocation for k3", 0 );
+      _ODE_ERROR( "memory allocation for k3", 0 );
   }
   
   /* k4 */
@@ -97,7 +97,7 @@ static void * rkf45_alloc ( size_t dim )
       free( state->k2 );
       free( state->k1 );
       free( state );
-      ODE_ERROR( "memory allocation for k4", 0 );
+      _ODE_ERROR( "memory allocation for k4", 0 );
   }
 
   /* k5 */
@@ -108,7 +108,7 @@ static void * rkf45_alloc ( size_t dim )
       free( state->k2 );
       free( state->k1 );
       free( state );
-      ODE_ERROR( "memory allocation for k5", 0 );
+      _ODE_ERROR( "memory allocation for k5", 0 );
   }
 
   /* k6 */
@@ -120,7 +120,7 @@ static void * rkf45_alloc ( size_t dim )
       free( state->k2 );
       free( state->k1 );
       free( state );
-      ODE_ERROR( "memory allocation for k6", 0 );
+      _ODE_ERROR( "memory allocation for k6", 0 );
   }
 
   /* y0 */
@@ -133,7 +133,7 @@ static void * rkf45_alloc ( size_t dim )
       free( state->k2 );
       free( state->k1 );
       free( state );
-      ODE_ERROR( "memory allocation for y0", 0 );
+      _ODE_ERROR( "memory allocation for y0", 0 );
     }
   
   /* ytmp */
@@ -147,7 +147,7 @@ static void * rkf45_alloc ( size_t dim )
       free( state->k2 );
       free( state->k1 );
       free( state );
-      ODE_ERROR( "memory allocation for ytmp", 0 );
+      _ODE_ERROR( "memory allocation for ytmp", 0 );
   }
 
   return state;

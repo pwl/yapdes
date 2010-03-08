@@ -8,15 +8,17 @@
 
 
 /** 
- * This function prints error reason and stops executing
- * the program.
+ * This function prints the reason for the error and the file and
+ * line number.
  * 
  * @param msg the reason for the error message
+ * @param file file in which error has occured
+ * @param line line number of error occurence
  * @param errno error identifier
  */
-void ODE_ERROR ( char * msg, int errno )
+void ODE_error ( const char * msg, const char * file, int line, const int errno )
 {
-  printf(" ODE error\n");
-  printf(" failed %s\n", msg);
-  exit( EXIT_FAILURE );
+  printf(" ERROR: %s \n in file %s on line %d\n Error no. %d\n",
+         msg,  file, line, errno);
 }
+

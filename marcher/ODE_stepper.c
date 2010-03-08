@@ -1,4 +1,4 @@
-#include "ODE_marcher_common.h"
+#include "ODE_stepper.h"
 
 
 /** 
@@ -17,19 +17,19 @@ ODE_stepper * ODE_stepper_alloc ( const ODE_step_type * T, size_t dim )
   
   /* checking memory allocation correctness */
   if( s==0 ) {
-      ODE_ERROR( "memory allocation for ODE_stepper", NULL );
+      _ODE_ERROR( "memory allocation for ODE_stepper", 0 );
   }
   
   s->type = T; /* pointing ODE_step_type */
   s->dim = dim; /* setting ODE_stepper dimension */
   
   /* allocating ODE_step and setting ODE_stepper state */
-  s->state = s->type->apply( dim );
+  s->state = s->type->alloc( dim );
   
   /* checking memory allocation correctness */
   if( s->state == 0 ) {
       free( s );
-      ODE_ERROR( "memory allocation for ODE_step_type", NULL );
+      _ODE_ERROR( "memory allocation for ODE_step_type", 0 );
   }
   
   return s;
@@ -118,7 +118,7 @@ int ODE_stepper_reset ( ODE_stepper * s )
  * 
  * @return status of steppers type free function
  */
-int ODE_stepper_free ( ODE_stepper * s )
+void ODE_stepper_free ( ODE_stepper * s )
 {
-  return s->type->free( s->state );
+  s->type->free( s->state );
 }

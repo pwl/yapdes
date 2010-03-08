@@ -6,44 +6,39 @@
 export SHELL = /bin/bash
 export CC = cc
 export WFLAGS = -ansi -pedantic -Wall \
-#        -Wshadow \
-#        -Wmissing-prototypes -Wstrict-prototypes \
-#        -Wpointer-arith -Wcast-qual -Wcast-align \
-#        -Wwrite-strings -Wnested-externs \
-#        -fshort-enums -fno-common -Dinline=
+       -Wshadow \
+       -Wmissing-prototypes -Wstrict-prototypes \
+       -Wpointer-arith -Wcast-qual -Wcast-align \
+       -Wwrite-strings -Wnested-externs \
+       -fshort-enums -fno-common -Dinline=
 
 
 export CFLAGS = $(WFLAGS)
-       # -Wpointer-arith -Wcast-qual -Wcast-align\
-       # -Wwrite-strings -Wnested-externs\
-       # -fshort-enums -fno-common
-       # -Wmissing-prototypes -Wstrict-prototypes
-       # -Wconversion -Wshadow
 export OFLAGS = -O2 # left empty for debuggin reasons
 export GDBFLAGS = -ggdb
 export FLAGS = $(CFLAGS) $(OFLAGS) $(GDBFLAGS)
 export LIBS = -lm -lgsl -lgslcblas # -lfftw3
 export ARCHIVE = $(PWD)/libyapdes.a
 export MAKEFILES = $(PWD)/Makefile.common
-export INCLUDES = $(PWD)/marcher
-DIRS = error marcher marcher/step_type marcher/control_type
-# $(patsubst %/,%,$(wildcard */))
+DIRS = $(patsubst %/,%,$(wildcard */))
+export INCLUDES = $(patsubst %/, -I $(PWD)/%, $(wildcard */))
 
 .PHONY : clean $(DIRS) projekty
 
 project: CLEAR_AR $(DIRS)
 
 test: project test.o $(DIRS)
-	$(CC) $(FLAGS) $(LIBS) -I $(INCLUDES) test.o $(ARCHIVE) -o $@
+	$(CC) $(FLAGS) $(LIBS) $(INCLUDES) test.o $(ARCHIVE) -o $@
 
 test.o: test.c test.h
-	$(CC) $(FLAGS) -I $(INCLUDES) -c -o $@ $<
+	$(CC) $(FLAGS) $(INCLUDES) -c -o $@ $<
 
 CLEAR_AR:
 	@rm -f libyapdes.a
 	@ar rs libyapdes.a
 
 $(DIRS):
+	@echo -e "\033[1;36m$(CURDIR)/$@\033[0m"
 	@$(MAKE) --no-print-directory -eC $@ project
 
 clean:

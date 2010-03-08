@@ -29,7 +29,7 @@ static void * std_step_control_alloc ( void )
 
   /* checking memory allocation correctness */
   if( s==0 ) {
-      ODE_ERROR( "memory allocation for std_step_control_state", 0 );
+      _ODE_ERROR( "memory allocation for std_step_control_state", 0 );
   }
   
   return s;
@@ -54,16 +54,16 @@ static int std_step_control_init ( void * vstate, ODE_R eps_abs,
 
   /* Preconditions checking */
   if( eps_abs < 0 ) {
-      ODE_ERROR( "eps_abs is negative", 0 );
+      _ODE_ERROR( "eps_abs is negative", 0 );
   }
   else if( eps_rel < 0 ) {
-      ODE_ERROR( "eps_rel is negative", 0 );
+      _ODE_ERROR( "eps_rel is negative", 0 );
   }
   else if( a_y < 0 ) {
-      ODE_ERROR( "a_y is negative", 0 );
+      _ODE_ERROR( "a_y is negative", 0 );
   }
   else if( a_dydt < 0 ) {
-      ODE_ERROR( "a_dydt is negative", 0 );
+      _ODE_ERROR( "a_dydt is negative", 0 );
   }
   
   /* setting control values */
@@ -230,7 +230,7 @@ ODE_step_control * ODE_step_control_standard_new ( ODE_R eps_abs, ODE_R eps_rel,
   
   if( status != ODE_TRUE ) {
       ODE_step_control_free( c );
-      ODE_ERROR( "error trying to initialize control", status );
+      _ODE_ERROR( "error trying to initialize control", status );
   }
   
   return c;

@@ -14,7 +14,7 @@ ODE_marcher * ODE_marcher_alloc ( ODE_uint dim )
   
   /* checking memory allocation correctness */
   if( m==0 ) {
-      ODE_ERROR( "memory allocation for ODE_marcher", 0 );
+      _ODE_ERROR( "memory allocation for ODE_marcher", 0 );
   }
 
   /* allocating memory for marcher components */
@@ -22,7 +22,7 @@ ODE_marcher * ODE_marcher_alloc ( ODE_uint dim )
   m->y0 = (ODE_R *) malloc( dim*sizeof( ODE_R ) );
   if( m->y0==0 ) {
       free( m );
-      ODE_ERROR( "memory allocation for y0", 0 );
+      _ODE_ERROR( "memory allocation for y0", 0 );
   }
 
   /* yerr */
@@ -30,7 +30,7 @@ ODE_marcher * ODE_marcher_alloc ( ODE_uint dim )
   if( m->yerr==0 ) {
       free( m->y0 );
       free( m );
-      ODE_ERROR( "memory allocation for yerr", 0 );
+      _ODE_ERROR( "memory allocation for yerr", 0 );
   }
 
   /* dydt_in */
@@ -39,7 +39,7 @@ ODE_marcher * ODE_marcher_alloc ( ODE_uint dim )
       free( m->yerr );
       free( m->y0 );
       free( m );
-      ODE_ERROR( "memory allocation for dydt_in", 0 );
+      _ODE_ERROR( "memory allocation for dydt_in", 0 );
   }
 
   /* dydt_out */
@@ -49,7 +49,7 @@ ODE_marcher * ODE_marcher_alloc ( ODE_uint dim )
       free( m->yerr );
       free( m->y0 );
       free( m );
-      ODE_ERROR( "memory allocation for dydt_out", 0 );
+      _ODE_ERROR( "memory allocation for dydt_out", 0 );
   }
   
   m->dim = dim; /* Setting dimension of marcher. */
@@ -99,11 +99,11 @@ int ODE_marcher_apply ( ODE_marcher * m,
 
   /* Preconditions checking */
   if( m->dim != step->dim ) {
-      ODE_ERROR( "stepper dimension must match marcher size", 0 );
+      _ODE_ERROR( "stepper dimension must match marcher size", 0 );
   }
   
   if( (dt < 0.0 && h0 > 0.0) || (dt > 0.0 && h0 < 0.0) ) {
-      ODE_ERROR( "step direction must match interval direction", 0 );
+      _ODE_ERROR( "step direction must match interval direction", 0 );
   }
   
   /* No need to copy if we cannot control the step size. */

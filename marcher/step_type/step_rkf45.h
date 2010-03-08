@@ -8,5 +8,6 @@
 #include "../ODE_utils.h"
 #include "../error/ODE_error.h"
 
+#include "../ODE_stepper.h"
 
 #endif /* _STEP_RKF45_H_ */

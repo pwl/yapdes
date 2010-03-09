@@ -19,16 +19,17 @@ project: $(DIRS) $(OBJECTS)
 # compiles all the .c files into .o files
 $(OBJECTS): %.o: %.c %.h
 	@echo "\033[1m$<\033[0m"
-	@$(CC) $(FLAGS) -I $(INCLUDES) -c -o $@ $<
+	@$(CC) $(FLAGS) $(INCLUDES) -c -o $@ $<
 
 # $(OBJECTS): %.o: %.c %.h
-# 	echo "$(CC) $(FLAGS) -I $(INCLUDES) -c -o $@ $<"
-# 	$(CC) $(FLAGS) -I $(INCLUDES) -c -o $@ $<
+# 	echo "$(CC) $(FLAGS) $(INCLUDES) -c -o $@ $<"
+# 	$(CC) $(FLAGS) $(INCLUDES) -c -o $@ $<
 
 # OBJECTS are temporarly made .PHONY
 
 # recursively make all subdirectories
 $(DIRS):
+	@echo "\033[1;36m$(CURDIR)/$@\033[0m"
 	@$(MAKE) --no-print-directory -eC $@ project
 
 clean:

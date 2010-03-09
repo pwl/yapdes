@@ -1,8 +1,10 @@
-
-# libyapdes.a
-# *.o
+*
+libyapdes.a
+*.o
 # doc/*
 # *.bak
-# test
+test*
 !solver
 !*.[ch]
+*~
+*.cpy

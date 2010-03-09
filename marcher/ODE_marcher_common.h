@@ -54,6 +54,13 @@ ODE_system;
 #define _ODE_FUNC_EVAL(S,t,y,f)  (*((S)->func))(t,y,f,(S)->params) /* ODE_system function evaluate macro */
 #define _ODE_JAC_EVAL(S,t,y,dfdy,dfdt)  (*((S)->jac))(t,y,dfdy,dfdt,(S)->params) /* ODE_system jacobian evaluate macro */
 
+
+/* Implemented step types:
+ *   * Runge Kutte Fehlberg method
+ */
+/* const ODE_step_type *ODE_step_rkf45; */
+
+
 __END_DECLS
 
 #endif /* _ODE_MARCHER_COMMON_H_ */

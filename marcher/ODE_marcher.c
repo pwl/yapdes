@@ -91,6 +91,7 @@ int ODE_marcher_apply ( ODE_marcher * m,
                         const ODE_system * dydt,
                         ODE_R *t, ODE_R t1, ODE_R *h, ODE_R y[] )
 {
+
   const ODE_R t0 = *t;
   ODE_R h0 = *h;
   int step_status;
@@ -111,10 +112,11 @@ int ODE_marcher_apply ( ODE_marcher * m,
       _ODE_R_MEMCPY( m->y0, y, m->dim );
   }
   
+
   /* Calculate initial dydt once if the method can benefit. */
   if( step->type->can_use_dydt_in ) {
       int status = _ODE_FUNC_EVAL( dydt, t0, y, m->dydt_in );
-      if( status ) {
+      if( !status ) { /* there was mistake */
           return status;
       }
   }

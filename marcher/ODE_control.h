@@ -2,7 +2,6 @@
 #define _ODE_CONTROL_H_
 
 #include "ODE_marcher_common.h"
-
 #include "ODE_stepper.h"
 
 /* General step size control object.
@@ -52,7 +51,7 @@ void ODE_step_control_free ( ODE_step_control * c );
 ODE_step_control * ODE_step_control_standard_new ( ODE_R eps_abs, ODE_R eps_rel, ODE_R a_y, ODE_R a_dydt );
 ODE_step_control * ODE_step_control_y_new ( ODE_R eps_abs, ODE_R eps_rel );
 ODE_step_control * ODE_step_control_yp_new( ODE_R eps_abs, ODE_R eps_rel );
-ODE_step_control * ODE_step_control_scaled_new ( ODE_R eps_abs, ODE_R eps_rel, ODE_R a_y, ODE_R a_dydt, const ODE_R scale_abs[], size_t dim );
+/* ODE_step_control * ODE_step_control_scaled_new ( ODE_R eps_abs, ODE_R eps_rel, ODE_R a_y, ODE_R a_dydt, const ODE_R scale_abs[], size_t dim ); */
 
 
 

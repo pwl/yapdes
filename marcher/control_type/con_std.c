@@ -107,7 +107,7 @@ static int std_step_control_hadjust ( void * vstate,
   const ODE_R S = 0.9;          /* setting safety factor */
   const ODE_R h_old = *h;       /* backup of input time step */ 
 
-  ODE_R rmax = DBL_MIN;
+  ODE_R rmax = LDBL_MIN;
   size_t i;
 
   for(i=0; i<dim; i++) {

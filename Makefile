@@ -33,6 +33,13 @@ test: project test.o $(DIRS)
 test.o: test.c test.h
 	$(CC) $(FLAGS) $(INCLUDES) -c -o $@ $<
 
+test2: project test2.o $(DIRS)
+	$(CC) $(FLAGS) $(LIBS) $(INCLUDES) test2.o $(ARCHIVE) -o $@
+
+test2.o: test2.c test2.h
+	$(CC) $(FLAGS) $(INCLUDES) -c -o $@ $<
+
+
 CLEAR_AR:
 	@rm -f libyapdes.a
 	@ar rs libyapdes.a

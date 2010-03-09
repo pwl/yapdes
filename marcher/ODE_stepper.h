@@ -37,7 +37,7 @@ ODE_stepper;
 /* Implemented step types:
  *   * Runge Kutte Fehlberg method
  */
-const ODE_step_type *ODE_step_rkf45;
+/* const ODE_step_type *ODE_step_rkf45; */
 
 
 /* Constructor for stepper objects.

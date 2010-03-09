@@ -20,10 +20,10 @@ export FLAGS = $(CFLAGS) $(OFLAGS) $(GDBFLAGS)
 export LIBS = -lm -lgsl -lgslcblas # -lfftw3
 export ARCHIVE = $(PWD)/libyapdes.a
 export MAKEFILES = $(PWD)/Makefile.common
-DIRS = $(patsubst %/,%,$(wildcard */))
-export INCLUDES = $(patsubst %/, -I $(PWD)/%, $(wildcard */))
+DIRS = error/ solver/ marcher/
+export INCLUDES = $(patsubst %/, -I $(PWD)/%, $(DIRS))
 
-.PHONY : clean $(DIRS) projekty
+.PHONY : clean $(DIRS) project
 
 project: CLEAR_AR $(DIRS)
 

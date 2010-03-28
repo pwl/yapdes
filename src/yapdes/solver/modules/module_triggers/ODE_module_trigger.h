@@ -1,9 +1,9 @@
 #ifndef _ODE_MODULE_TRIGGER_H_
 #define _ODE_MODULE_TRIGGER_H_
 
-#include "ODE_typedefs.h"
-#include "ODE_common.h"
-#include "modules/ODE_modules.h"
+#include "solver/ODE_typedefs.h"
+#include "solver/ODE_common.h"
+#include "solver/modules/ODE_modules.h"
 
 
 struct _ODE_module_trigger

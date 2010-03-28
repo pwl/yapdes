@@ -1,9 +1,9 @@
 #ifndef _ODE_SOLVER_H_
 #define _ODE_SOLVER_H_
 
-#include "ODE_typedefs.h"
-#include "modules/ODE_modules.h"
-#include "ODE_state.h"
+#include "solver/ODE_typedefs.h"
+#include "solver/modules/ODE_modules.h"
+#include "solver/ODE_state.h"
 /* #include "ODE_stepper.h" */
 
 struct _ODE_solver

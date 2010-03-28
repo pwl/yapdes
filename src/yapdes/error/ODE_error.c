@@ -7,10 +7,10 @@
  */
 
 
-/** 
+/**
  * This function prints the reason for the error and the file and
  * line number.
- * 
+ *
  * @param msg the reason for the error message
  * @param file file in which error has occured
  * @param line line number of error occurence

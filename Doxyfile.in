@@ -1164,6 +1164,9 @@ LATEX_HIDE_INDICES     = NO
 
 LATEX_SOURCE_CODE      = NO
 
+# From version >= 1.7.2
+USE_MATHJAX = YES
+
 #---------------------------------------------------------------------------
 # configuration options related to the RTF output
 #---------------------------------------------------------------------------

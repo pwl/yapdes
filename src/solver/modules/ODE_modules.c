@@ -26,7 +26,7 @@ int ODE_module_run_common( ODE_module * m )
   int ret_val;
 
   if( ! ODE_module_run_triggers( m ) )
-    return -1;			/* TODO: return value may overlap the
+    return -1;			/** \todo return value may overlap the
 				   return code of m->run */
 
   if( (ret_val = m->run( m ) ) < 0 )

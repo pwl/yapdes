@@ -1,19 +1,40 @@
 #include "ODE_solver.h"
 
+/**
+ * Allocates memory for the ODE_solver and initializes some of its
+ * parts to their default values.
+ *
+ * For detailed information of what parts are initialized refer to the
+ * code.
+ *
+ * @return Pointer to allocated ODE_solver
+ */
+
 ODE_solver * ODE_solver_init ( void )
 {
   ODE_solver * s = malloc( sizeof( ODE_solver ) );
   s->modules = malloc( MAX_MOD_NUMB * sizeof( ODE_module * ) );
-  s->mod_num = 0;		/**< number of modules loaded */
-  s->run_time = SOLVER_RUN_NOT_RUNNING; /**< what stage of running are we? */
+  s->mod_num = 0;		/* number of modules loaded */
+  s->run_time = SOLVER_RUN_NOT_RUNNING; /* what stage of running are we? */
   s->status = SOLVER_ST_INITIALIZED
-    | SOLVER_ST_MODULES_READY;	/**< what stage of solving the
+    | SOLVER_ST_MODULES_READY;	/* what stage of solving the
 				     equation are we? */
   return s;
 }
 
-/* TODO: send some information about which module failed to
-   initialize, e.g. module number, print module name etc. */
+
+/**
+ * Runs ODE_module->init() for every module added to s
+ *
+ * @todo send some information about which module failed to
+ * initialize, e.g. module number, print module name etc.
+ *
+ * @todo Implement transparent modules structure with accessors
+ *
+ * @param s Pointer to initialized solver
+ *
+ * @return
+ */
 int ODE_solver_modules_init( ODE_solver * s )
 {
   int i;
@@ -56,14 +77,14 @@ int ODE_solver_modules_run( ODE_solver * s )
   for (i = 0; i < s->mod_num; ++i)
     {
       m = s->modules[i];
-      /* TODO: do something with the return value of this, print, log? */
+      /** \todo do something with the return value of this, print, log? */
       ODE_module_run_common( m );
     }
 
   return 0;
 }
 
-/* TODO: inform the user or log! */
+/** \todo inform the user or log! */
 int ODE_solver_add_module( ODE_solver * s, ODE_module * m )
 {
   int ret_val;

@@ -1,7 +1,7 @@
 #include "con_std.h"
 
 
-/* TODO:
+/** \todo
  * [ ] DBL_MIN -> LDBL_MIN
  * [ ] GSL_MAX_DBL -> _ODE_MAX supporting long double precision
  * [ ] parallelize for loop in handjust function

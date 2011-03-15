@@ -1,6 +1,6 @@
 #include "ODE_error.h"
 
-/* TODO:
+/** \todo
  * [ ] error identifiers
  * [ ] error mesages
  * [ ] exiting the program

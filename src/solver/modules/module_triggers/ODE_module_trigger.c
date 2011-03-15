@@ -6,7 +6,7 @@ ODE_module_trigger * ODE_module_trigger_init_common ( void )
 
   mt->run_time = TRIG_RUN_DEFAULT; /* default run_time for trigger */
 
-  /* TODO: can be set to some useful value by default */
+  /** \todo can be set to some useful value by default */
   mt->init = NULL;
   mt->free = NULL;
   mt->test = NULL;

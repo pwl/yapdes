@@ -10,7 +10,7 @@
  * 
  */
 
-/* TODO:
+/** \todo
  * [ ] check the coefficients, see references 
  * [ ] parallelize for loops in apply function
  */

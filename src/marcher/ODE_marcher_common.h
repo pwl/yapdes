@@ -8,7 +8,7 @@
 #include "../solver/ODE_common.h"
 #include "../error/ODE_error.h"
 
-/* TODO:
+/** \todo
  * size_t to ODE_uint
  * [ OK ] S_DOUBLE to ODE_R
  * [ ] unsigned int

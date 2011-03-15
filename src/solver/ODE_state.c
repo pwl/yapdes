@@ -1,11 +1,11 @@
 #include "ODE_state.h"
 
 
-ODE_state * ODE_state_init ( int N, int * length )
+ODE_state * ODE_state_init (int length )
 {
   ODE_state * st = malloc( sizeof( st ) );
-  st->f = ODE_splitted_table_init( N, length );
-  st->df = ODE_splitted_table_init( N, length );
+  st->f = ODE_table_init( length );
+  st->df = ODE_table_init( length );
   /* some default values to be changed by the stepper or obtained from
      file later on */
   st->dt=1.;
@@ -17,7 +17,7 @@ ODE_state * ODE_state_init ( int N, int * length )
 
 void ODE_state_free ( ODE_state * st)
 {
-  ODE_splitted_table_free( st->f );
-  ODE_splitted_table_free( st->df );
+  ODE_table_free( st->f );
+  ODE_table_free( st->df );
   free( st );
 }

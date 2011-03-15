@@ -1,3 +1,19 @@
+/**
+ * @file   ODE_modules.h
+ * @author Pawel Biernat <pawel.biernat@gmail.com>
+ * @date   Tue Mar 15 21:00:42 2011
+ *
+ * Datatype and functions concerning a single module. @todo The module
+ * bundle datatype and functions should be included in another file
+ * (ODE_module_bundle.[ch]?). There should also be an analoguos file
+ * to maintain triggers, e.g. trigger_bundle
+ *
+ *
+ *
+ * @todo Documentation!
+ * @addtogroup solver
+ *
+ */
 #ifndef _ODE_MODULES_H_
 #define _ODE_MODULES_H_
 
@@ -20,8 +36,8 @@ struct _ODE_module
   int trig_num;			/**< number of triggers added, TODO:
 				   to be changed */
 
-  char * type;	    /* name of the module TODO: decrease table size */
-  void * data;	    /* data specific to a particular module */
+  char * type;	    /**< name of the module TODO: decrease table size */
+  void * data;	    /**< data specific to a particular module */
   int times_run;
   int times_run_failed;
 };

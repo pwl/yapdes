@@ -15,36 +15,53 @@
 #include "stdio.h"
 #include "stdlib.h"
 
-#define ODE_R long double
-#define ODE_uint unsigned int
+/** @name Default data types for solver
+ @todo should be default data types for the whole yapdes! */
+/**@{*/
+#define ODE_R long double     /**< type for continuous variables */
+#define ODE_uint unsigned int /**< type for unsigned in, (mainly flags) */
+/**@}*/
 
 
-/* default maximum capacity for triggers and modules */
+/** @name default maximum capacity for triggers and modules */
+/**@{*/
 #define MAX_TRIG_NUMB 10
 #define MAX_MOD_NUMB 30
+/**@}*/
 
+/** String length to contain module type
+
+    @todo should be increased to avoid errors and consistent with
+    other string lengths */
 #define MODULE_TYPE_SIZE 100
 
-/* solver states */
+/** @name solver states
+    @{ */
 #define SOLVER_ST_INITIALIZED 0x01
 #define SOLVER_ST_STATE_READY 0x02
 #define SOLVER_ST_MODULES_READY 0x04
 #define SOLVER_ST_READY 0x08
+/**@}*/
 
-/* trigger run times */
+/** @name trigger run times
+    @{*/
 #define TRIG_RUN_NEVER   0x00
 #define TRIG_RUN_START   0x01
 #define TRIG_RUN_STEP    0x02
 #define TRIG_RUN_STOP    0x04
+/** used for triggers to be run at a mixture of stages */
 #define TRIG_RUN_ALWAYS  (TRIG_RUN_START | TRIG_RUN_STEP | TRIG_RUN_STOP)
+/**@}*/
 
-/* solver run times */
+/** @name solver run times */
+/**@{*/
 #define SOLVER_RUN_NOT_RUNNING 0x00
 #define SOLVER_RUN_START   0x01
 #define SOLVER_RUN_STEP    0x02
 #define SOLVER_RUN_STOP    0x04
+/**@}*/
 
-/* default run_time for trigger */
+/** default run_time for trigger */
 #define TRIG_RUN_DEFAULT TRIG_RUN_NEVER
 
 #endif /* _ODE_COMMON_H_ */

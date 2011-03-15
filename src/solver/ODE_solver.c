@@ -1,15 +1,5 @@
 #include "ODE_solver.h"
 
-/**
- * Allocates memory for the ODE_solver and initializes some of its
- * parts to their default values.
- *
- * For detailed information of what parts are initialized refer to the
- * code.
- *
- * @return Pointer to allocated ODE_solver
- */
-
 ODE_solver * ODE_solver_init ( void )
 {
   ODE_solver * s = malloc( sizeof( ODE_solver ) );
@@ -23,18 +13,6 @@ ODE_solver * ODE_solver_init ( void )
 }
 
 
-/**
- * Runs ODE_module->init() for every module added to s
- *
- * @todo send some information about which module failed to
- * initialize, e.g. module number, print module name etc.
- *
- * @todo Implement transparent modules structure with accessors
- *
- * @param s Pointer to initialized solver
- *
- * @return
- */
 int ODE_solver_modules_init( ODE_solver * s )
 {
   int i;

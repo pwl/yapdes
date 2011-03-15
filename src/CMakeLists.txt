@@ -1,7 +1,7 @@
 include_directories( . )
 
 # Search for the source files recursively and add them to yapdes_src
-file( GLOB_RECURSE yapdes_src *.c )
+file( GLOB_RECURSE yapdes_src [^.]*.c )
 
 # set the additional compile flags
 set_source_files_properties(${yapdes_src}

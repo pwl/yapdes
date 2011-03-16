@@ -6,7 +6,7 @@
 typedef struct
 {
   const char * name; /* step name */
-  
+
   int can_use_dydt_in;
   int gives_exact_dydt_out;
 
@@ -20,19 +20,18 @@ typedef struct
                   const ODE_system * dydt );
   int  (*reset) ( void * state, size_t dim );
   void (*free)  ( void * state );
-  
+
   unsigned int  (*order) ( void * state ); /* order of stepper */
 
 }
 ODE_step_type;
 
-typedef struct
+struct ODE_stepper
 {
   const ODE_step_type * type; /* pointer to the stepper type */
   size_t dim; /* dimension of stepper */
-  void * state; /* pointer to the state of stepper of void type */ 
-}
-ODE_stepper;
+  void * state; /* pointer to the state of stepper of void type */
+};
 
 /* Implemented step types:
  *   * Runge Kutte Fehlberg method

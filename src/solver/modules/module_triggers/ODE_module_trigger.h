@@ -2,11 +2,11 @@
 #define _ODE_MODULE_TRIGGER_H_
 
 #include "solver/ODE_typedefs.h"
-#include "solver/ODE_common.h"
+#include "common.h"
 #include "solver/modules/ODE_modules.h"
 
 
-struct _ODE_module_trigger
+struct ODE_module_trigger
 {
   int (*init)( ODE_module_trigger *);
   int (*free)( ODE_module_trigger *);

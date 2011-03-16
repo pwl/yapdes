@@ -12,6 +12,7 @@
 #ifndef _ODE_SOLVER_H_
 #define _ODE_SOLVER_H_
 
+#include "common.h"
 #include "solver/ODE_typedefs.h"
 #include "solver/modules/ODE_modules.h"
 #include "solver/ODE_state.h"
@@ -24,7 +25,7 @@
  * (i.e. method(s) of spatial differentiation used etc.)
  *
  */
-struct _ODE_solver
+struct ODE_solver
 {
   ODE_state * state;
   ODE_module ** modules;	/**< table holding pointers to modules
@@ -35,7 +36,7 @@ struct _ODE_solver
 
   ODE_uint status;		/**< status of the solver */
   ODE_uint run_time;		/**< phase of DE solving
-				   (initialization, marching,
+				   (init+ialization, marching,
 				   etc.). Triggers access it to
 				   determine the phase of evolution */
   /*   ODE_stepper ** stepper; */

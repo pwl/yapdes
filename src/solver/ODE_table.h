@@ -1,11 +1,9 @@
 #ifndef _ODE_TABLE_H_
 #define _ODE_TABLE_H_
 
-#include "ODE_common.h"
+#include "common.h"
 
-typedef struct _ODE_table ODE_table;
-
-struct _ODE_table
+struct ODE_table
 {
   ODE_R * table;
   int length;

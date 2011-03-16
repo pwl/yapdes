@@ -15,15 +15,10 @@
 #include "stdio.h"
 #include "stdlib.h"
 
-/** @name Default data types for solver
- @todo should be default data types for the whole yapdes! */
-/**@{*/
-#define ODE_R long double     /**< type for continuous variables */
-#define ODE_uint unsigned int /**< type for unsigned in, (mainly flags) */
-/**@}*/
+#include "solver/ODE_typedefs.h"
 
 
-/** @name default maximum capacity for triggers and modules */
+/** @name default maximum size of trigger and module bundles */
 /**@{*/
 #define MAX_TRIG_NUMB 10
 #define MAX_MOD_NUMB 30

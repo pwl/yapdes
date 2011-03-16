@@ -547,7 +547,7 @@ WARN_IF_UNDOCUMENTED   = YES
 # parameters in a documented function, or documenting parameters that
 # don't exist or using markup commands wrongly.
 
-WARN_IF_DOC_ERROR      = YES
+WARN_IF_DOC_ERROR      = NO
 
 # This WARN_NO_PARAMDOC option can be abled to get warnings for
 # functions that are documented, but have no documentation for their parameters
@@ -1456,7 +1456,7 @@ MSCGEN_PATH            =
 # inheritance and usage relations if the target is undocumented
 # or is not a class.
 
-HIDE_UNDOC_RELATIONS   = NO
+HIDE_UNDOC_RELATIONS   = YES
 
 # If you set the HAVE_DOT tag to YES then doxygen will assume the dot tool is
 # available from the path. This tool is part of Graphviz, a graph visualization
@@ -1471,7 +1471,7 @@ HAVE_DOT               = YES
 # explicitly to a value larger than 0 to get control over the balance
 # between CPU load and processing speed.
 
-DOT_NUM_THREADS        = 0
+DOT_NUM_THREADS        = 10
 
 # By default doxygen will write a font called FreeSans.ttf to the output
 # directory and reference it in all dot files that doxygen generates. This
@@ -1501,7 +1501,7 @@ DOT_FONTPATH           =
 # indirect inheritance relations. Setting this tag to YES will force the
 # the CLASS_DIAGRAMS tag to NO.
 
-CLASS_GRAPH            = YES
+CLASS_GRAPH            = NO
 
 # If the COLLABORATION_GRAPH and HAVE_DOT tags are set to YES then doxygen
 # will generate a graph for each documented class showing the direct and
@@ -1519,7 +1519,7 @@ GROUP_GRAPHS           = YES
 # collaboration diagrams in a style similar to the OMG's Unified Modeling
 # Language.
 
-UML_LOOK               = NO
+UML_LOOK               = YES
 
 # If set to YES, the inheritance and collaboration graphs will show the
 # relations between templates and their instances.

@@ -3,20 +3,20 @@
  * @author Pawel Biernat <pawel.biernat@gmail.com>
  * @date   Tue Mar 15 18:28:58 2011
  *
- * Definitions and functions concerning @ref ODE_state struct.
+ * Definitions and functions concerning ODE_state struct.
  *
  *
  */
 #ifndef _ODE_STATE_H_
 #define _ODE_STATE_H_
 
-#include "ODE_typedefs.h"
-#include "ODE_splitted_table.h"
+#include "solver/ODE_table.h"
+#include "common.h"
 
 /** Structure designed to hold a time-dependent information on the
     function being evolved. This is a core data structure of a solver
     and is evolved by marcher. */
-struct _ODE_state
+struct ODE_state
 {
   /** @name Vector values
    *

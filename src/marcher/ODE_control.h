@@ -1,8 +1,8 @@
 #ifndef _ODE_CONTROL_H_
 #define _ODE_CONTROL_H_
 
-#include "ODE_marcher_common.h"
-#include "ODE_stepper.h"
+#include "marcher/ODE_marcher_common.h"
+#include "marcher/ODE_stepper.h"
 
 /* General step size control object.
  *
@@ -14,7 +14,7 @@
  * to store state and control their heuristics.
  */
 
-typedef struct 
+typedef struct
 {
   const char * name;
   void * (*alloc) ( void );
@@ -24,11 +24,11 @@ typedef struct
                    const ODE_R y[], const ODE_R yerr[],
                    const ODE_R yp[], ODE_R * h );
   void (*free) ( void * state );
-  
+
 }
 ODE_step_control_type;
 
-typedef struct 
+typedef struct
 {
   const ODE_step_control_type * type;
   void * state;

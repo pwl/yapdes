@@ -5,8 +5,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "../solver/ODE_common.h"
-#include "../error/ODE_error.h"
+#include "common.h"
+#include "error/ODE_error.h"
 
 /** \todo
  * size_t to ODE_uint
@@ -40,13 +40,13 @@ typedef struct
 {
   int (* func) ( ODE_R t, const ODE_R y[],
                  ODE_R dydt[], void * params );
-  
+
   int (* jac)  ( ODE_R t, const ODE_R y[],
                  ODE_R * dfdy, ODE_R dfdt[],
                  void * params );
 
   size_t dimension; /* what size_t is ? */
-  void * params; 
+  void * params;
 }
 ODE_system;
 

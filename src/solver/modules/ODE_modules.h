@@ -21,7 +21,7 @@
 #include "solver/ODE_solver.h"
 #include "solver/modules/module_triggers/ODE_module_trigger.h"
 
-struct _ODE_module
+struct ODE_module
 {
   int (*init)( ODE_module *);
   int (*run)( ODE_module *);

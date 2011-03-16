@@ -68,7 +68,9 @@ void ODE_module_bundle_add_module( ODE_module_bundle * mb, ODE_module * m );
 
 /**
  * Tells a ODE_module_bundle mb to run all of its modules with respect
- * to a given flag. For each module
+ * to a given flag. One of start(), step() or stop() is run for each
+ * module in the bundle depending on a value of the flag provided a
+ * trigger was set.
  *
  * @sa run_flags
  *
@@ -79,25 +81,16 @@ void ODE_module_bundle_run( ODE_module_bundle * mb, ODE_uint flag );
 
 
 /**
- * This function calls ODE_module->start() for each of its
- * modules. ODE_module->start() is a module-specific function which
- * prepares a module before running an ODE_solver.
+ * Runs ODE_module_free_common() for each module in a bundle and frees
+ * the allocated memory of ODE_module_bundle.
+ *
+ * @attention This should always be run @b after
+ * ODE_module_bundle_run( mb, MODULES_RUN_STOP ), which frees a
+ * module-specific memory allocation, closes files etc.
  *
  * @sa ODE_module
  *
  */
-void ODE_module_bundle_modules_start( ODE_module_bundle * mb );
-
-
-/**
- * Runs ODE_module_free_common() for each module in a bundle.
- *
- * @attention This should be run after ODE_module->stop(), which frees
- * a module-specific memory allocation, closes files etc.
- *
- * @sa ODE_module
- *
- */
-void ODE_module_bundle_modules_free( ODE_module_bundle * mb );
+void ODE_module_bundle_free( ODE_module_bundle * mb );
 
 #endif /* _ODE_MODULE_BUNDLE_H_ */

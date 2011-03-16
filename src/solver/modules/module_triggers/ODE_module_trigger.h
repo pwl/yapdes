@@ -8,14 +8,17 @@
 
 struct ODE_module_trigger
 {
-  int (*init)( ODE_module_trigger *);
-  int (*free)( ODE_module_trigger *);
+  int (*start)( ODE_module_trigger *);
+  int (*stop)( ODE_module_trigger *);
   int (*test)( ODE_module_trigger *);
 
-  ODE_module * module;	/**< module to which this trigger is
-				  assigned to */
+  ODE_module * module;	/**< module to which this trigger is assigned
+		  to */
+  ODE_solver * solver;		/**< a shortcut to ODE_solver */
 
-  ODE_uint run_time;
+  ODE_trigger_bundle * trigger_bundle;
+
+  ODE_uint run_flag;
   void * data;
 };
 

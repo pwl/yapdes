@@ -26,8 +26,8 @@ ODE_module_trigger * ODE_module_trigger_test_init ( )
   t->data = NULL;
   t->module = NULL;
 
-  t->init = trigger_test_start;
-  t->free = trigger_test_stop;
+  t->start = trigger_test_start;
+  t->stop = trigger_test_stop;
   t->test = trigger_test_test;
 
   return t;

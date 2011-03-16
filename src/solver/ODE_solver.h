@@ -15,6 +15,7 @@
 #include "common.h"
 #include "solver/ODE_typedefs.h"
 #include "solver/modules/ODE_modules.h"
+#include "solver/ODE_module_bundle.h"
 #include "solver/ODE_state.h"
 /* #include "ODE_stepper.h" */
 
@@ -28,17 +29,19 @@
 struct ODE_solver
 {
   ODE_state * state;
-  ODE_module ** modules;	/**< table holding pointers to modules
-				   @todo should point to a structure
-				   holding modules and @c mod_num on
-				   which accessors could be run */
-  int mod_num;			/**< number of loaded modules */
+  /* ODE_module ** modules;	/\**< table holding pointers to modules */
+  /* 				   @todo should point to a structure */
+  /* 				   holding modules and @c mod_num on */
+  /* 				   which accessors could be run *\/ */
+  /* int mod_num;			/\**< number of loaded modules *\/ */
+  ODE_module_bundle * module_bundle; /**< Bundle of modules assigned to
+				      a solver */
 
   ODE_uint status;		/**< status of the solver */
   ODE_uint run_time;		/**< phase of DE solving
-				   (init+ialization, marching,
-				   etc.). Triggers access it to
-				   determine the phase of evolution */
+  				   (init+ialization, marching,
+  				   etc.). Triggers access it to
+  				   determine the phase of evolution */
   /*   ODE_stepper ** stepper; */
 
   /** @todo change 100 to some predefined length e.g.

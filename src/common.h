@@ -51,12 +51,17 @@
 /** @name solver run times */
 /**@{*/
 #define SOLVER_RUN_NOT_RUNNING 0x00
-#define SOLVER_RUN_START   0x01
-#define SOLVER_RUN_STEP    0x02
-#define SOLVER_RUN_STOP    0x04
+#define MODULE_RUN_START   0x01
+#define MODULE_RUN_STEP    0x02
+#define MODULE_RUN_STOP    0x04
 /**@}*/
+
+/** maximal numbers of modules to load into a ODE_module_bundle */
+#define MODULE_BUNDLE_MAX_MODULES 100
 
 /** default run_time for trigger */
 #define TRIG_RUN_DEFAULT TRIG_RUN_NEVER
+
+#define ODE_MAX_STRING_LENGTH 100
 
 #endif /* _ODE_COMMON_H_ */

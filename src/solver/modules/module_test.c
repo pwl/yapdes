@@ -22,11 +22,11 @@ ODE_module * ODE_module_module_test_init ( void )
 
   sprintf( m->type, "Test module" );
 
-  m->init =
+  m->start =
     module_test_init;
   m->run =
     module_test_run;
-  m->free =
+  m->stop =
     module_test_free;
 
   return m;

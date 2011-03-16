@@ -13,21 +13,21 @@ ODE_module * ODE_module_init_common ( void )
   m->solver = NULL;
   m->type = malloc( MODULE_TYPE_SIZE * sizeof( char ) );
 
-  m->init = NULL;
+  m->start = NULL;
   m->run = NULL;
-  m->free = NULL;
+  m->stop = NULL;
   m->data_free = NULL;
 
   return m;
 }
 
-int ODE_module_run_common( ODE_module * m )
+int ODE_module_run_common( ODE_module * m , ODE_uint flag)
 {
   int ret_val;
 
   if( ! ODE_module_run_triggers( m ) )
-    return -1;			/** \todo return value may overlap the
-				   return code of m->run */
+    return -1; /** \todo return value may overlap the return code of
+		   m->run */
 
   if( (ret_val = m->run( m ) ) < 0 )
     {
@@ -72,7 +72,7 @@ int ODE_module_run_triggers ( ODE_module * m )
       tr = m->triggers[i];
       ret_val =
 	ret_val			/* ret_val is positive */
-	|| ((tr->run_time
+	|| ((tr->run_flag
 	     & m->solver->run_time) /* run_times match */
 	    && (tr->test( tr ))	   /* test is positive */
 	    );
@@ -90,7 +90,7 @@ int ODE_module_triggers_free ( ODE_module * m )
   for (i = 0; i < m->trig_num; ++i)
     {
       tr = m->triggers[i];
-      if( (ret_val = tr->free( tr )) < 0 ||
+      if( (ret_val = tr->stop( tr )) < 0 ||
 	  (ret_val = ODE_module_trigger_free_common( tr )) < 0 )
 	return ret_val;
     }

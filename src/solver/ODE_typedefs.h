@@ -23,12 +23,12 @@ typedef unsigned int ODE_uint; /**< type for unsigned in, (mainly flags) */
 typedef struct ODE_module ODE_module;
 typedef struct ODE_solver ODE_solver;
 typedef struct ODE_state ODE_state;
-typedef struct ODE_module_trigger ODE_module_trigger;
+typedef struct ODE_trigger ODE_trigger;
 typedef struct ODE_module_bundle ODE_module_bundle;
+typedef struct ODE_trigger_bundle ODE_trigger_bundle;
 typedef struct ODE_table ODE_table;
 typedef struct ODE_stepper ODE_stepper;
 /**@}*/
-
 
 
 

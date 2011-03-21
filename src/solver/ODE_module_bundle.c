@@ -26,19 +26,33 @@ void ODE_module_bundle_add_module( ODE_module_bundle * mb, ODE_module * m )
     }
 }
 
-void ODE_module_bundle_run( ODE_module_bundle * mb, ODE_uint flag )
+void ODE_module_bundle_start( ODE_module_bundle * mb )
 {
   ODE_uint i;
-
-  for ( i = 0; i <= mb->mod_num; i++ )
-    ODE_module_run_common( mb->modules[i], flag );
+  for( i = 0; i < mb->mod_num; i++ )
+    ODE_module_start( mb->modules[i] );
 }
+
+void ODE_module_bundle_stop( ODE_module_bundle * mb )
+{
+  ODE_uint i;
+  for( i = 0; i < mb->mod_num; i++ )
+    ODE_module_stop( mb->modules[i] );
+}
+
+void ODE_module_bundle_step( ODE_module_bundle * mb )
+{
+  ODE_uint i;
+  for( i = 0; i < mb->mod_num; i++ )
+    ODE_module_step( mb->modules[i] );
+}
+
 
 void ODE_module_bundle_free( ODE_module_bundle * mb )
 {
   ODE_uint i;
   for ( i = 0; i <= mb->mod_num; i++ )
-    ODE_module_free_common(  mb->modules[i] );
+    ODE_module_free(  mb->modules[i] );
 
   free( mb->modules );
 

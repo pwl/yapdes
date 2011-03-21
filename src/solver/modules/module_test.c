@@ -16,15 +16,15 @@ int module_test_free ( ODE_module * m )
 }
 
 
-ODE_module * ODE_module_module_test_init ( void )
+ODE_module * ODE_module_test_init ( void )
 {
-  ODE_module * m = ODE_module_init_common ();
+  ODE_module * m = ODE_module_init ();
 
   sprintf( m->type, "Test module" );
 
   m->start =
     module_test_init;
-  m->run =
+  m->step =
     module_test_run;
   m->stop =
     module_test_free;

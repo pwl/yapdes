@@ -14,7 +14,7 @@
 
 #include "common.h"
 #include "solver/ODE_typedefs.h"
-#include "solver/modules/ODE_modules.h"
+#include "solver/ODE_module.h"
 #include "solver/ODE_module_bundle.h"
 #include "solver/ODE_state.h"
 /* #include "ODE_stepper.h" */
@@ -28,7 +28,8 @@
  */
 struct ODE_solver
 {
-  ODE_state * state;
+  ODE_state * state;		/**< all parameters varying during a
+				   solver run are stored here */
   /* ODE_module ** modules;	/\**< table holding pointers to modules */
   /* 				   @todo should point to a structure */
   /* 				   holding modules and @c mod_num on */
@@ -91,7 +92,16 @@ void ODE_solver_free ( ODE_solver * s );
  */
 int ODE_solver_run ( ODE_solver * s );
 
-int ODE_solver_add_module( ODE_solver * , ODE_module * );
+/**
+ * Add a module to a solver. Practically this is a wrapper to
+ * ODE_module_bundle_add_module().
+ *
+ * @param s
+ * @param m
+ */
+void ODE_solver_add_module ( ODE_solver * s, ODE_module * m );
+
+/* int ODE_solver_add_module( ODE_solver * , ODE_module * ); */
 
 /**
  * Runs ODE_module->init() for every module added to s
@@ -106,13 +116,13 @@ int ODE_solver_add_module( ODE_solver * , ODE_module * );
  *
  * @return ???
  */
-int ODE_solver_modules_init( ODE_solver * );
+/* int ODE_solver_modules_init( ODE_solver * ); */
 
-int ODE_solver_modules_run( ODE_solver * );
+/* int ODE_solver_modules_run( ODE_solver * ); */
 
-int ODE_solver_modules_free( ODE_solver * );
+/* int ODE_solver_modules_free( ODE_solver * ); */
 
-int ODE_module_add ( ODE_solver *, ODE_module * );
+/* int ODE_module_add ( ODE_solver *, ODE_module * ); */
 
 /* int ODE_solver_add_stepper ( ODE_solver *, ODE_stepper * ); */
 

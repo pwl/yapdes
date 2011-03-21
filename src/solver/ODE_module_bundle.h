@@ -13,7 +13,7 @@
 #ifndef _ODE_MODULE_BUNDLE_H_
 #define _ODE_MODULE_BUNDLE_H_
 
-#include "solver/modules/ODE_modules.h"
+#include "solver/ODE_module.h"
 #include "solver/ODE_solver.h"
 
 /**
@@ -65,28 +65,40 @@ ODE_module_bundle * ODE_module_bundle_init( ODE_solver * s, ODE_uint size );
  */
 void ODE_module_bundle_add_module( ODE_module_bundle * mb, ODE_module * m );
 
+/** @name functions responsible for running modules from a bundle.
+ *
+ * @{*/
+/**
+ * Calls ODE_module_start() for each module in a bundle.
+ *
+ * @param mb
+ */
+void ODE_module_bundle_start( ODE_module_bundle * mb );
 
 /**
- * Tells a ODE_module_bundle mb to run all of its modules with respect
- * to a given flag. One of start(), step() or stop() is run for each
- * module in the bundle depending on a value of the flag provided a
- * trigger was set.
+ * Calls ODE_module_stop() for each module in a bundle.
  *
- * @sa run_flags
- *
- * @param mb Bundle to run its module
- * @param flag
+ * @param mb
  */
-void ODE_module_bundle_run( ODE_module_bundle * mb, ODE_uint flag );
+void ODE_module_bundle_stop( ODE_module_bundle * mb );
 
+/**
+ * Calls ODE_module_step() for each module in a bundle.
+ *
+ * @param mb
+ */
+void ODE_module_bundle_step( ODE_module_bundle * mb );
+/**@}*/
 
 /**
  * Runs ODE_module_free_common() for each module in a bundle and frees
- * the allocated memory of ODE_module_bundle.
+ * the allocated memory of ODE_module_bundle. This function frees only
+ * the memory common to all modules and memory allocated for
+ * ODE_module_bundle. It does not stop modules.
  *
  * @attention This should always be run @b after
- * ODE_module_bundle_run( mb, MODULES_RUN_STOP ), which frees a
- * module-specific memory allocation, closes files etc.
+ * ODE_module_bundle_stop( mb ), which frees a module-specific memory
+ * allocation, closes files etc.
  *
  * @sa ODE_module
  *

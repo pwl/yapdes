@@ -1,12 +1,27 @@
+/**
+ * @file   ODE_table.h
+ * @author Pawel Biernat <pawel.biernat@gmail.com>
+ * @date   Sun Mar 20 17:00:41 2011
+ *
+ * @brief Helper file defining ODE_table and accessory functions.
+ *
+ *
+ */
 #ifndef _ODE_TABLE_H_
 #define _ODE_TABLE_H_
 
 #include "common.h"
 
+/**
+ * ODE_table is a simply a table with its maximum length stored in a
+ * single structure
+ *
+ */
+
 struct ODE_table
 {
-  ODE_R * table;
-  int length;
+  ODE_R * table;		/**< table */
+  int length;			/**< maximum length of ODE_table.table */
 };
 
 

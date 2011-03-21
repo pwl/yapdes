@@ -72,16 +72,16 @@
 
 typedef enum
   {
-    MODULE_STARTED,
-    MODULE_STOPPED,
-    MODULE_ERROR
+    MODULE_STARTED = 'a',
+    MODULE_STOPPED = 'b',
+    MODULE_ERROR = 'c'
   } ODE_module_state;
 
 typedef enum
   {
-    TRIGGER_STARTED,
-    TRIGGER_STOPPED,
-    TRIGGER_ERROR
+    TRIGGER_STARTED = 'a',
+    TRIGGER_STOPPED = 'b',
+    TRIGGER_ERROR = 'c'
   } ODE_trigger_state;
 
 

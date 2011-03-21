@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
   t = ODE_trigger_test_init();
   s = ODE_solver_init();
 
-  ODE_module_print( m );
+  /* ODE_module_print( m ); */
 
   ODE_module_add_trigger( m, t );
 
@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
 
   ODE_solver_run(s);
 
-  ODE_module_print( m );
+  /* ODE_module_print( m ); */
 
   ODE_solver_free(s);
 

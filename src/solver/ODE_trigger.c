@@ -2,16 +2,19 @@
 
 ODE_trigger * ODE_trigger_init ( void )
 {
-  ODE_trigger * mt = malloc( sizeof( ODE_trigger ) );
+  ODE_trigger * t = malloc( sizeof( ODE_trigger ) );
 
-  /** \todo can be set to some useful value by default */
-  mt->start = NULL;
-  mt->stop = NULL;
-  mt->test = NULL;
-  mt->module = NULL;
-  mt->data = NULL;
+  /** @todo can be set to some useful value by default */
+  t->start  = NULL;
+  t->stop   = NULL;
+  t->test   = NULL;
+  t->module = NULL;
+  t->solver = NULL;
+  t->data   = NULL;
 
-  return mt;
+  t->state  = TRIGGER_STOPPED;
+
+  return t;
 }
 
 void ODE_trigger_free( ODE_trigger * tr )
@@ -31,17 +34,13 @@ void ODE_trigger_start( ODE_trigger * tr )
   /* action to take depends on the state of a trigger */
   switch( tr->state )
     {
-      /* trigger encountered a problem */
-    case TRIGGER_ERROR: return;
-
-      /* trigger has been already started */
-    case TRIGGER_STARTED: return;
+      /* trigger encountered a problem or it has been already
+	 started */
+    case TRIGGER_ERROR:
+    case TRIGGER_STARTED:
+      return;
 
       /* if the trigger has been properly stopped or not started at all */
-      /** @todo can we eliminate a status NOT_STARTED in favor of STOPPED?
-	  the separation of those two states is a redundancy, because a
-	  properly stopped trigger should be able to be properly started
-	  in the same way a trigger with status NOT_STARTED is */
     case TRIGGER_STOPPED:
       {
 	/* triggers sanity test failed */
@@ -102,13 +101,27 @@ void ODE_trigger_stop( ODE_trigger * tr )
 
 int ODE_trigger_sanity_test( ODE_trigger * tr )
 {
-  if( ! (tr->start &&
-	 tr->stop &&
-	 tr->test &&
-	 tr->module &&
+
+  ODE_trigger_print( tr );
+
+  if( ! (tr->start	&&
+	 tr->stop	&&
+	 tr->test	&&
+	 tr->module	&&
 	 tr->solver ) )
     return FALSE;
 
   else
     return TRUE;
+}
+
+void ODE_trigger_print( ODE_trigger * t )
+{
+    if( t->state != TRIGGER_ERROR)
+    {
+      printf("T: Data structure assigned: %s\n", t->data ? "Yes" : "No" );
+      printf("T: Solver assigned: %s\n", t->solver ? "Yes" : "No" );
+      printf("T: Module assigned: %s\n", t->module ? "Yes" : "No" );
+      printf("T: Trigger state: %c\n", t->state );
+    }
 }

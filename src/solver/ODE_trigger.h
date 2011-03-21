@@ -108,4 +108,12 @@ void ODE_trigger_start( ODE_trigger * tr );
  */
 int ODE_trigger_sanity_test( ODE_trigger * tr );
 
+/**
+ * Print some info on the trigger.
+ *
+ * @param t
+ */
+void ODE_trigger_print( ODE_trigger * t );
+
+
 #endif /* _ODE_MODULE_TRIGGER_H_ */

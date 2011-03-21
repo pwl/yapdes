@@ -6,7 +6,7 @@ ODE_module * ODE_module_init ( void )
 
   m->times_run = 0;
 
-  m->trigger_bundle = NULL;
+  m->trigger_bundle = ODE_trigger_bundle_init( m, MAX_TRIG_NUMB );
 
   m->data = NULL;
   m->solver = NULL;
@@ -24,7 +24,6 @@ void ODE_module_start( ODE_module * m )
 {
   switch( m->state )
     {
-
     case MODULE_STOPPED:
       {
 	/* check the health status of the module (in particular if
@@ -133,21 +132,27 @@ void ODE_module_print ( ODE_module * m )
   if( m->state != MODULE_ERROR)
     {
       printf("M: Type: %s\n", m->type);
-      printf("M: Number of triggers assigned: %i\n",ODE_trigger_bundle_count( m->trigger_bundle ));
+      printf("M: Number of triggers assigned: %i\n", ODE_trigger_bundle_count( m->trigger_bundle ));
       printf("M: Times run: %i\n",m->times_run);
       printf("M: Data structure assigned: %s\n", m->data ? "Yes" : "No" );
       printf("M: Solver assigned: %s\n", m->solver ? "Yes" : "No" );
+      printf("M: Module state: %c\n", m->state );
     }
 }
 
 int ODE_module_sanity_test( ODE_module * m )
 {
+
+  ODE_module_print( m );
+
   if( !(m->trigger_bundle &&
 	m->solver &&
 	m->start &&
 	m->stop &&
 	m->step ) )
     return FALSE;
+
+
   else
     return TRUE;
 }

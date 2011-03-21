@@ -17,6 +17,8 @@ void ODE_trigger_bundle_add_trigger( ODE_trigger_bundle * tb, ODE_trigger * t )
 {
   if( tb->trig_num < tb->max_trigs )
     {
+      t->module = tb->module;
+      t->solver = tb->module->solver;
       tb->triggers[tb->trig_num] = t;
       tb->trig_num++;
     }

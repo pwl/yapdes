@@ -34,6 +34,7 @@ struct ODE_trigger_bundle
 
   ODE_uint max_trigs;		/**< maximum number of triggers to load
 				   (corresponding to a memory size) */
+
   /**@}*/
   /* ODE_uint run_mode;		/\**< a switch to change global */
   /* 				   behaviour of triggers *\/ */

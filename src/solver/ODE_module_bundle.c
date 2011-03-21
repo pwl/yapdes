@@ -20,6 +20,7 @@ void ODE_module_bundle_add_module( ODE_module_bundle * mb, ODE_module * m )
   else
     {
       /* Add a new module */
+      m->solver = mb->solver;
       mb->modules[mb->mod_num] = m; /**< @todo log success */
       /* increase number of modules held */
       mb->mod_num++;

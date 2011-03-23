@@ -2,22 +2,25 @@
 
 int trigger_test_start ( ODE_trigger * t)
 {
-  printf("trigger_test_starting\n");
-  return 1;
+  printf("TT: trigger_test [start]\n");
+  /* ODE_trigger_print( t ); */
+  return 0;
 }
 
 
 int  trigger_test_stop ( ODE_trigger * t)
 {
-  printf("trigger_test stopping\n");
-  return 1;
+  printf("TT: trigger_test [stop]\n");
+  /* ODE_trigger_print( t ); */
+  return 0;
 }
 
 
 int trigger_test_test ( ODE_trigger * t)
 {
-  ODE_trigger_print( t );
-  printf("trigger_test returning TRUE\n");
+  /* ODE_trigger_print( t ); */
+  printf("TT: trigger_test [test - TRUE]\n");
+  /* ODE_trigger_print( t ); */
   return TRUE;
 }
 

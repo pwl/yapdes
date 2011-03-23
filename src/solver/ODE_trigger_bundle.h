@@ -102,6 +102,17 @@ void ODE_trigger_bundle_free( ODE_trigger_bundle * tb );
  */
 ODE_uint ODE_trigger_bundle_count( ODE_trigger_bundle * tb );
 
+/**
+ * Function to rewrite solver information of each trigger in the
+ * bundle each time after ODE_module_bundle_add_module is called. Its
+ * purpose is to rewrite information on solver when a trigger is
+ * assigned to a module before a module is assigned to a solver
+ * (i.e. when module->solver is NULL). After assigning a module to a
+ * solver all triggers are updated.
+ *
+ * @param tb
+ */
+void ODE_trigger_bundle_update( ODE_trigger_bundle * tb );
 
 
 #endif /* _ODE_TRIGGER_BUNDLE_H_ */

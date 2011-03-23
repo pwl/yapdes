@@ -22,6 +22,9 @@ ODE_module * ODE_module_init ( void )
 
 void ODE_module_start( ODE_module * m )
 {
+  /* printf("\nstarting modules\n"); */
+  /* ODE_module_print(m); */
+
   switch( m->state )
     {
     case MODULE_STOPPED:
@@ -32,7 +35,7 @@ void ODE_module_start( ODE_module * m )
      shall not be run at all. Sanity test returns TRUE/FALSE */
 	/** @todo report an error! */
 	/* change state for insane modules */
-	if( ! ODE_module_sanity_test( m ) )
+	if( ! ODE_module_sanity_check( m ) )
 	  m->state = MODULE_ERROR;
 
 	/* module started successfuly? */
@@ -51,14 +54,18 @@ void ODE_module_start( ODE_module * m )
     case MODULE_STARTED:
       break;
 
-      /* for any other state set the module to error */
-    default:
-      m->state = MODULE_ERROR;
+      /* ignore broken modules */
+    case MODULE_ERROR:
+      break;
     }
+  /* ODE_module_print(m); */
+
 }
 
 void ODE_module_step( ODE_module * m )
 {
+  /* printf("\nstepping module\n"); */
+  /* ODE_module_print(m); */
   switch( m->state )
     {
       /* only started modules can do a step() action */
@@ -74,16 +81,19 @@ void ODE_module_step( ODE_module * m )
 	  else
 	    m->state = MODULE_ERROR;
 	}
-      /* if module is not started it cannot be run */
+      /* if module is not started or is broken it cannot be run */
     case MODULE_STOPPED:
     case MODULE_ERROR:
-      return;
+      break;
     }
+  /* ODE_module_print(m); */
 }
 
 /** @todo make triggers more efficient by caching test results */
 void ODE_module_stop( ODE_module * m )
 {
+  /* printf("\nstopping module\n"); */
+  /* ODE_module_print(m); */
   /* module which is not corretcly initialized or suffered an errer
      should not be stopped, as it might result in further errors. In
      such case memory leaks or unclosed files are possible to
@@ -108,6 +118,7 @@ void ODE_module_stop( ODE_module * m )
       if ( m->trigger_bundle )
 	ODE_trigger_bundle_stop( m->trigger_bundle );
     }
+  /* ODE_module_print(m); */
 }
 
 void ODE_module_free ( ODE_module * m )
@@ -140,10 +151,10 @@ void ODE_module_print ( ODE_module * m )
     }
 }
 
-int ODE_module_sanity_test( ODE_module * m )
+int ODE_module_sanity_check( ODE_module * m )
 {
 
-  ODE_module_print( m );
+  /* ODE_module_print( m ); */
 
   if( !(m->trigger_bundle &&
 	m->solver &&

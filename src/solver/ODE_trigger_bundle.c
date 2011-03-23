@@ -75,3 +75,10 @@ ODE_uint ODE_trigger_bundle_count( ODE_trigger_bundle * tb )
 {
   return tb->trig_num;
 }
+
+void ODE_trigger_bundle_update( ODE_trigger_bundle * tb )
+{
+  ODE_uint i;
+  for( i = 0; i < tb->trig_num; i++ )
+    tb->triggers[i]->solver = tb->module->solver;
+}

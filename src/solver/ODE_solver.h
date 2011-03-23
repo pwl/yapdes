@@ -101,29 +101,4 @@ int ODE_solver_run ( ODE_solver * s );
  */
 void ODE_solver_add_module ( ODE_solver * s, ODE_module * m );
 
-/* int ODE_solver_add_module( ODE_solver * , ODE_module * ); */
-
-/**
- * Runs ODE_module->init() for every module added to s
- *
- * @todo send some information about which module failed to
- * initialize, e.g. module number, print module name etc, and return a
- * corresponding error code.
- *
- * @todo Implement transparent modules structure with accessors
- *
- * @param s Pointer to initialized solver
- *
- * @return ???
- */
-/* int ODE_solver_modules_init( ODE_solver * ); */
-
-/* int ODE_solver_modules_run( ODE_solver * ); */
-
-/* int ODE_solver_modules_free( ODE_solver * ); */
-
-/* int ODE_module_add ( ODE_solver *, ODE_module * ); */
-
-/* int ODE_solver_add_stepper ( ODE_solver *, ODE_stepper * ); */
-
 #endif /* _ODE_SOLVER_H_ */

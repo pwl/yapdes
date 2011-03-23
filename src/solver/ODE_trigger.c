@@ -102,8 +102,6 @@ void ODE_trigger_stop( ODE_trigger * tr )
 int ODE_trigger_sanity_test( ODE_trigger * tr )
 {
 
-  ODE_trigger_print( tr );
-
   if( ! (tr->start	&&
 	 tr->stop	&&
 	 tr->test	&&
@@ -117,7 +115,7 @@ int ODE_trigger_sanity_test( ODE_trigger * tr )
 
 void ODE_trigger_print( ODE_trigger * t )
 {
-    if( t->state != TRIGGER_ERROR)
+    /* if( t->state != TRIGGER_ERROR) */
     {
       printf("T: Data structure assigned: %s\n", t->data ? "Yes" : "No" );
       printf("T: Solver assigned: %s\n", t->solver ? "Yes" : "No" );

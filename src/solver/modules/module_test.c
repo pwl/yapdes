@@ -2,20 +2,22 @@
 
 int module_test_start ( ODE_module * m )
 {
-  printf("module_test start\n");
+  printf("MM: module_test [start]\n");
+  /* ODE_module_print( m ); */
   return 0;
 }
 
 int module_test_step ( ODE_module * m )
 {
-  ODE_module_print( m );
-  printf("module_test run\n");
+  printf("MM: module_test [step]\n");
+  /* ODE_module_print( m ); */
   return 0;
 }
 
 int module_test_stop ( ODE_module * m )
 {
-  printf("module_test stop\n");
+  printf("MM: module_test [stop]\n");
+  /* ODE_module_print( m ); */
   return 0;
 }
 

@@ -127,6 +127,6 @@ void ODE_module_print ( ODE_module * m );
  * @retval TRUE if neither of the vital pointers NULL.
  * @retval FALSE otherwise.
  */
-int ODE_module_sanity_test( ODE_module * m );
+int ODE_module_sanity_check( ODE_module * m );
 
 #endif /* _ODE_MODULES_H_ */

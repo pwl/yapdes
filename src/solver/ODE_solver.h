@@ -39,10 +39,6 @@ struct ODE_solver
 				      a solver */
 
   ODE_uint status;		/**< status of the solver */
-  ODE_uint run_time;		/**< phase of DE solving
-  				   (init+ialization, marching,
-  				   etc.). Triggers access it to
-  				   determine the phase of evolution */
   /*   ODE_stepper ** stepper; */
 
   /** @todo change 100 to some predefined length e.g.

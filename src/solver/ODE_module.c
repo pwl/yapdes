@@ -14,6 +14,7 @@ ODE_module * ODE_module_init ( void )
   m->start = NULL;
   m->step = NULL;
   m->stop = NULL;
+  m->free = NULL;
 
   m->state = MODULE_STOPPED;
 
@@ -22,8 +23,9 @@ ODE_module * ODE_module_init ( void )
 
 void ODE_module_start( ODE_module * m )
 {
-  /* printf("\nstarting modules\n"); */
-  /* ODE_module_print(m); */
+  /* if a module does not have a start function return */
+  if( ! m->start )
+    return;
 
   switch( m->state )
     {
@@ -64,8 +66,10 @@ void ODE_module_start( ODE_module * m )
 
 void ODE_module_step( ODE_module * m )
 {
-  /* printf("\nstepping module\n"); */
-  /* ODE_module_print(m); */
+  /* if a module does not have a step function return */
+  if( ! m->state )
+    return;
+
   switch( m->state )
     {
       /* only started modules can do a step() action */
@@ -86,12 +90,15 @@ void ODE_module_step( ODE_module * m )
     case MODULE_ERROR:
       break;
     }
-  /* ODE_module_print(m); */
 }
 
 /** @todo make triggers more efficient by caching test results */
 void ODE_module_stop( ODE_module * m )
 {
+  /* if a module does not have a stop function, return */
+  if( ! m->stop )
+    return;
+
   /* printf("\nstopping module\n"); */
   /* ODE_module_print(m); */
   /* module which is not corretcly initialized or suffered an errer
@@ -125,10 +132,26 @@ void ODE_module_stop( ODE_module * m )
 
 void ODE_module_free ( ODE_module * m )
 {
-  /* @todo after adding a state corresponding to non initialized
+  /* @todo after adding a state corresponding to a non initialized
      trigger_bundle it should be used here */
-  if ( m->trigger_bundle )
-    ODE_trigger_bundle_free( m->trigger_bundle );
+
+  switch( m->state )
+    {
+      /* module is running, files are not closed and memory might
+	 still be in use, do not close a module */
+    case MODULE_STARTED:
+      break;
+      /* Module is broken, but we can try to close files and free
+	 memory if it is possible. A procedure for a stopped module is
+	 exactely the same. */
+    case MODULE_ERROR:
+    case MODULE_STOPPED:
+      if ( m->trigger_bundle )
+	ODE_trigger_bundle_free( m->trigger_bundle );
+      if ( m->free )
+	m->free( m );
+      break;
+    }
 
   free( m );
 }
@@ -158,13 +181,15 @@ int ODE_module_sanity_check( ODE_module * m )
 
   /* ODE_module_print( m ); */
 
-  if( !(m->trigger_bundle &&
-	m->solver &&
-	m->start &&
-	m->stop &&
-	m->step ) )
+  if( !( m->trigger_bundle &&	/* module should have abundle
+				   assigned */
+	 m->solver &&		/* and a solver as well */
+	(m->start  ||		/* there is something wrong if a
+				   module does not have any
+				   functionality */
+	 m->stop   ||
+	 m->step ) ) )
     return FALSE;
-
 
   else
     return TRUE;

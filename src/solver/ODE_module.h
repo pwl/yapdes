@@ -77,8 +77,12 @@ struct ODE_module
   int (*start)( ODE_module *);
   /** run is called every time a trigger is activated */
   int (*step)( ODE_module *);
-  /** stop is called to free module specific stuff */
+  /** stop is called to close files, stop plotting etc. */
   int (*stop)( ODE_module *);
+  /** free is called to free module specific stuff (stored in
+      module->data), used only in ODE_module_free() and run only if
+      module state is MODULE_STOPPED */
+  int (*free)( ODE_module *);
 
   /** solver to which module is assigned */
   ODE_solver * solver;

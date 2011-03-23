@@ -102,21 +102,23 @@ void ODE_module_stop( ODE_module * m )
     {
       /* only a started module can be stopped */
     case MODULE_STARTED:
-      {
 	if( ! m->stop( m ) )
 	  m->state = MODULE_STOPPED;
 	/** @todo report an error */
 	else
 	  m->state = MODULE_ERROR;
-      }
 
       /** @todo this is not a right way to do it, there should be an
 	  additional status for a module which has trigger_bundle
 	  initialized */
-    default:
-      /* If m->trigger_bundle is not NULL try to stop the triggers */
+    case MODULE_ERROR:
+      /* If m->trigger_bundle is not NULL try to stop the triggers but
+	 dont change state of the module */
       if ( m->trigger_bundle )
 	ODE_trigger_bundle_stop( m->trigger_bundle );
+      break;
+    case MODULE_STOPPED:
+      break;
     }
   /* ODE_module_print(m); */
 }

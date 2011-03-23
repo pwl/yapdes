@@ -11,6 +11,44 @@
  * triggers in a feasible manner. Each trigger added to a module can
  * see its ODE_trigger_bundle only by refering to an ODE_module first.
  *
+ * Graph below represents the states (ODE_module_state) of ODE_module
+ * (states uninitialized and free are not states formally). Each arrow
+ * represents a function which changes a state of the module (the
+ * prefixes @v "ODE_module_" and @v "MODULE_" were omitted for
+ * clarity). After assigning an @v ERROR state to a module all the
+ * functions consider it as broken @b beyond @b repair and as such the
+ * state ERROR can be considered as an final-state for a trigger. At
+ * this moment a broken modules are not completely ignored by all the
+ * functions as they may contain working triggers, and singals such @v
+ * stop, @v start and @v free can be send to them.
+ *
+ *
+ * @todo Consider adding an additional state in which module is broken
+ * but triggers are fine.
+ *
+ * @dot
+ digraph "trigger states" {
+ rankdir=LR
+ node [shape=circle]
+ uninitialized [shape=box]
+ uninitialized -> STOPPED [label="init"]
+ free [shape=box]
+ STOPPED -> free [label="free"]
+ STOPPED -> STARTED [label="start"]
+ STOPPED -> ERROR [label="start"]
+
+ STARTED -> STOPPED [label="stop"]
+ STARTED -> STARTED [label="test"]
+ STARTED -> ERROR [label="test"]
+ STARTED -> ERROR [label="stop"]
+ ERROR -> free [label="free"]
+
+ {rank=same; "free"; "uninitialized"}
+ }
+  @enddot
+ *
+ * @attention if a module is stopped, so are all of its triggers. This
+ * may cause problems if two modules share a trigger.
  *
  * @addtogroup solver
  *
@@ -52,6 +90,7 @@ struct ODE_module
   void * data;	    /**< data specific to a particular module */
   int times_run;    /**< number of times a module has been called */
 
+  /** state of the module */
   ODE_module_state state;
 };
 
@@ -89,6 +128,9 @@ void ODE_module_step ( ODE_module * m );
  * If m->status is STARTED it stops a module by running m->stop(m) and
  * depending on the value it returns sets m->state to STOPPED or
  * ERROR.
+ *
+ * @attention if a module is stopped, so are all of its triggers. This
+ * may cause problems if two modules share a trigger.
  *
  * @param m
  */

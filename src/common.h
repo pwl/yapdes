@@ -43,33 +43,13 @@
 #define SOLVER_ST_READY			0x08
 /**@}*/
 
-/** @name trigger run times
-    @{*/
-#define TRIG_RUN_NEVER			0x00
-#define TRIG_RUN_START			0x01
-#define TRIG_RUN_STEP			0x02
-#define TRIG_RUN_STOP			0x04
-/** used for triggers to be run at a mixture of stages */
-#define TRIG_RUN_ALWAYS			(TRIG_RUN_START | TRIG_RUN_STEP | TRIG_RUN_STOP)
-/**@}*/
-
-/** @name solver run times */
-/**@{*/
-#define SOLVER_RUN_NOT_RUNNING		0x00
-#define MODULE_RUN_START		0x01
-#define MODULE_RUN_STEP			0x02
-#define MODULE_RUN_STOP			0x04
-/**@}*/
-
 /** maximal numbers of modules to load into a ODE_module_bundle */
 #define MODULE_BUNDLE_MAX_MODULES	100
-
-/** default run_time for trigger */
-#define TRIG_RUN_DEFAULT		TRIG_RUN_NEVER
 
 /** maximum length of strings used in yapdes. global variable */
 #define ODE_MAX_STRING_LENGTH		100
 
+/** This are the possible states of a module, @sa ODE_module.h */
 typedef enum
   {
     MODULE_STARTED = 'a',
@@ -77,6 +57,7 @@ typedef enum
     MODULE_ERROR = 'c'
   } ODE_module_state;
 
+/** This are the possible states of a trigger, @sa ODE_trigger.h */
 typedef enum
   {
     TRIGGER_STARTED = 'a',

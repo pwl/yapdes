@@ -1,0 +1,5 @@
+digraph bbb {
+	a -> b;
+	b -> b;
+	b -> c;
+}

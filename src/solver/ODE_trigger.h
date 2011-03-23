@@ -7,6 +7,34 @@
  * with accessory functions. There is a lot of potential for
  * aggressive expansion here.
  *
+ * Graph below represents the states (ODE_trigger_state) of an
+ * ODE_trigger (states uninitialized and free are not states
+ * formally). Each arrow represents a function which changes a state
+ * of the trigger (prefixes "ODE_trigger_" and "TRIGGER_" were omitted
+ * for clarity). After assigning an ERROR state to a trigger all the
+ * functions consider it as broken @b beyond @b repair and as such the
+ * state ERROR can be considered as an final-state for a trigger.
+ *
+ * @dot
+ digraph "trigger states" {
+ rankdir=LR
+ node [shape=circle]
+ uninitialized [shape=box]
+ uninitialized -> STOPPED [label="init"]
+ free [shape=box]
+ STOPPED -> free [label="free"]
+ STOPPED -> STARTED [label="start"]
+ STOPPED -> ERROR [label="start"]
+
+ STARTED -> STOPPED [label="stop"]
+ STARTED -> STARTED [label="test"]
+ STARTED -> ERROR [label="test"]
+ STARTED -> ERROR [label="stop"]
+
+ {rank=same; "free"; "uninitialized"}
+ }
+  @enddot
+ *
  *
  */
 #ifndef _ODE_MODULE_TRIGGER_H_

@@ -20,7 +20,9 @@ int module_state_init_stop ( ODE_module * m )
 {
   printf("MM: module_state_init [stop]\n");
 
-  /* state has to be freed in order to restart module appropriately */
+  /* state has to be freed or otherwise a sequence m->start m->stop
+     would generate a memory leak as the solvers state is not freed by
+     the solver itself */
   ODE_state_free( m->solver->state );
 
   return 0;

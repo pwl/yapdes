@@ -23,36 +23,39 @@ ODE_module * ODE_module_init ( void )
 
 void ODE_module_start( ODE_module * m )
 {
-  /* if a module does not have a start function return */
-  if( ! m->start )
-    return;
-
   switch( m->state )
     {
     case MODULE_STOPPED:
-      {
-	/* check the health status of the module (in particular if
-     m->start, m->step and m->stop are non NULL or if the
-     trigger_bundle is not assigned), if module fails this test it
-     shall not be run at all. Sanity test returns TRUE/FALSE */
-	/** @todo report an error! */
-	/* change state for insane modules */
-	if( ! ODE_module_sanity_check( m ) )
-	  m->state = MODULE_ERROR;
+      /* check the health status of the module (in particular if the
+	 trigger_bundle and solver are assigned), if module fails this
+	 test it shall not be run at all. Sanity test returns
+	 TRUE/FALSE */
+      /** @todo report an error! */
+      if( ! ODE_module_sanity_check( m ) )
+	m->state = MODULE_ERROR;
 
-	/* module started successfuly? */
-	else if ( ! m->start( m ) )
-	  {
-	    /* set module state, now its ready to run m->step(m) */
-	    m->state = MODULE_STARTED;
-	    /* starting triggers does not return any value! */
-	    ODE_trigger_bundle_start( m->trigger_bundle );
-	  }
-	break;
-      }
+      /* if a module does not have a start function do not run it,
+	 only change the state */
+      else if( ! m->start )
+	m->state = MODULE_STARTED;
 
-      /* module has already been started, nothing wrong is
-	 happening, do nothing */
+      /* module has a start function, check weather it performed
+	 well and change the state accordingly */
+      else if ( ! m->start( m ) )
+	{
+	  /* set module state, now its ready to run m->step(m) */
+	  m->state = MODULE_STARTED;
+	  /* starting triggers does not return any value! */
+	  ODE_trigger_bundle_start( m->trigger_bundle );
+	}
+
+      /* this is the case when m->start exists, but it returned an
+	 error in the previous 'else if' */
+      else
+	m->state = MODULE_ERROR;
+      break;
+
+      /* module has already started, do nothing */
     case MODULE_STARTED:
       break;
 
@@ -60,23 +63,22 @@ void ODE_module_start( ODE_module * m )
     case MODULE_ERROR:
       break;
     }
-  /* ODE_module_print(m); */
 
 }
 
 void ODE_module_step( ODE_module * m )
 {
-  /* if a module does not have a step function return */
-  if( ! m->state )
-    return;
-
   switch( m->state )
     {
       /* only started modules can do a step() action */
     case MODULE_STARTED:
-      if( ODE_trigger_bundle_test ( m->trigger_bundle ) )
+      /* if a module does not have a step function break */
+      if( ! m->step )
+	break;
+      /* else check the triggers */
+      else if( ODE_trigger_bundle_test ( m->trigger_bundle ) )
 	{
-	  /* check if module was activated without an error */
+  	  /* check if module was activated without an error */
 	  if ( ! m->step( m ) )
 	    m->times_run++;
 	  /* if not, switch its status to ERROR, it will be run no
@@ -85,6 +87,7 @@ void ODE_module_step( ODE_module * m )
 	  else
 	    m->state = MODULE_ERROR;
 	}
+      break;
       /* if module is not started or is broken it cannot be run */
     case MODULE_STOPPED:
     case MODULE_ERROR:
@@ -95,9 +98,6 @@ void ODE_module_step( ODE_module * m )
 /** @todo make triggers more efficient by caching test results */
 void ODE_module_stop( ODE_module * m )
 {
-  /* if a module does not have a stop function, return */
-  if( ! m->stop )
-    return;
 
   /* printf("\nstopping module\n"); */
   /* ODE_module_print(m); */
@@ -109,11 +109,20 @@ void ODE_module_stop( ODE_module * m )
     {
       /* only a started module can be stopped */
     case MODULE_STARTED:
-	if( ! m->stop( m ) )
-	  m->state = MODULE_STOPPED;
-	/** @todo report an error */
-	else
-	  m->state = MODULE_ERROR;
+      /* if a module does not have a stop function do nothing apart
+	 from changing its state */
+      if( ! m->stop )
+	m->state = MODULE_STOPPED;
+
+      /* stop function exists and it is run to stop the module */
+      else if( ! m->stop( m ) )
+	m->state = MODULE_STOPPED;
+
+      /** @todo report an error */
+      else
+	m->state = MODULE_ERROR;
+
+      break;
 
       /** @todo this is not a right way to do it, there should be an
 	  additional status for a module which has trigger_bundle
@@ -160,7 +169,20 @@ void ODE_module_free ( ODE_module * m )
 /* you can add a trigger to a module which is in ERROR state */
 void ODE_module_add_trigger (ODE_module * m, ODE_trigger * t)
 {
-  ODE_trigger_bundle_add_trigger( m->trigger_bundle, t );
+  switch( m->state )
+    {
+      /* just add the trigger without altering its state */
+    case MODULE_STOPPED:
+      ODE_trigger_bundle_add_trigger( m->trigger_bundle, t );
+      /* add the trigger and try to start it */
+    case MODULE_STARTED:
+      ODE_trigger_bundle_add_trigger( m->trigger_bundle, t );
+      ODE_trigger_start( t );
+      /* do not add a trigger to a broken module */
+      /** @todo report an error */
+    case MODULE_ERROR:
+      break;
+    }
 }
 
 void ODE_module_print ( ODE_module * m )
@@ -186,7 +208,7 @@ int ODE_module_sanity_check( ODE_module * m )
 	 m->solver &&		/* and a solver as well */
 	(m->start  ||		/* there is something wrong if a
 				   module does not have any
-				   functionality */
+				   of those functions */
 	 m->stop   ||
 	 m->step ) ) )
     return FALSE;

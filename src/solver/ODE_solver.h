@@ -6,8 +6,6 @@
  * The user interface and primary structure of the solver are defined
  * here. @sa ODE_state
  *
- * @addtogroup solver
- *
  */
 #ifndef _ODE_SOLVER_H_
 #define _ODE_SOLVER_H_
@@ -24,6 +22,8 @@
  *
  * @todo include some structure to keep information on PDE
  * (i.e. method(s) of spatial differentiation used etc.)
+ *
+ * @todo develop a state machine for a solver
  *
  */
 struct ODE_solver

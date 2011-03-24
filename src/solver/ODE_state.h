@@ -30,7 +30,7 @@ struct ODE_state
    * @{ */
   ODE_R t;			/**< Calculational time */
   ODE_R dt;			/**< Current stepsize */
-  long int i;			/**< Step number */
+  ODE_uint i;			/**< Step number */
   /** @} */
 };
 

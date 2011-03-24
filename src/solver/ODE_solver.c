@@ -9,7 +9,7 @@ ODE_solver * ODE_solver_init ( void )
   /* state is chosen to be NULL by defailt. Instead it is initalized by module_state_init */
   s->state = NULL;
 
-  s->status = 0;SOLVER_ST_INITIALIZED
+  s->status = SOLVER_ST_INITIALIZED
     | SOLVER_ST_MODULES_READY;	/* what stage of solving the
 				     equation are we? */
   return s;
@@ -20,6 +20,7 @@ int ODE_solver_run ( ODE_solver * s )
   ODE_module_bundle_start( s->module_bundle );
 
   /** @todo sanity check here */
+
   while( 0 ) /* temporarly disabled */
     {
       ODE_module_bundle_step( s->module_bundle );

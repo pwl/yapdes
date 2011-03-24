@@ -47,10 +47,11 @@
  }
   @enddot
  *
+ * @attention a trigger added to a started module will be started. A
+ * trigger will not be added to a broken module.
+ *
  * @attention if a module is stopped, so are all of its triggers. This
  * may cause problems if two modules share a trigger.
- *
- * @addtogroup solver
  *
  */
 #ifndef _ODE_MODULES_H_
@@ -148,8 +149,10 @@ void ODE_module_stop ( ODE_module * m );
 void ODE_module_free ( ODE_module * m );
 
 /**
- * Add a trigger to a module. Practically this is a wrapper to a
- * ODE_trigger_bundle_add_trigger().
+ * Add a trigger to a module. This is a wrapper to a
+ * ODE_trigger_bundle_add_trigger() but its action depends on a state
+ * of the module. E.g. for started modules, the trigger is set to
+ * start as well, for broken modules, the trigger is not added etc.
  *
  * @param m
  * @param t

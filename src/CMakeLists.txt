@@ -9,4 +9,7 @@ set_source_files_properties(${yapdes_src}
 	COMPILE_FLAGS
 	"${w_flags} ${o_flags} ${d_flags}")
 
+# SET(CMAKE_C_COMPILER ${CMAKE_CXX_COMPILER})
+# SET_TARGET_PROPERTIES(f0main${DEBUGEXT} PROPERTIES LINKER_LANGUAGE CXX)
+
 add_library(yapdes SHARED ${yapdes_src})

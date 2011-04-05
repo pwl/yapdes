@@ -1,39 +1,17 @@
-* Modules
-  - in main loop run by triggering functions
-  - trigger per module (default trigger)
-  - run times counter
+* Interesting libraries
+** Loading modules
+   - GModule
+** Testing
+   - Check
+   - Libtap
+** Logging and reporting
+** Plotting
+** Dumping structures
+** Optimization
+   - likely/unlikely macros (icc compatible?)
+** Signal handling
+   - http://www.gnu.org/software/libc/manual/html_mono/libc.html#Signal-Handling
 
-
-* TODO Solver [0/1]
-  - [ ] minimal initialization first
-  - [ ] status! (READY, PAUSE, STOP, etc.)
-  - [ ] data initialization/allocation by modules, status DATA_READY
-    or something
-  - [ ] list of spatial derivative generators
-
-* Triggers
-
-
-* main loop draft
-
-  solver_init
-  - alloc memory
-
-  module_add
-  - add module to solver
-
-  solver_run
-  - init modules from start list
-  - init stepper
-  - loop stepper with modules, stop with status
-  - stop
-
-* stepper
-
-** stepping algorithm needs
-   - current time
-   - current step size
-   - error bounds
-   - function generating rhs of f'=F(f,t)
-   - pointer to parameters of any kind (void * solver) to change
-     status and store temporary data
+* Conventions
+** Exit status
+   - http://www.gnu.org/software/libc/manual/html_mono/libc.html#Exit-Status

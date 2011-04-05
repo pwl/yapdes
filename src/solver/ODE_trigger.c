@@ -11,15 +11,33 @@ ODE_trigger * ODE_trigger_init ( void )
   t->module = NULL;
   t->solver = NULL;
   t->data   = NULL;
+  t->free   = NULL;
 
   t->state  = TRIGGER_STOPPED;
 
   return t;
 }
 
+/* @todo there is a problem here similar to that with
+   ODE_module_free() */
 void ODE_trigger_free( ODE_trigger * tr )
 {
-  free( tr );
+  switch( tr->state )
+    {
+      /* @todo this case should never happen, report immidietely */
+    case TRIGGER_STARTED:
+      break;
+      /* @todo this is almost as bad as the previous one, shall we free it
+	 anyway? */
+    case TRIGGER_ERROR:
+      /* normal action */
+    case TRIGGER_STOPPED:
+      {
+	if( tr->free )
+	  tr->free( tr );
+	free( tr );
+      }
+    }
 }
 
 /* the multiple state comparisons in the following function are due to

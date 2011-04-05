@@ -143,17 +143,27 @@ void ODE_module_free ( ODE_module * m )
 {
   /* @todo after adding a state corresponding to a non initialized
      trigger_bundle it should be used here */
+  /* @todo someting @e essentially wrong is going on here, an attempt
+     to free a started module should not be left like that. Altough
+     this should normally not happen as all triggers/modules are
+     stopped @e before memory being released (this should be
+     guaranteed by solver). */
 
   switch( m->state )
     {
-      /* module is running, files are not closed and memory might
-	 still be in use, do not close a module */
-    case MODULE_STARTED:
-      break;
       /* Module is broken, but we can try to close files and free
 	 memory if it is possible. A procedure for a stopped module is
 	 exactely the same. */
     case MODULE_ERROR:
+      /* module is still running, clean free is potentially harmful,
+	 something went very wrong, @todo report */
+      /* @todo possible fix: call ODE_module_stop(m) and continue, it
+	 would be good to do that @e before entering switch, as it
+	 wont have any impact on states ERROR and STOPPED, just in
+	 case. It might however, be a possible double to another ODE_module_stop()
+	 and should be cleaned up definitely. The same goes to ODE_trigger_free(). */
+    case MODULE_STARTED:
+      break;
     case MODULE_STOPPED:
       if ( m->trigger_bundle )
 	ODE_trigger_bundle_free( m->trigger_bundle );
@@ -161,7 +171,6 @@ void ODE_module_free ( ODE_module * m )
 	m->free( m );
       break;
     }
-
   free( m );
 }
 

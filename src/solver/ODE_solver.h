@@ -42,7 +42,7 @@ struct ODE_solver
   /*   ODE_stepper ** stepper; */
 
   /** @todo change 100 to some predefined length e.g.
-      @c MAX_FILE_NAME_LENGTH or something similar
+      #MAX_FILE_NAME_LENGTH or something similar
 
       @todo more sophisticated data files management, probably
       including creation of automatically named directories or a

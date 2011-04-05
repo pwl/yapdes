@@ -20,17 +20,17 @@ struct ODE_state
 {
   /** @name Vector values
    *
-   *  @c f and @c df contain current function values and rhs
+   *  #f and #df contain current function values and rhs
    *  respectively
    *  @{*/
   ODE_table * f;		/**< Function value */
-  ODE_table * df;		/**< @a rhs value */
+  ODE_table * df;		/**< rhs */
   /** @} */
   /** @name Scalar values
    * @{ */
   ODE_R t;			/**< Calculational time */
   ODE_R dt;			/**< Current stepsize */
-  ODE_uint i;			/**< Step number */
+  ODE_uint i;			/**< Step number @bug possible overflow*/
   /** @} */
 };
 

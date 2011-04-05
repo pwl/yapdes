@@ -59,8 +59,12 @@ struct ODE_trigger
 				   frees memory and closes files if
 				   necessary  */
   int (*test)( ODE_trigger *);	/**< The core function of the
-				   ODE_trigger - returns 1 if test
+				   ODE_trigger - returns TRUE if test
 				   succeeded and 0 otherwise  */
+
+  /** Function required to free #data and used iff #data != NULL
+   @todo implement the iff case */
+  int (*free)( ODE_trigger *);
 
   ODE_module * module; /**< ODE_module to which this trigger is
 		  assigned. */
@@ -76,6 +80,8 @@ struct ODE_trigger
   */
   ODE_trigger_state state;
 
+  /** Additional data used by module and possibly provided by a
+      modules programmer. It is initialized at the time module is created and  */
   void * data;			/**< additional structures to be
 				   defined for a particular trigger
 				   should go here. */

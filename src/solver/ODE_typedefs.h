@@ -35,6 +35,9 @@ typedef struct ODE_stepper ODE_stepper;
 typedef struct ODE_mesh ODE_mesh;
 /**@}*/
 
-
+/** @name Forward declaration of structs for helpers
+   @{*/
+typedef struct ODE_dictionary ODE_dictionary;
+/** @}*/
 
 #endif /* _ODE_TYPEDEFS_H_ */

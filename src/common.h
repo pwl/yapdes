@@ -15,6 +15,7 @@
 #include				"stdio.h"
 #include "stdlib.h"
 
+#include "helper/macro.h"
 #include "solver/ODE_typedefs.h"
 
 /** @name boolean data types */

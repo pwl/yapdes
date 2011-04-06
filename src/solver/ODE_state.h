@@ -5,6 +5,8 @@
  *
  * Definitions and functions concerning ODE_state struct.
  *
+ * @todo replace all free and mallocs with appropriate macros.
+ *
  *
  */
 #ifndef _ODE_STATE_H_
@@ -15,7 +17,10 @@
 
 /** Structure designed to hold a time-dependent information on the
     function being evolved. This is a core data structure of a solver
-    and is evolved by marcher. */
+    and is evolved by marcher using some rhs formula (@todo provide
+    rhs formula).
+    @todo a state machine for #ODE_state
+*/
 struct ODE_state
 {
   /** @name Vector values

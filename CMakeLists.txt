@@ -10,6 +10,7 @@ set( LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR}/lib )
 
 # define compile flags
 set(w_flags "-ansi -pedantic -Wall -Wshadow -Wmissing-prototypes -Wstrict-prototypes -Wpointer-arith -Wcast-qual -Wcast-align -Wwrite-strings -Wnested-externs -fshort-enums -fno-common -Dinline=")
+set(w_flags_disable "-Wno-multichar")
 set(o_flags "-O2")
 set(d_flags "-ggdb")
 
@@ -44,5 +45,11 @@ foreach(bin ${bin_list})
     PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY
     ${CMAKE_CURRENT_BINARY_DIR}/test)
+  # set the additional compile flags
+set_target_properties(${bin}
+  	PROPERTIES
+  	COMPILE_FLAGS
+  	"${w_flags} ${w_flags_disable} ${o_flags} ${d_flags}")
+
   target_link_libraries(${bin} yapdes m)
 endforeach(bin)

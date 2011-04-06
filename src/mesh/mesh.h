@@ -56,16 +56,18 @@ struct ODE_mesh
   int maxrk;
 
   /** Values of the mesh points, table of size #n, elements are\n
-      \c mesh[i] @f$=x_i, \quad i\in@f$ [0,\c n-1]*/
+      @c mesh[i] @f$=x_i, \quad i\in@f$ [0,@c n-1]*/
   ODE_R * mesh;
 
   /** Values at the mesh points, table of size #ind x #n, elements are\n
-      \c f[i][j] @f$=f_i(x_j), \quad (i,j)\in@f$ [0,@c ind-1]x[0,@c n-1]*/
+      @c f[i][j] @f$=f_i(x_j), \quad (i,j)\in@f$ [0,@c ind-1]x[0,@c n-1]*/
   ODE_R ** f;
 
   /** Values of cached derivatives, table of size #maxrk x #ind  x #n, elements are\n
-      \c cache[i][j][k] @f$=D^{i+1} f_j(x_k), \quad (i,j,k)\in@f$ [0,@c maxrk-1]x[0,@c ind-1]x[0,@c n-1]*/
+      @c cache[i][j][k] @f$=D^{i+1} f_j(x_k), \quad (i,j,k)\in@f$ [0,@c maxrk-1]x[0,@c ind-1]x[0,@c n-1]*/
   ODE_R *** cache;
+
+  ODE_dictionary * dict;
 
   /** To be filled with data specific to a particular mesh
       implementation */

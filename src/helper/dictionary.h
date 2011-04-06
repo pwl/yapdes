@@ -33,6 +33,10 @@
  * @attention This simple implementation does not facility removing
  * indices from a table.
  *
+ * @todo increase a dictionary performence by adding a "last accessed"
+ * index
+ * 
+ *
  */
 #ifndef _DICTIONARY_H_
 #define _DICTIONARY_H_

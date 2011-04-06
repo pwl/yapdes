@@ -93,7 +93,7 @@ ODE_R * ODE_mesh_get_f_ptr(ODE_mesh * m, int mc);
  * Use this to set an i-th member of the function named #mc to a value
  * #val. This way is probably slow as it has to search for a correct
  * name in a dictionary at every call.
- * 
+ *
  * @param m 
  * @param mc
  * @param i

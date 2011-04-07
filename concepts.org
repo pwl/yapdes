@@ -1,4 +1,11 @@
 * Interesting libraries
+** Memory management
+   - malloc_hook
+   - allocating a multidimensional table in a single line
+     
+     int (*x)[10] = malloc(10 * 10 * sizeof(int));
+     x[2][3] = 3;
+
 ** Loading modules
    - GModule
 ** Testing

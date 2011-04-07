@@ -43,6 +43,14 @@
 
 #include "common.h"
 
+/**
+ * This implementation relies on the following structure, where #mc is
+ * a table of multicharacter constants of which indices are used to
+ * translate multicharacter to an integer value, i.e. multicharacter
+ * has index @v i iff mc[i]=multicharacter.
+ * 
+ */
+
 struct ODE_dictionary
 {
   /** multicharacter constants to be stored here */
@@ -77,8 +85,19 @@ int ODE_dictionary_get_index( ODE_dictionary * d, int mc );
  */
 int ODE_dictionary_set_index( ODE_dictionary * d, int index, int mc );
 
+/** 
+ * Standard initialization
+ * 
+ * 
+ * @return A pointer to an initialized dictionary
+ */
 ODE_dictionary * ODE_dictionary_init( void );
 
+/** 
+ * Standard free
+ * 
+ * @param d Pointer to an allocated dictionary.
+ */
 void ODE_dictionary_free( ODE_dictionary * d );
 
 

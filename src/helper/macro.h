@@ -41,6 +41,8 @@
     case when it works as free instead of ODE_FREE */
 #define ODE_REALLOC(ptr,n,type) (type *)realloc((void * )ptr, (n) * sizeof(type))
 
+#define ODE_PRINT_HERE() printf("")
+
 /** 
  * MAXXX!!!!
  * 

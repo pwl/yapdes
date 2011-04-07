@@ -3,7 +3,7 @@
 
 ODE_state * ODE_state_init (int length )
 {
-  ODE_state * st = malloc( sizeof( st ) );
+  ODE_state * st = ODE_MALLOC( 1, ODE_state );
   st->f = ODE_table_init( length );
   st->df = ODE_table_init( length );
   /* some default values to be changed by the stepper or obtained from

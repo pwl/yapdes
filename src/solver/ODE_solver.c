@@ -2,7 +2,7 @@
 
 ODE_solver * ODE_solver_init ( void )
 {
-  ODE_solver * s = malloc( sizeof( ODE_solver ) );
+  ODE_solver * s = ODE_MALLOC( 1, ODE_solver );
 
   s->module_bundle = ODE_module_bundle_init( s, MODULE_BUNDLE_MAX_MODULES );
 
@@ -42,8 +42,9 @@ void ODE_solver_free (ODE_solver * s)
   /* @todo free only properly initalized modules */
   ODE_module_bundle_free( s->module_bundle );
 
-  if( s->state )
-    ODE_state_free( s->state );
+  /** @todo temporary disabled, to be done by a module? */
+  /* if( s->state ) */
+  /*   ODE_state_free( s->state ); */
 
   free( s );
 }

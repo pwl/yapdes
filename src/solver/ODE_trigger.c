@@ -2,7 +2,7 @@
 
 ODE_trigger * ODE_trigger_init ( void )
 {
-  ODE_trigger * t = malloc( sizeof( ODE_trigger ) );
+  ODE_trigger * t = ODE_MALLOC( 1, ODE_trigger );
 
   /** @todo can be set to some useful value by default */
   t->start  = NULL;
@@ -22,6 +22,9 @@ ODE_trigger * ODE_trigger_init ( void )
    ODE_module_free() */
 void ODE_trigger_free( ODE_trigger * tr )
 {
+  _ODE_ERROR("", 0);
+  
+  ODE_trigger_print( tr );
   switch( tr->state )
     {
       /* @todo this case should never happen, report immidietely */

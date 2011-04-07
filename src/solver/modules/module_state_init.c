@@ -43,7 +43,7 @@ ODE_module * ODE_module_state_init_init ( ODE_uint size )
 
   sprintf( m->type, "State_Init" );
 
-  m->data = (void *)malloc( sizeof( ODE_uint ) );
+  m->data = (void *)ODE_MALLOC( 1, ODE_uint );
   *(ODE_uint *)(m->data) = size;
 
 

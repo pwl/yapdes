@@ -24,8 +24,7 @@ typedef struct
  */
 static void * std_step_control_alloc ( void )
 {
-  std_step_control_state_t * s = 
-    (std_step_control_state_t *) malloc( sizeof( std_step_control_state_t ) );
+  std_step_control_state_t * s = ODE_MALLOC( 1, std_step_control_state_t );
 
   /* checking memory allocation correctness */
   if( s==0 ) {

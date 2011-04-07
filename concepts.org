@@ -22,3 +22,10 @@
 * Conventions
 ** Exit status
    - http://www.gnu.org/software/libc/manual/html_mono/libc.html#Exit-Status
+* Unresolved
+** Debug
+   - print relative path on debug ouptut
+
+     problem encountered: using __BASE_FILE__ instead of __FILE__
+     should solve the issue but due to a bug in gcc it does not
+     work. Another problem is that __BASE_FILE__ is gcc specific.

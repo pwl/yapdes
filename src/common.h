@@ -16,6 +16,8 @@
 #include "stdlib.h"
 
 #include "helper/macro.h"
+#include "error/ODE_error.h"
+/** @todo split typedefs and move them to their respective folders */
 #include "solver/ODE_typedefs.h"
 
 /** @name boolean data types */

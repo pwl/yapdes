@@ -3,9 +3,9 @@
 
 ODE_trigger_bundle * ODE_trigger_bundle_init( ODE_module * m, ODE_uint size)
 {
-  ODE_trigger_bundle * tb = malloc( sizeof( ODE_trigger_bundle ) );
+  ODE_trigger_bundle * tb = ODE_MALLOC( 1, ODE_trigger_bundle );
 
-  tb->triggers	= malloc( size * sizeof( ODE_trigger * ) );
+  tb->triggers	= ODE_MALLOC( size,  ODE_trigger *  );
   tb->trig_num	= 0;
   tb->max_trigs	= size;
   tb->module	= m;

@@ -2,8 +2,8 @@
 
 ODE_table * ODE_table_init( int length )
 {
-  ODE_table * t = malloc( sizeof( ODE_table ) );
-  t->table = malloc( length * sizeof( ODE_R ) );
+  ODE_table * t = ODE_MALLOC( 1, ODE_table );
+  t->table = ODE_MALLOC( length, ODE_R );
   return t;
 }
 

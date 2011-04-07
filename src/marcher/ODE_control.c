@@ -42,7 +42,7 @@
  */
 ODE_step_control * ODE_step_control_alloc ( const ODE_step_control_type * T )
 {
-  ODE_step_control *c = ( ODE_step_control* ) malloc( sizeof( ODE_step_control ) );
+  ODE_step_control *c = ODE_MALLOC( 1, ODE_step_control );
   
   /* checking memory allocation correctness */
   if( c==0 ) {

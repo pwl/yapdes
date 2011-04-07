@@ -2,9 +2,9 @@
 
 ODE_module_bundle * ODE_module_bundle_init( ODE_solver * s, ODE_uint size )
 {
-  ODE_module_bundle * mb = malloc( sizeof( ODE_module_bundle ) );
+  ODE_module_bundle * mb = ODE_MALLOC( 1, ODE_module_bundle );
 
-  mb->modules	= malloc( size * sizeof( ODE_module * ) );
+  mb->modules	= ODE_MALLOC( size, ODE_module * );
   mb->mod_num	= 0;
   mb->max_mods	= size;
   mb->solver	= s;

@@ -2,7 +2,7 @@
 
 ODE_module * ODE_module_init ( void )
 {
-  ODE_module * m = malloc( sizeof( ODE_module ) );
+  ODE_module * m = ODE_MALLOC( 1, ODE_module );
 
   m->times_run = 0;
 
@@ -178,6 +178,8 @@ void ODE_module_free ( ODE_module * m )
 /* you can add a trigger to a module which is in ERROR state */
 void ODE_module_add_trigger (ODE_module * m, ODE_trigger * t)
 {
+  ODE_trigger_print( t );
+  ODE_module_print( m );
   switch( m->state )
     {
       /* just add the trigger without altering its state */
@@ -192,6 +194,7 @@ void ODE_module_add_trigger (ODE_module * m, ODE_trigger * t)
     case MODULE_ERROR:
       break;
     }
+  ODE_trigger_print( t );
 }
 
 void ODE_module_print ( ODE_module * m )

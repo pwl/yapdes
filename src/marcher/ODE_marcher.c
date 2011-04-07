@@ -10,7 +10,7 @@
  */
 ODE_marcher * ODE_marcher_alloc ( ODE_uint dim )
 {
-  ODE_marcher *m = ( ODE_marcher* ) malloc( sizeof( ODE_marcher ) );
+  ODE_marcher *m = ODE_MALLOC( 1, ODE_marcher );
   
   /* checking memory allocation correctness */
   if( m==0 ) {
@@ -19,14 +19,14 @@ ODE_marcher * ODE_marcher_alloc ( ODE_uint dim )
 
   /* allocating memory for marcher components */
   /* y0 */
-  m->y0 = (ODE_R *) malloc( dim*sizeof( ODE_R ) );
+  m->y0 = ODE_MALLOC( dim, ODE_R );
   if( m->y0==0 ) {
       free( m );
       _ODE_ERROR( "memory allocation for y0", 0 );
   }
 
   /* yerr */
-  m->yerr = (ODE_R *) malloc( dim*sizeof( ODE_R ) );
+  m->yerr = ODE_MALLOC( dim, ODE_R  );
   if( m->yerr==0 ) {
       free( m->y0 );
       free( m );
@@ -34,7 +34,7 @@ ODE_marcher * ODE_marcher_alloc ( ODE_uint dim )
   }
 
   /* dydt_in */
-  m->dydt_in = (ODE_R *) malloc( dim*sizeof( ODE_R ) );
+  m->dydt_in = ODE_MALLOC( dim, ODE_R  );
   if( m->dydt_in==0 ) {
       free( m->yerr );
       free( m->y0 );
@@ -43,7 +43,7 @@ ODE_marcher * ODE_marcher_alloc ( ODE_uint dim )
   }
 
   /* dydt_out */
-  m->dydt_out = (ODE_R *) malloc( dim*sizeof( ODE_R ) );
+  m->dydt_out = ODE_MALLOC( dim, ODE_R );
   if( m->dydt_out==0 ) {
       free( m->dydt_in );
       free( m->yerr );

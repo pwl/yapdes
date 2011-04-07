@@ -13,7 +13,7 @@
  */
 ODE_stepper * ODE_stepper_alloc ( const ODE_step_type * T, size_t dim )
 {
-  ODE_stepper *s = ( ODE_stepper* ) malloc( sizeof( ODE_stepper ) );
+  ODE_stepper *s = ODE_MALLOC( 1, ODE_stepper );
   
   /* checking memory allocation correctness */
   if( s==0 ) {

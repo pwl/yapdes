@@ -58,7 +58,7 @@ rkf45_state_t;
  */
 static void * rkf45_alloc ( size_t dim )
 {
-  rkf45_state_t *state = (rkf45_state_t *) malloc( sizeof( rkf45_state_t ) );
+  rkf45_state_t *state = ODE_MALLOC( 1, rkf45_state_t );
 
   /* checking memory allocation correctness */
   if( state==0 ) {
@@ -67,14 +67,14 @@ static void * rkf45_alloc ( size_t dim )
 
   /* allocating memory for rkf45 state type components */
   /* k1 */
-  state->k1 = (ODE_R *) malloc( dim*sizeof( ODE_R ) );
+  state->k1 = ODE_MALLOC( dim, ODE_R );
   if( state->k1==0 ) {
       free( state );
       _ODE_ERROR( "memory allocation for k1", 0 );
   }
 
   /* k2 */
-  state->k2 = (ODE_R *) malloc( dim*sizeof( ODE_R ) );
+  state->k2 = ODE_MALLOC( dim, ODE_R );
   if( state->k2==0 ) {
       free( state->k1 );
       free( state );
@@ -82,7 +82,7 @@ static void * rkf45_alloc ( size_t dim )
   }
 
   /* k3 */
-  state->k3 = (ODE_R *) malloc( dim*sizeof( ODE_R ) );
+  state->k3 = ODE_MALLOC( dim, ODE_R );
   if ( state->k3==0 ) {
       free( state->k2 );
       free( state->k1 );
@@ -91,7 +91,7 @@ static void * rkf45_alloc ( size_t dim )
   }
   
   /* k4 */
-  state->k4 = (ODE_R *) malloc( dim*sizeof( ODE_R ) );
+  state->k4 = ODE_MALLOC( dim, ODE_R );
   if( state->k4==0 ) {
       free( state->k3 );
       free( state->k2 );
@@ -101,7 +101,7 @@ static void * rkf45_alloc ( size_t dim )
   }
 
   /* k5 */
-  state->k5 = (ODE_R *) malloc( dim*sizeof( ODE_R ) );
+  state->k5 = ODE_MALLOC( dim, ODE_R );
   if( state->k5==0 ) {
       free( state->k4 );
       free( state->k3 );
@@ -112,7 +112,7 @@ static void * rkf45_alloc ( size_t dim )
   }
 
   /* k6 */
-  state->k6 = (ODE_R *) malloc( dim*sizeof( ODE_R ) );
+  state->k6 = ODE_MALLOC( dim, ODE_R );
   if( state->k6==0 ) {
       free( state->k5 );
       free( state->k4 );
@@ -124,7 +124,7 @@ static void * rkf45_alloc ( size_t dim )
   }
 
   /* y0 */
-  state->y0 = (ODE_R *) malloc( dim*sizeof( ODE_R ) );
+  state->y0 = ODE_MALLOC( dim, ODE_R );
   if( state->y0==0 ) {
       free( state->k6 );
       free( state->k5 );
@@ -137,7 +137,7 @@ static void * rkf45_alloc ( size_t dim )
     }
   
   /* ytmp */
-  state->ytmp = (ODE_R *) malloc( dim*sizeof( ODE_R ) );
+  state->ytmp = ODE_MALLOC( dim, ODE_R );
   if( state->ytmp==0 ) {
       free( state->y0 );
       free( state->k6 );

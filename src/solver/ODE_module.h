@@ -132,7 +132,8 @@ void ODE_module_step ( ODE_module * m );
 /**
  * If m->status is STARTED it stops a module by running m->stop(m) and
  * depending on the value it returns sets m->state to STOPPED or
- * ERROR.
+ * ERROR. Calls ODE_trigger_bundle_stop() before processing the
+ * modules state.
  *
  * @attention if a module is stopped, so are all of its triggers. This
  * may cause problems if two modules share a trigger.
@@ -142,7 +143,8 @@ void ODE_module_step ( ODE_module * m );
 void ODE_module_stop ( ODE_module * m );
 
 /**
- * Free memory assigned to a m and its members.
+ * Free memory assigned to a m and its members. Calls
+ * ODE_trigger_bundle_free() before processing the modules state.
  *
  * @param m
  */

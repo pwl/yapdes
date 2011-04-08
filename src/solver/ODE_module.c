@@ -148,6 +148,9 @@ void ODE_module_free ( ODE_module * m )
      stopped @e before memory being released (this should be
      guaranteed by solver). */
 
+  if ( m->trigger_bundle )
+    ODE_trigger_bundle_free( m->trigger_bundle );
+
   switch( m->state )
     {
       /* Module is broken, but we can try to close files and free
@@ -164,8 +167,6 @@ void ODE_module_free ( ODE_module * m )
     case MODULE_STARTED:
       break;
     case MODULE_STOPPED:
-      if ( m->trigger_bundle )
-	ODE_trigger_bundle_free( m->trigger_bundle );
       if ( m->free )
 	m->free( m );
       break;

@@ -24,6 +24,8 @@ void ODE_trigger_free( ODE_trigger * tr )
 {
   switch( tr->state )
     {
+      /* this should never ever happen, as triggers are stopped by
+	 their parent module */
     case TRIGGER_STARTED:
       ODE_trigger_stop( tr );
       ODE_trigger_free( tr );

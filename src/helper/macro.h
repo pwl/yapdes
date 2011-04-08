@@ -23,7 +23,7 @@
  * successfuly
  */
 
-#define ODE_MALLOC(size,type) (type *)malloc(size * sizeof(type))
+#define ODE_MALLOC(size,type) (type *)malloc( (size) * sizeof(type))
 
 /** @todo report a double free error if ptr==NULL */
 #define ODE_FREE(ptr) {if(ptr) free(ptr); ptr=NULL;}

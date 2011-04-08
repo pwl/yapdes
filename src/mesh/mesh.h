@@ -18,6 +18,7 @@
  */
 
 #include "common.h"
+#include "helper/dictionary.h"
 
 #ifndef _MESH_H_
 #define _MESH_H_
@@ -101,6 +102,18 @@ ODE_R * ODE_mesh_get_f_ptr(ODE_mesh * m, int mc);
  * 
  */
 void ODE_mesh_set_f(ODE_mesh * m, int mc, int i, ODE_R val);
+
+/** 
+ * Reserves memory for all the elements of ODE_mesh. In particular it
+ * allocates memory for #mesh, #f and #cache.
+ * 
+ * @param n number of mesh points
+ * @param ind number of functions the mesh should work on
+ * @param maxrk maximal rank of derivative used by the mesh
+ * 
+ * @return Pointer to an initialized mesh structure
+ */
+ODE_mesh * ODE_mesh_init( int n, int ind, int maxrk );
 
 #endif /* _MESH_H_ */
 

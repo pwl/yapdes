@@ -36,6 +36,8 @@
   @enddot
  *
  *
+ * @bug adding the same module twice will result in a double free
+ *
  */
 #ifndef _ODE_MODULE_TRIGGER_H_
 #define _ODE_MODULE_TRIGGER_H_
@@ -96,7 +98,9 @@ struct ODE_trigger
 ODE_trigger * ODE_trigger_init ( void );
 
 /**
- * Analogous to ODE_module_free_common().
+ * Analogous to ODE_module_free_common(). It also stops a trigger
+ * using ODE_trigger_stop() if it is started, but freeing a started
+ * module should never occur in a typical usage.
  *
  * @param tr ODE_trigger to free.
  *

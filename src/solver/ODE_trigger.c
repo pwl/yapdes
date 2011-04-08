@@ -22,24 +22,21 @@ ODE_trigger * ODE_trigger_init ( void )
    ODE_module_free() */
 void ODE_trigger_free( ODE_trigger * tr )
 {
-  _ODE_ERROR("", 0);
-  
-  ODE_trigger_print( tr );
   switch( tr->state )
     {
-      /* @todo this case should never happen, report immidietely */
     case TRIGGER_STARTED:
+      ODE_trigger_stop( tr );
+      ODE_trigger_free( tr );
       break;
       /* @todo this is almost as bad as the previous one, shall we free it
 	 anyway? */
     case TRIGGER_ERROR:
       /* normal action */
     case TRIGGER_STOPPED:
-      {
-	if( tr->free )
-	  tr->free( tr );
-	free( tr );
-      }
+      if( tr->free )
+	tr->free( tr );
+      free( tr );
+      break;
     }
 }
 

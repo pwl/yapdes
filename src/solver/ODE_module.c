@@ -99,6 +99,14 @@ void ODE_module_step( ODE_module * m )
 void ODE_module_stop( ODE_module * m )
 {
 
+  /* If m->trigger_bundle is not NULL try to stop the triggers but
+     dont change state of the module */
+  /** @todo this is not a right way to do it, there should be an
+	  additional status for a module which has trigger_bundle
+	  initialized */
+  if ( m->trigger_bundle )
+    ODE_trigger_bundle_stop( m->trigger_bundle );
+
   /* printf("\nstopping module\n"); */
   /* ODE_module_print(m); */
   /* module which is not corretcly initialized or suffered an errer
@@ -109,29 +117,20 @@ void ODE_module_stop( ODE_module * m )
     {
       /* only a started module can be stopped */
     case MODULE_STARTED:
+
       /* if a module does not have a stop function do nothing apart
 	 from changing its state */
       if( ! m->stop )
 	m->state = MODULE_STOPPED;
-
       /* stop function exists and it is run to stop the module */
       else if( ! m->stop( m ) )
 	m->state = MODULE_STOPPED;
-
-      /** @todo report an error */
+      /** @todo report an error, m->stop() failed */
       else
 	m->state = MODULE_ERROR;
-
       break;
-
-      /** @todo this is not a right way to do it, there should be an
-	  additional status for a module which has trigger_bundle
-	  initialized */
+      
     case MODULE_ERROR:
-      /* If m->trigger_bundle is not NULL try to stop the triggers but
-	 dont change state of the module */
-      if ( m->trigger_bundle )
-	ODE_trigger_bundle_stop( m->trigger_bundle );
       break;
     case MODULE_STOPPED:
       break;
@@ -178,23 +177,23 @@ void ODE_module_free ( ODE_module * m )
 /* you can add a trigger to a module which is in ERROR state */
 void ODE_module_add_trigger (ODE_module * m, ODE_trigger * t)
 {
-  ODE_trigger_print( t );
-  ODE_module_print( m );
   switch( m->state )
     {
       /* just add the trigger without altering its state */
     case MODULE_STOPPED:
       ODE_trigger_bundle_add_trigger( m->trigger_bundle, t );
       /* add the trigger and try to start it */
+      /** @todo consider not adding a trigger to a started module */
+      break;
     case MODULE_STARTED:
       ODE_trigger_bundle_add_trigger( m->trigger_bundle, t );
       ODE_trigger_start( t );
+      break;
       /* do not add a trigger to a broken module */
       /** @todo report an error */
     case MODULE_ERROR:
       break;
     }
-  ODE_trigger_print( t );
 }
 
 void ODE_module_print ( ODE_module * m )

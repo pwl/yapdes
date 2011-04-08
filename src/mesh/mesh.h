@@ -115,6 +115,14 @@ void ODE_mesh_set_f(ODE_mesh * m, int mc, int i, ODE_R val);
  */
 ODE_mesh * ODE_mesh_init( int n, int ind, int maxrk );
 
+/** 
+ * Standard free function
+ * 
+ * @param m 
+ */
+void ODE_mesh_free( ODE_mesh * m );
+
+
 #endif /* _MESH_H_ */
 
 /** @}*/

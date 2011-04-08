@@ -6,31 +6,32 @@ ODE_mesh * ODE_mesh_init( int n, int ind, int maxrk )
 
   /** @todo assuming all the memory is will be allocated is pretty
       dangerous here */
+  
+  m->mesh = ODE_MALLOC( n, ODE_R );
+  
   /* This is an initialization of the 2,3-dimensional tables as a
      continuous block. Such approach drastically reduces the calls to
      mallocs */
-
-
+  
   /* @todo a horror! */
-  m->mesh = ODE_MALLOC( n, ODE_R );
-  m->f	  = (ODE_R**)malloc( n * sizeof(ODE_R*));
-  m->f[0] = (ODE_R*)malloc( ind * n * sizeof(ODE_R) );
+  m->f	  = ODE_MALLOC( n, ODE_R* );
+  m->f[0] = ODE_MALLOC( ind * n, ODE_R );
   {
     int i;
-    for( i = 1; i < n; i++ )
-      m->f[i] = m->f[0] + i*n;
+    for( i = 0; i < n; i++ )
+      m->f[i] = m->f[0] + i*ind;
   }
     
-  m->cache	 = (ODE_R ***) malloc( n * sizeof(ODE_R**) );
-  m->cache[0]	 = (ODE_R **) malloc( n * ind * sizeof(ODE_R*) );
-  m->cache[0][0] = (ODE_R *) malloc( n * ind  * maxrk * sizeof(ODE_R));
+  m->cache	 = ODE_MALLOC( n, ODE_R** );
+  m->cache[0]	 = ODE_MALLOC( n * ind, ODE_R* );
+  m->cache[0][0] = ODE_MALLOC( n * ind  * maxrk, ODE_R );
   {
     int i,j;
-    for( i = 1; i < n; i++ )
+    for( i = 0; i < n; i++ )
       {
-	m->cache[i]=m->cache[0]+i*n;
-	for( j = 1; j < ind; j++ )
-	  m->cache[i][j]=m->cache[0][0]+i*n+j*n*ind;
+	m->cache[i]=m->cache[0]+i*ind;
+	for( j = 0; j < ind; j++ )
+	  m->cache[i][j]=m->cache[0][0]+(i+j*maxrk)*ind;
       }
   }
   
@@ -49,6 +50,7 @@ void ODE_mesh_free( ODE_mesh * m )
 {
   ODE_FREE( m->mesh );
 
+  /* free the continuous blocks */
   ODE_FREE( m->f[0] );
   ODE_FREE( m->f );
 

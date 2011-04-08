@@ -12,7 +12,7 @@
 #ifndef _ODE_COMMON_H_
 #define _ODE_COMMON_H_
 
-#include				"stdio.h"
+#include "stdio.h"
 #include "stdlib.h"
 
 #include "helper/macro.h"

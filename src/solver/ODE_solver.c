@@ -39,14 +39,14 @@ int ODE_solver_run ( ODE_solver * s )
 
 void ODE_solver_free (ODE_solver * s)
 {
-  /* @todo free only properly initalized modules */
+  /* @todoODE_FREE only properly initalized modules */
   ODE_module_bundle_free( s->module_bundle );
 
   /** @todo temporary disabled, to be done by a module? */
   /* if( s->state ) */
   /*   ODE_state_free( s->state ); */
 
-  free( s );
+ ODE_FREE( s );
 }
 
 void ODE_solver_add_module ( ODE_solver * s, ODE_module * m )

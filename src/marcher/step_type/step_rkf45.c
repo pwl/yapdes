@@ -69,84 +69,84 @@ static void * rkf45_alloc ( size_t dim )
   /* k1 */
   state->k1 = ODE_MALLOC( dim, ODE_R );
   if( state->k1==0 ) {
-      free( state );
+     ODE_FREE( state );
       _ODE_ERROR( "memory allocation for k1", 0 );
   }
 
   /* k2 */
   state->k2 = ODE_MALLOC( dim, ODE_R );
   if( state->k2==0 ) {
-      free( state->k1 );
-      free( state );
+     ODE_FREE( state->k1 );
+     ODE_FREE( state );
       _ODE_ERROR( "memory allocation for k2", 0 );
   }
 
   /* k3 */
   state->k3 = ODE_MALLOC( dim, ODE_R );
   if ( state->k3==0 ) {
-      free( state->k2 );
-      free( state->k1 );
-      free( state );
+     ODE_FREE( state->k2 );
+     ODE_FREE( state->k1 );
+     ODE_FREE( state );
       _ODE_ERROR( "memory allocation for k3", 0 );
   }
   
   /* k4 */
   state->k4 = ODE_MALLOC( dim, ODE_R );
   if( state->k4==0 ) {
-      free( state->k3 );
-      free( state->k2 );
-      free( state->k1 );
-      free( state );
+     ODE_FREE( state->k3 );
+     ODE_FREE( state->k2 );
+     ODE_FREE( state->k1 );
+     ODE_FREE( state );
       _ODE_ERROR( "memory allocation for k4", 0 );
   }
 
   /* k5 */
   state->k5 = ODE_MALLOC( dim, ODE_R );
   if( state->k5==0 ) {
-      free( state->k4 );
-      free( state->k3 );
-      free( state->k2 );
-      free( state->k1 );
-      free( state );
+     ODE_FREE( state->k4 );
+     ODE_FREE( state->k3 );
+     ODE_FREE( state->k2 );
+     ODE_FREE( state->k1 );
+     ODE_FREE( state );
       _ODE_ERROR( "memory allocation for k5", 0 );
   }
 
   /* k6 */
   state->k6 = ODE_MALLOC( dim, ODE_R );
   if( state->k6==0 ) {
-      free( state->k5 );
-      free( state->k4 );
-      free( state->k3 );
-      free( state->k2 );
-      free( state->k1 );
-      free( state );
+     ODE_FREE( state->k5 );
+     ODE_FREE( state->k4 );
+     ODE_FREE( state->k3 );
+     ODE_FREE( state->k2 );
+     ODE_FREE( state->k1 );
+     ODE_FREE( state );
       _ODE_ERROR( "memory allocation for k6", 0 );
   }
 
   /* y0 */
   state->y0 = ODE_MALLOC( dim, ODE_R );
   if( state->y0==0 ) {
-      free( state->k6 );
-      free( state->k5 );
-      free( state->k4 );
-      free( state->k3 );
-      free( state->k2 );
-      free( state->k1 );
-      free( state );
+     ODE_FREE( state->k6 );
+     ODE_FREE( state->k5 );
+     ODE_FREE( state->k4 );
+     ODE_FREE( state->k3 );
+     ODE_FREE( state->k2 );
+     ODE_FREE( state->k1 );
+     ODE_FREE( state );
       _ODE_ERROR( "memory allocation for y0", 0 );
     }
   
   /* ytmp */
   state->ytmp = ODE_MALLOC( dim, ODE_R );
   if( state->ytmp==0 ) {
-      free( state->y0 );
-      free( state->k6 );
-      free( state->k5 );
-      free( state->k4 );
-      free( state->k3 );
-      free( state->k2 );
-      free( state->k1 );
-      free( state );
+     ODE_FREE( state->y0 );
+     ODE_FREE( state->k6 );
+     ODE_FREE( state->k5 );
+     ODE_FREE( state->k4 );
+     ODE_FREE( state->k3 );
+     ODE_FREE( state->k2 );
+     ODE_FREE( state->k1 );
+     ODE_FREE( state );
       _ODE_ERROR( "memory allocation for ytmp", 0 );
   }
 
@@ -336,7 +336,7 @@ static unsigned int rkf45_order ( void * vstate )
 
 
 /** 
- * This function frees memory associated with the rkf45_state_t struct.
+ * This functionODE_FREEs memory associated with the rkf45_state_t struct.
  * 
  * @param vstate pointer of type void to the rkf45_state_t struct
  */
@@ -344,15 +344,15 @@ static void rkf45_free ( void * vstate )
 {
   rkf45_state_t *state = (rkf45_state_t *) vstate;
 
-  free( state->ytmp );
-  free( state->y0 );
-  free( state->k6 );
-  free( state->k5 );
-  free( state->k4 );
-  free( state->k3 );
-  free( state->k2 );
-  free( state->k1 );
-  free( state );
+ ODE_FREE( state->ytmp );
+ ODE_FREE( state->y0 );
+ ODE_FREE( state->k6 );
+ ODE_FREE( state->k5 );
+ ODE_FREE( state->k4 );
+ ODE_FREE( state->k3 );
+ ODE_FREE( state->k2 );
+ ODE_FREE( state->k1 );
+ ODE_FREE( state );
 }
 
 
@@ -367,7 +367,7 @@ static const ODE_step_type rkf45_type =
   &rkf45_alloc,                 /**< alloc function */
   &rkf45_apply,                 /**< apply function */
   &rkf45_reset,                 /**< reset function */
-  &rkf45_free,                  /**< free function */
+  &rkf45_free,                  /**<ODE_FREE function */
   &rkf45_order                  /**< order function */
 };
 

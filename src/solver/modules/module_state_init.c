@@ -20,8 +20,8 @@ int module_state_init_stop ( ODE_module * m )
 {
   printf("MM: module_state_init [stop]\n");
 
-  /* state has to be freed or otherwise a sequence m->start m->stop
-     would generate a memory leak as the solvers state is not freed by
+  /* state has to beODE_FREEd or otherwise a sequence m->start m->stop
+     would generate a memory leak as the solvers state is notODE_FREEd by
      the solver itself */
   ODE_state_free( m->solver->state );
 
@@ -32,7 +32,7 @@ int module_state_init_free( ODE_module * m )
 {
   /* printf("MM: module_state [free]\n"); */
 
-  free( m->data );
+ ODE_FREE( m->data );
 
   return 0;
 }

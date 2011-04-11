@@ -35,8 +35,8 @@ void ODE_trigger_bundle_free( ODE_trigger_bundle * tb )
   for( i=0; i < tb->trig_num; i++ )
     ODE_trigger_free( tb->triggers[i] );
 
-  free( tb->triggers );
-  free( tb );
+ ODE_FREE( tb->triggers );
+ ODE_FREE( tb );
 }
 
 void ODE_trigger_bundle_start( ODE_trigger_bundle * tb )

@@ -50,7 +50,7 @@ void ODE_mesh_free( ODE_mesh * m )
 {
   ODE_FREE( m->mesh );
 
-  /* free the continuous blocks */
+  /*ODE_FREE the continuous blocks */
   ODE_FREE( m->f[0] );
   ODE_FREE( m->f );
 
@@ -60,5 +60,5 @@ void ODE_mesh_free( ODE_mesh * m )
 
   ODE_dictionary_free( m->dict );
   
-  free(m);
+ ODE_FREE(m);
 }

@@ -21,34 +21,34 @@ ODE_marcher * ODE_marcher_alloc ( ODE_uint dim )
   /* y0 */
   m->y0 = ODE_MALLOC( dim, ODE_R );
   if( m->y0==0 ) {
-      free( m );
+     ODE_FREE( m );
       _ODE_ERROR( "memory allocation for y0", 0 );
   }
 
   /* yerr */
   m->yerr = ODE_MALLOC( dim, ODE_R  );
   if( m->yerr==0 ) {
-      free( m->y0 );
-      free( m );
+     ODE_FREE( m->y0 );
+     ODE_FREE( m );
       _ODE_ERROR( "memory allocation for yerr", 0 );
   }
 
   /* dydt_in */
   m->dydt_in = ODE_MALLOC( dim, ODE_R  );
   if( m->dydt_in==0 ) {
-      free( m->yerr );
-      free( m->y0 );
-      free( m );
+     ODE_FREE( m->yerr );
+     ODE_FREE( m->y0 );
+     ODE_FREE( m );
       _ODE_ERROR( "memory allocation for dydt_in", 0 );
   }
 
   /* dydt_out */
   m->dydt_out = ODE_MALLOC( dim, ODE_R );
   if( m->dydt_out==0 ) {
-      free( m->dydt_in );
-      free( m->yerr );
-      free( m->y0 );
-      free( m );
+     ODE_FREE( m->dydt_in );
+     ODE_FREE( m->yerr );
+     ODE_FREE( m->y0 );
+     ODE_FREE( m );
       _ODE_ERROR( "memory allocation for dydt_out", 0 );
   }
   
@@ -203,15 +203,15 @@ int ODE_marcher_reset ( ODE_marcher * m )
 
 
 /** 
- * This function frees memory associated with the marcher.
+ * This functionODE_FREEs memory associated with the marcher.
  * 
  * @param m pointer to the ODE_marcher
  */
 void ODE_marcher_free ( ODE_marcher * m )
 {
-  free( m->dydt_out );
-  free( m->dydt_in );
-  free( m->yerr );
-  free( m->y0 );
-  free( m );
+ ODE_FREE( m->dydt_out );
+ ODE_FREE( m->dydt_in );
+ ODE_FREE( m->yerr );
+ ODE_FREE( m->y0 );
+ ODE_FREE( m );
 }

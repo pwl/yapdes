@@ -28,7 +28,7 @@ ODE_stepper * ODE_stepper_alloc ( const ODE_step_type * T, size_t dim )
   
   /* checking memory allocation correctness */
   if( s->state == 0 ) {
-      free( s );
+     ODE_FREE( s );
       _ODE_ERROR( "memory allocation for ODE_step_type", 0 );
   }
   
@@ -112,11 +112,11 @@ int ODE_stepper_reset ( ODE_stepper * s )
 
 
 /** 
- * This function frees memory associated with the stepper.
+ * This functionODE_FREEs memory associated with the stepper.
  * 
  * @param s pointer to the ODE_stepper
  * 
- * @return status of steppers type free function
+ * @return status of steppers typeODE_FREE function
  */
 void ODE_stepper_free ( ODE_stepper * s )
 {

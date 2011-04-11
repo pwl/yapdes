@@ -56,7 +56,7 @@ ODE_step_control * ODE_step_control_alloc ( const ODE_step_control_type * T )
   
   /* checking memory allocation correctness */
   if( c->state == 0 ) {
-      free( c );
+     ODE_FREE( c );
       _ODE_ERROR( "memory allocation for ODE_step_control_type", 0 );
   }
   
@@ -132,7 +132,7 @@ const char * ODE_step_control_name ( const ODE_step_control * c )
 
 
 /** 
- * This function frees all the memory associated with the step control
+ * This functionODE_FREEs all the memory associated with the step control
  * function c.
  * 
  * @param c pointer to the ODE_step_control
@@ -140,5 +140,5 @@ const char * ODE_step_control_name ( const ODE_step_control * c )
 void ODE_step_control_free ( ODE_step_control * c )
 {
   c->type->free( c->state );
-  free( c );
+ ODE_FREE( c );
 }

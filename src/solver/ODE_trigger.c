@@ -30,14 +30,14 @@ void ODE_trigger_free( ODE_trigger * tr )
       ODE_trigger_stop( tr );
       ODE_trigger_free( tr );
       break;
-      /* @todo this is almost as bad as the previous one, shall we free it
+      /* @todo this is almost as bad as the previous one, shall weODE_FREE it
 	 anyway? */
     case TRIGGER_ERROR:
       /* normal action */
     case TRIGGER_STOPPED:
       if( tr->free )
 	tr->free( tr );
-      free( tr );
+     ODE_FREE( tr );
       break;
     }
 }

@@ -147,7 +147,7 @@ static int std_step_control_hadjust ( void * vstate,
 
 
 /** 
- * This function frees all the memory associated the standard step
+ * This functionODE_FREEs all the memory associated the standard step
  * control state type.
  *
  * @param vstate pointer of type void to the std_step_control_state_t
@@ -155,7 +155,7 @@ static int std_step_control_hadjust ( void * vstate,
 static void std_step_control_free ( void * vstate )
 {
   std_step_control_state_t *state = (std_step_control_state_t *) vstate;
-  free( state );
+ ODE_FREE( state );
 }
 
 
@@ -167,7 +167,7 @@ static const ODE_step_control_type std_step_control_type =
   &std_step_control_alloc,      /**< alloc function */
   &std_step_control_init,       /**< init function */
   &std_step_control_hadjust,    /**< hadjust function */ 
-  &std_step_control_free };     /**< free function */
+  &std_step_control_free };     /**<ODE_FREE function */
 
 /**
  * Defining pointer (ODE_step_control_standard) to standard step control type

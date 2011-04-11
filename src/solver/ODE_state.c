@@ -19,5 +19,5 @@ void ODE_state_free ( ODE_state * st)
 {
   ODE_table_free( st->f );
   ODE_table_free( st->df );
-  free( st );
+ ODE_FREE( st );
 }

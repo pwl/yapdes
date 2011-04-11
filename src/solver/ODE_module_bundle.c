@@ -58,8 +58,8 @@ void ODE_module_bundle_free( ODE_module_bundle * mb )
   for ( i = 0; i < mb->mod_num; i++ )
     ODE_module_free(  mb->modules[i] );
 
-  free( mb->modules );
+ ODE_FREE( mb->modules );
 
-  free( mb );
+ ODE_FREE( mb );
 }
 

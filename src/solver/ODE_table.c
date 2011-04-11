@@ -10,6 +10,6 @@ ODE_table * ODE_table_init( int length )
 
 void ODE_table_free( ODE_table * t )
 {
-  free( t->table );
-  free( t );
+ ODE_FREE( t->table );
+ ODE_FREE( t );
 }

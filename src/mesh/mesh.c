@@ -31,7 +31,7 @@ ODE_mesh * ODE_mesh_init( int n, int ind, int maxrk )
       {
 	m->cache[i]=m->cache[0]+i*ind;
 	for( j = 0; j < ind; j++ )
-	  m->cache[i][j]=m->cache[0][0]+(i+j*maxrk)*ind;
+	  m->cache[i][j]=m->cache[0][0]+(i*ind+j)*maxrk;
       }
   }
   

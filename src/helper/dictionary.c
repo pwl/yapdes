@@ -52,6 +52,8 @@ int ODE_dictionary_set_index( ODE_dictionary * d, int index, int mc)
 
 void ODE_dictionary_free( ODE_dictionary * d )
 {
-  ODE_FREE( d->mc );
+  /* if there are some entries present */
+  if( d->n > 0 )
+    ODE_FREE( d->mc );
   ODE_FREE( d );
 }

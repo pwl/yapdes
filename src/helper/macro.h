@@ -23,10 +23,18 @@
  * successfuly
  */
 
-#define ODE_MALLOC(size,type) (type *)malloc( (size) * sizeof(type))
+#define ODE_MALLOC(size,type) (type *)calloc( size, sizeof(type))
 
 /** @todo report a double free error if ptr==NULL */
-#define ODE_FREE(ptr) {if(ptr) free(ptr); ptr=NULL;}
+#define ODE_FREE(ptr) {				\
+    if(ptr)					\
+      {						\
+	free(ptr);				\
+      }						\
+    else					\
+      ODE_PRINT_HERE(("Double free: %s is NULL", #ptr));	\
+    ptr=NULL;							\
+}
 
 /** 
  * Realloc
@@ -41,8 +49,14 @@
     case when it works as free instead of ODE_FREE */
 #define ODE_REALLOC(ptr,n,type) (type *)realloc((void * )ptr, (n) * sizeof(type))
 
-#define ODE_PRINT_HERE() printf("")
-
+#define ODE_PRINT_HERE(msg)						\
+  {									\
+    printf("file:%s:%d in %s()\n    : ", __FILE__, __LINE__, __FUNCTION__); \
+    printf msg;								\
+    printf("\n");							\
+  }									\
+    
+  
 /** 
  * MAXXX!!!!
  * 

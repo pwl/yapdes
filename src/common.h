@@ -68,5 +68,6 @@ typedef enum
     TRIGGER_ERROR = 'E'
   } ODE_trigger_state;
 
+#define ODE_FMT "%i"
 
 #endif				/* _ODE_COMMON_H_ */

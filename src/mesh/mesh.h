@@ -122,6 +122,26 @@ ODE_mesh * ODE_mesh_init( int n, int ind, int maxrk );
  */
 void ODE_mesh_free( ODE_mesh * m );
 
+#ifdef ODE_NOT_DEFINED
+/* /\**  */
+/*  * Function used to name components of m->f. */
+/*  *  */
+/*  * @param m ODE_mesh */
+/*  * */
+/*  * @param names Table of multicharacter constants with length grater */
+/*  * or equal to m->ind */
+/*  *\/ */
+/* void ODE_mesh_give_names( ODE_mesh * m, const int * names ); */
+
+/* /\** @bug this is not a right way to do it *\/ */
+/* #define ODE_MESH_GIVE_NAMES( m, ... )		\ */
+/* {						\ */
+/*   const int a[] = {__VA_ARGS__};			\ */
+/*   ODE_mesh_give_names( m, a );			\ */
+/* }						\ */
+#endif
+
+
 
 #endif /* _MESH_H_ */
 

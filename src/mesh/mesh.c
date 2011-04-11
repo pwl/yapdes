@@ -60,5 +60,13 @@ void ODE_mesh_free( ODE_mesh * m )
 
   ODE_dictionary_free( m->dict );
   
- ODE_FREE(m);
+  ODE_FREE(m);
 }
+
+/* void ODE_mesh_give_names( ODE_mesh * m, const int * names ) */
+/* { */
+/*   int i; */
+/*   for( i = 0; i < m->ind; i++ ) */
+/*     ODE_dictionary_set_index(m->dict, i, names[i] ); */
+/* } */
+

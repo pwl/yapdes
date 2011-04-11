@@ -14,20 +14,21 @@
 
 /** @name Default data types for solver */
 /**@{*/
-typedef long double ODE_R;     /**< type for continuous variables */
-typedef unsigned int ODE_uint; /**< type for unsigned in, (mainly flags) */
+typedef int	ODE_R;  /**< type for continuous variables */
+typedef unsigned int	ODE_uint;	/**< type for unsigned in, (mainly flags) */
 /**@}*/
 
 /** @name Forward declaration of structs for solver
    @{*/
-typedef struct ODE_module ODE_module;
-typedef struct ODE_solver ODE_solver;
-typedef struct ODE_state ODE_state;
-typedef struct ODE_trigger ODE_trigger;
-typedef struct ODE_module_bundle ODE_module_bundle;
-typedef struct ODE_trigger_bundle ODE_trigger_bundle;
-typedef struct ODE_table ODE_table;
-typedef struct ODE_stepper ODE_stepper;
+typedef struct ODE_module		ODE_module;
+typedef struct ODE_solver		ODE_solver;
+typedef struct ODE_state		ODE_state;
+typedef struct ODE_trigger		ODE_trigger;
+typedef struct ODE_module_bundle	ODE_module_bundle;
+typedef struct ODE_trigger_bundle	ODE_trigger_bundle;
+typedef struct ODE_table		ODE_table;
+typedef struct ODE_stepper		ODE_stepper;
+typedef struct ODE_pde			ODE_pde;
 /**@}*/
 
 /** @name Forward declaration of structs for mesh
@@ -37,7 +38,8 @@ typedef struct ODE_mesh ODE_mesh;
 
 /** @name Forward declaration of structs for helpers
    @{*/
-typedef struct ODE_dictionary ODE_dictionary;
+typedef struct ODE_dictionary	ODE_dictionary;
+typedef struct ODE_storage      ODE_storage;
 /** @}*/
 
 #endif /* _ODE_TYPEDEFS_H_ */

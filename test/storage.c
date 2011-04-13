@@ -2,8 +2,8 @@
 
 int main(int argc, char *argv[])
 {
-  int depth1[] = {2,2,2};
-  int depth2[] = {2,2,2};
+  int depth1[] = {1,2,3};
+  int depth2[] = {3,2,1};
     
   ODE_storage * s1 = ODE_storage_init(3, depth1);
   ODE_storage * s2 = ODE_storage_init(3, depth2);

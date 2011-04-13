@@ -14,7 +14,7 @@
 
 struct ODE_storage
 {
-  void *** ptrs;
+  void **** ptrs;
   ODE_R * data;
   int * size;
   int depth;

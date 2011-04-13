@@ -23,12 +23,17 @@ struct ODE_storage
 
 void ODE_storage_add( ODE_storage * s1, ODE_storage * s2 );
 
-void ODE_storage_print( ODE_storage * s, int offset );
+void ODE_storage_print( ODE_storage * s);
 
 ODE_storage * ODE_storage_init( int depth, int * size );
 
 
 void ODE_storage_free( ODE_storage * s );
+
+void ODE_storage_realloc(ODE_storage *s1, ODE_storage *s2);
+
+void ODE_storage_recalculate_pointers(ODE_storage *s1, ODE_storage *s2);
+
 
 
 #endif /* _STORAGE_H_ */

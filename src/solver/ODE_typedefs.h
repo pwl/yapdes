@@ -14,7 +14,7 @@
 
 /** @name Default data types for solver */
 /**@{*/
-typedef int	ODE_R;  /**< type for continuous variables */
+typedef double	ODE_R;  /**< type for continuous variables */
 typedef unsigned int	ODE_uint;	/**< type for unsigned in, (mainly flags) */
 /**@}*/
 

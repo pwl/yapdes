@@ -21,7 +21,7 @@
  * @code
  * int * a = {2,3,4};
  * ODE_storage * s = ODE_storage_init_array( 3, a );
- * ODE_R *** table = (ODE_R***)s->ptrs;
+ * ODE_R *** table = (ODE_R***)s->ptrs[0];
  * table[1][2][3] = (ODE_R)1.;
  * @endcode
  *

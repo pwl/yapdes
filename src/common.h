@@ -18,6 +18,18 @@
 #include "helper/macro.h"
 #include "error/ODE_error.h"
 /** @todo split typedefs and move them to their respective folders */
+
+/** define a type used by the whole library */
+#define ODE_R_LONG_DOUBLE
+
+#ifdef ODE_R_LONG_DOUBLE 
+#define ODE_FMT "% 1.1Lf"
+#endif
+
+#ifdef ODE_R_DOUBLE 
+#define ODE_FMT "% 1.1f"
+#endif
+
 #include "solver/ODE_typedefs.h"
 
 /** @name boolean data types */
@@ -68,6 +80,5 @@ typedef enum
     TRIGGER_ERROR = 'E'
   } ODE_trigger_state;
 
-#define ODE_FMT "%1.1f"
 
 #endif				/* _ODE_COMMON_H_ */

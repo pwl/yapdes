@@ -157,7 +157,7 @@ void ODE_storage_print( ODE_storage * s)
 	    
   	    printf(" (...) |");
 
-  	    for( j = s->size[i]-1; j > s->size[i] - offset - 1; j-- )
+  	    for( j = s->size[i] - offset; j < s->size[i]; j++ )
 	      {
 		if (i == d-2)
 		  shift =((ODE_R*)s->ptrs[i][j] - (ODE_R*)s->ptrs[i][0]);
@@ -183,7 +183,7 @@ void ODE_storage_print( ODE_storage * s)
     
     	printf(" (...) |");
     
-    	for( j = s->size[s->depth-1] - 1; j > s->size[s->depth-1] - offset - 1; j-- )
+    	for( j = s->size[s->depth-1] - offset; j < s->size[s->depth-1]; j++ )
     	  printf(" " ODE_FMT " |", s->data[j]);
       }
     printf("\n");

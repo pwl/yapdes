@@ -17,20 +17,14 @@ void ODE_storage_realloc(ODE_storage *s1, ODE_storage *s2)
 	  ODE_REALLOC( s1->ptrs[i], s1->size[i] + s2->size[i], void ** );
 
 	/* calculate new relative poistion */
-	shift = (void**)s1->ptrs[i] - (void**)old;
+	shift = s1->ptrs[i] - old;
 	      
 	/* did a realloc moved a block of memory? if yes we need to
 	   recalculate pointers. */
 	
 	if( shift != 0 && i > 0 )
 	  for( j = 0; j < s1->size[i-1]; j++ )
-	    {
-	      printf("-----------%i %i %i %i\n",
-	      	     i, j, (void**)s1->ptrs[i-1][j]-(void**)old, shift);
-	      /* translate the pointers to a new memory block
-		 position */
-	      s1->ptrs[i-1][j] = (void*)((void **)s1->ptrs[i-1][j] + shift);
-	    }
+	    s1->ptrs[i-1][j] = s1->ptrs[i-1][j] + shift;
       }
   }
 
@@ -47,11 +41,7 @@ void ODE_storage_realloc(ODE_storage *s1, ODE_storage *s2)
     /* if a memory block has moved */
     if( shift != 0 )
       for( j = 0; j < s1->size[d-2]; j++ )
-	{
-	  printf("-----------%i %i %i %i\n",
-	  	 i, j, (ODE_R*)s1->ptrs[d-2][j] - old, shift);
-	  s1->ptrs[d-2][j] = (void*)((ODE_R*)s1->ptrs[d-2][j] + shift);
-	}
+	s1->ptrs[d-2][j] = (void**)((ODE_R*)s1->ptrs[d-2][j] + shift);
   }
 }
 
@@ -69,18 +59,18 @@ void ODE_storage_recalculate_pointers(ODE_storage *s1, ODE_storage *s2)
 	  {
 	    void *** start;
   	    start = s1->ptrs[i+1];
-	    s1->ptrs[i][S1+j] = (void*)
-	      ((void**)s2->ptrs[i][j] - (void**)s2->ptrs[i][0] /* this is the address shift */
-	       + start + S2);	/* new addresses in s1 start here */    
+	    s1->ptrs[i][S1+j] = (void**)(
+	      s2->ptrs[i][j] - s2->ptrs[i][0] /* this is the address shift */
+	      + start + S2);	/* new addresses in s1 start here */    
 	  }
 	
 	else
 	  {
 	    ODE_R * start;
 	    start = s1->data;
-	    s1->ptrs[i][S1+j] = (void*)
-	      ((ODE_R*)s2->ptrs[i][j] - (ODE_R*)s2->ptrs[i][0] /* this is the address shift */
-	       + start + S2);	/* new addresses in s1 start here */    
+	    s1->ptrs[i][S1+j] = (void**)(
+	      (ODE_R*)s2->ptrs[i][j] - (ODE_R*)s2->ptrs[i][0] /* this is the address shift */
+	      + start + S2);	/* new addresses in s1 start here */    
 	  }
       }
 }

@@ -196,16 +196,16 @@ void ODE_storage_print( ODE_storage * s)
 
     if( s->size[s->depth-1] <= 2*offset )
       for( j = 0; j < s->size[s->depth-1]; j++ )
-    	printf(ODE_FMT " |", s->data[j]);
+    	{}/* printf(ODE_FMT " |", s->data[j]); */
     else
       {
     	for( j = 0; j < offset; j++ )
-    	  printf(ODE_FMT " |", s->data[j]);
+    	  {}/* printf(ODE_FMT " |", s->data[j]); */
 
     	printf("(...)|");
 
     	for( j = s->size[s->depth-1] - offset; j < s->size[s->depth-1]; j++ )
-    	  printf(ODE_FMT " |", s->data[j]);
+    	  {}/* printf(ODE_FMT " |", s->data[j]); */
       }
     printf("\n");
   }

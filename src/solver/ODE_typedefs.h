@@ -38,4 +38,20 @@ typedef struct ODE_dictionary	ODE_dictionary;
 typedef struct ODE_storage      ODE_storage;
 /** @}*/
 
+/** This are the possible states of a module, @sa ODE_module.h */
+typedef enum
+  {
+    MODULE_STARTED = 'S',
+    MODULE_STOPPED = '-',
+    MODULE_ERROR = 'E'
+  } ODE_module_state;
+
+/** This are the possible states of a trigger, @sa ODE_trigger.h */
+typedef enum
+  {
+    TRIGGER_STARTED = 'S',
+    TRIGGER_STOPPED = '-',
+    TRIGGER_ERROR = 'E'
+  } ODE_trigger_state;
+
 #endif /* _ODE_TYPEDEFS_H_ */

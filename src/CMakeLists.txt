@@ -13,9 +13,7 @@ set_source_files_properties(${yapdes_src}
   PROPERTIES
   LANGUAGE
   CXX)
-
-
-# SET(CMAKE_C_COMPILER ${CMAKE_CXX_COMPILER})
-# SET_TARGET_PROPERTIES(f0main${DEBUGEXT} PROPERTIES LINKER_LANGUAGE CXX)
+# target_link_libraries(${yapdes_src} yapdes m ${GMP_LIBRARIES})
 
 add_library(yapdes SHARED ${yapdes_src})
+target_link_libraries(yapdes m ${GMP_LIBRARIES})

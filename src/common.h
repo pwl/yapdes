@@ -8,7 +8,7 @@
  *
  *
  */
-
+#pragma once
 #ifndef _ODE_COMMON_H_
 #define _ODE_COMMON_H_
 
@@ -62,22 +62,6 @@
 
 /** maximum length of strings used in yapdes. global variable */
 #define ODE_MAX_STRING_LENGTH		100
-
-/** This are the possible states of a module, @sa ODE_module.h */
-typedef enum
-  {
-    MODULE_STARTED = 'S',
-    MODULE_STOPPED = '-',
-    MODULE_ERROR = 'E'
-  } ODE_module_state;
-
-/** This are the possible states of a trigger, @sa ODE_trigger.h */
-typedef enum
-  {
-    TRIGGER_STARTED = 'S',
-    TRIGGER_STOPPED = '-',
-    TRIGGER_ERROR = 'E'
-  } ODE_trigger_state;
 
 
 #endif				/* _ODE_COMMON_H_ */

@@ -1,3 +1,13 @@
+/**
+ * @file   data_type.h
+ * @author Pawel Biernat <pawel.biernat@gmail.com>
+ * @date   Fri Apr 15 00:38:59 2011
+ *
+ * @brief File containing forward declarations of most data types used
+ * in yapdes
+ *
+ *
+ */
 #pragma once
 #ifndef _DATA_TYPE_H_
 #define _DATA_TYPE_H_
@@ -26,7 +36,7 @@ __BEGIN_DECLS
 #endif
 
 #ifdef ODE_R_GMPF
-#define ODE_FMT "% 1.1f"
+#define ODE_FMT ""
 #define ODE_REAL mpf_class
 #endif
 /**@}*/

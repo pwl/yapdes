@@ -14,24 +14,25 @@ ODE_mesh * ODE_mesh_init( int n, int ind, int maxrk )
      mallocs */
   
   /* @todo a horror! */
-  m->f	  = ODE_MALLOC( n, ODE_R* );
+  /* @todo use ODE_storage_init_array() to allocate this memory? */
+  m->f	  = ODE_MALLOC( ind, ODE_R* );
   m->f[0] = ODE_MALLOC( ind * n, ODE_R );
   {
     int i;
-    for( i = 0; i < n; i++ )
-      m->f[i] = m->f[0] + i*ind;
+    for( i = 0; i < ind; i++ )
+      m->f[i] = m->f[0] + i*n;
   }
     
-  m->cache	 = ODE_MALLOC( n, ODE_R** );
-  m->cache[0]	 = ODE_MALLOC( n * ind, ODE_R* );
-  m->cache[0][0] = ODE_MALLOC( n * ind  * maxrk, ODE_R );
+  m->cache	 = ODE_MALLOC( ind, ODE_R** );
+  m->cache[0]	 = ODE_MALLOC( ind * maxrk, ODE_R* );
+  m->cache[0][0] = ODE_MALLOC( ind * maxrk * n, ODE_R );
   {
     int i,j;
-    for( i = 0; i < n; i++ )
+    for( i = 0; i < ind; i++ )
       {
-	m->cache[i]=m->cache[0]+i*ind;
-	for( j = 0; j < ind; j++ )
-	  m->cache[i][j]=m->cache[0][0]+(i*ind+j)*maxrk;
+	m->cache[i]=m->cache[0]+i*maxrk;
+	for( j = 0; j < maxrk; j++ )
+	  m->cache[i][j]=m->cache[0][0]+(i*maxrk+j)*n;
       }
   }
   

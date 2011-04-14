@@ -65,8 +65,8 @@ struct ODE_mesh
   ODE_R ** f;
 
   /** Values of cached derivatives, table of size #maxrk x #ind x #n,
-      elements are\n @c cache[i][j][k] @f$=D^{i+1} f_j(x_k), \quad
-      (i,j,k)\in@f$ [0,@c maxrk-1]x[0,@c ind-1]x[0,@c n-1]*/
+      elements are\n @c cache[i][j][k] @f$=D^{j+1} f_i(x_k), \quad
+      (j,i,k)\in@f$ [0,@c maxrk-1]x[0,@c ind-1]x[0,@c n-1]*/
   ODE_R *** cache;
 
   /** #dict contains the aliases of the function names. Using it one

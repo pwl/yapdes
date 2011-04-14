@@ -38,6 +38,7 @@
  * 
  *
  */
+#pragma once
 #ifndef _DICTIONARY_H_
 #define _DICTIONARY_H_
 
@@ -99,7 +100,6 @@ ODE_dictionary * ODE_dictionary_init( void );
  * @param d Pointer to an allocated dictionary.
  */
 void ODE_dictionary_free( ODE_dictionary * d );
-
 
 #endif /* _DICTIONARY_H_ */
 

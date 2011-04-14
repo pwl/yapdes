@@ -9,7 +9,7 @@ project( yapdes )
 set( LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR}/lib )
 
 # define compile flags
-set(w_flags "-ansi -pedantic -Wall -Wshadow -Wmissing-prototypes -Wstrict-prototypes -Wpointer-arith -Wcast-qual -Wcast-align -Wwrite-strings -Wnested-externs -fshort-enums -fno-common -Dinline=")
+set(w_flags "-ansi -pedantic -Wall -Wshadow -Wmissing-prototypes -Wstrict-prototypes -Wpointer-arith -Wcast-qual -Wcast-align -Wwrite-strings -Wnested-externs -fno-common -Dinline=")
 set(w_flags_disable "-Wno-multichar")
 set(o_flags "-O2")
 set(d_flags "-ggdb")
@@ -21,12 +21,12 @@ add_subdirectory( src )
 # add a target to generate API documentation with Doxygen
 find_package(Doxygen)
 if(DOXYGEN_FOUND)
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
-add_custom_target(doc
-  ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile
-  WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-  COMMENT "Generating API documentation with Doxygen" VERBATIM
-  )
+  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
+  add_custom_target(doc
+    ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile
+    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+    COMMENT "Generating API documentation with Doxygen" VERBATIM
+    )
 endif(DOXYGEN_FOUND)
 
 
@@ -40,16 +40,24 @@ include_directories( src )
 
 foreach(bin ${bin_list})
   string(REPLACE ".c" "" bin ${bin})
+
   add_executable(${bin} ${PROJECT_SOURCE_DIR}/test/${bin}.c)
+
   set_target_properties(${bin}
     PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY
     ${CMAKE_CURRENT_BINARY_DIR}/test)
+
   # set the additional compile flags
-set_target_properties(${bin}
-  	PROPERTIES
-  	COMPILE_FLAGS
-  	"${w_flags} ${w_flags_disable} ${o_flags} ${d_flags}")
+  set_target_properties(${bin}
+    PROPERTIES
+    COMPILE_FLAGS
+    "${w_flags} ${w_flags_disable} ${o_flags} ${d_flags}")
+
+  set_target_properties(${bin}
+    PROPERTIES
+    LANGUAGE
+    CXX)
 
   target_link_libraries(${bin} yapdes m)
 endforeach(bin)

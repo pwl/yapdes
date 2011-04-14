@@ -87,15 +87,49 @@ int ODE_pde_size( ODE_pde * pde );
  * @param pde pde to extract a mesh from
  * @param name name of the mesh
  * 
- * @return Mesh matching a #name
- * @retval NULL no mesh of a given #name was found
+ * @return Mesh matching a name
+ * @retval NULL no mesh of a given name was found
  */
 ODE_mesh * ODE_pde_get_mesh( ODE_pde * pde, int name );
 
-ODE_R * ODE_pde_get_mesh_f( ODE_pde * pde, int mesh_name, int f_name);
+/** 
+ * Helper function to ODE_pde_get_mesh_f()
+ * 
+ * @param pde pde to search
+ * @param mesh_name multicharacter name
+ * @param f_name multicharacter name
+ * @param out two dimensional array to store found indices. out[0] is
+ * an index of a mesh, out[1] is an index of a function
+ * 
+ * @retval 0 success
+ * @retval -1 failed to find either mesh or function index
+ * 
+ */
+int ODE_pde_get_mesh_and_f_index( ODE_pde * pde, int mesh_name, int f_name, int * out );
 
-ODE_R * ODE_pde_get_vector_f( ODE_pde * pde );
+/** 
+ * Points *f and *rhs to a starting point of a memory where a function
+ * (or a rhs respectively) named f_name and defined on a mesh
+ * mesh_name is located. If f or rhs is NULL it is ignored.
+ * 
+ * @param[in] pde 
+ * @param[in] mesh_name 
+ * @param[in] f_name 
+ * @param[out] f 
+ * @param[out] rhs 
+ */
+void ODE_pde_get_mesh_f( ODE_pde * pde, int mesh_name,
+			 int f_name, ODE_R ** f, ODE_R ** rhs );
 
-ODE_R * ODE_pde_get_vector_rhs( ODE_pde * pde );
+/** 
+ * Points *f and *rhs to a beginning of a long memory block where all
+ * the data from all meshes is located. If f or rhs is NULL it is
+ * ignored.
+ * 
+ * @param pde 
+ * @param f 
+ * @param rhs 
+ */  
+void ODE_pde_get_vector( ODE_pde * pde, ODE_R ** f, ODE_R ** rhs );
 
 #endif /* _PDE_H_ */

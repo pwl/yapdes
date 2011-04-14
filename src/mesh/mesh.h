@@ -113,7 +113,7 @@ void ODE_mesh_set_f(ODE_mesh * m, int mc, int i, ODE_R val);
  * 
  * @return Pointer to an initialized mesh structure
  */
-ODE_mesh * ODE_mesh_init( int n, int ind, int maxrk );
+ODE_mesh * ODE_mesh_init( int n, int ind, int maxrk , int * names);
 
 /** 
  * Standard free function

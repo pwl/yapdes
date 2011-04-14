@@ -1,6 +1,6 @@
 #include "mesh.h"
 
-ODE_mesh * ODE_mesh_init( int n, int ind, int maxrk )
+ODE_mesh * ODE_mesh_init( int n, int ind, int maxrk , int * names)
 {
   ODE_mesh * m = ODE_MALLOC( 1, ODE_mesh );
 
@@ -38,6 +38,15 @@ ODE_mesh * ODE_mesh_init( int n, int ind, int maxrk )
   
   /* dictionary is empty on initialization */
   m->dict  = ODE_dictionary_init( );
+
+  /* if *names is given we assume it contains _all_ the names */
+  if( names )
+  {
+    int i;
+    for( i = 0; i < n; i++ )
+      ODE_dictionary_set_index(m->dict, i, names[i]);
+  }
+  
 
   m->dim   = 1;
   m->n	   = n;

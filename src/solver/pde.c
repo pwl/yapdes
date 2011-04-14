@@ -113,7 +113,7 @@ ODE_mesh * ODE_pde_get_mesh( ODE_pde * pde, int name )
 int ODE_pde_get_mesh_and_f_index( ODE_pde * pde, int mesh_name, int f_name, int * out )
 {
   int mesh_index = ODE_dictionary_get_index(pde->dict, mesh_name);
-  int f_index = ODE_dictionary_get_index(pde->mesh[mesh_index], f_name);
+  int f_index = ODE_dictionary_get_index(pde->mesh[mesh_index]->dict, f_name);
 
   out[0] = mesh_index;
   out[1] = f_index;
@@ -125,14 +125,26 @@ int ODE_pde_get_mesh_and_f_index( ODE_pde * pde, int mesh_name, int f_name, int 
     return 0;
 }
 
-ODE_R * ODE_pde_get_mesh_f( ODE_pde * pde, int mesh_name, int f_name )
+void ODE_pde_get_mesh_f( ODE_pde * pde, int mesh_name,
+			 int f_name, ODE_R ** f, ODE_R ** rhs )
 {
   int indices[2];
 
   if( ODE_pde_get_mesh_and_f_index( pde, mesh_name, f_name, indices ) < 0 )
-    return NULL;
-  /* else */
-  /*   return pde->mesh[indices[0]]->f[]; */
-    
-  
+    return;
+  else
+    {
+      if( f )
+	f[0] = (ODE_R *)pde->s_f->ptrs[0][indices[0]][indices[1]];
+      if( rhs )
+	rhs[0] = (ODE_R *)pde->s_rhs->ptrs[0][indices[0]][indices[1]];
+    }
+}
+
+void ODE_pde_get_vector( ODE_pde * pde, ODE_R ** f, ODE_R ** rhs )
+{
+  if( pde->s_f && f )
+    f[0] = pde->s_f->data;
+  if( pde->s_rhs && rhs )
+    rhs[0] = pde->s_rhs->data;
 }

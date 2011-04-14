@@ -3,6 +3,8 @@
 
 #include "solver/ODE_module.h"
 
+__BEGIN_DECLS
+
 /* standard module functions */
 int module_test_start ( ODE_module * );
 
@@ -15,5 +17,6 @@ int module_test_stop ( ODE_module * );
 
 ODE_module * ODE_module_test_init ( void );
 
+__END_DECLS
 
 #endif /* _MODULE_TEST_H_ */

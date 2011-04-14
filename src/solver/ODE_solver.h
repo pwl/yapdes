@@ -17,6 +17,8 @@
 #include "solver/ODE_state.h"
 /* #include "ODE_stepper.h" */
 
+__BEGIN_DECLS
+
 /**
  * Ties state, modules and @a rhs of DE together.
  *
@@ -96,5 +98,7 @@ int ODE_solver_run ( ODE_solver * s );
  * @param m
  */
 void ODE_solver_add_module ( ODE_solver * s, ODE_module * m );
+
+__END_DECLS
 
 #endif /* _ODE_SOLVER_H_ */

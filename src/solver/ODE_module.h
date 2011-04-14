@@ -62,7 +62,7 @@
 #include "solver/ODE_trigger.h"
 #include "solver/ODE_trigger_bundle.h"
 
-
+__BEGIN_DECLS
 
 /**
  * Structure of a module contains pointers to methods acting on it as
@@ -179,5 +179,7 @@ void ODE_module_print ( ODE_module * m );
  * @retval FALSE otherwise.
  */
 int ODE_module_sanity_check( ODE_module * m );
+
+__END_DECLS
 
 #endif /* _ODE_MODULES_H_ */

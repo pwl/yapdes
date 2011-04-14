@@ -17,6 +17,8 @@
 #include "solver/ODE_solver.h"
 #include "solver/modules/module_state_init.h"
 
+__BEGIN_DECLS
+
 /**
  * Initializes a solver with a state initialized to a size s.
  *
@@ -28,5 +30,7 @@ ODE_solver * ODE_solver_wrapper_state( ODE_uint s );
 
 /** @todo initialize grid */
 /** @todo initialize initial conditions using given function */
+
+__END_DECLS
 
 #endif /* _ODE_SOLVER_WRAPPERS_H_ */

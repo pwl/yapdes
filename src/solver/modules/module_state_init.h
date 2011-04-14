@@ -24,6 +24,7 @@
 
 #include "solver/ODE_module.h"
 
+__BEGIN_DECLS
 
 /** @name standard module interface
     @{*/
@@ -51,5 +52,7 @@ ODE_module * ODE_module_state_init_init ( ODE_uint size );
  */
 int module_state_init_free( ODE_module * m );
 /**@}*/
+
+__END_DECLS
 
 #endif /* _MODULE_STATE_INIT_H_ */

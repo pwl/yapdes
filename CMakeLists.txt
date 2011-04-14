@@ -7,9 +7,10 @@ project( yapdes )
 # macro_ensure_out_of_source_build("${PROJECT_NAME} requires an out of source build.")
 
 set( LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR}/lib )
+set( CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/CMake )
 
 # define compile flags
-set(w_flags "-ansi -pedantic -Wall -Wshadow -Wmissing-prototypes -Wstrict-prototypes -Wpointer-arith -Wcast-qual -Wcast-align -Wwrite-strings -Wnested-externs -fno-common -Dinline=")
+set(w_flags "-ansi -pedantic -Wall -Wshadow -Wmissing-prototypes -Wstrict-prototypes -Wpointer-arith -Wcast-qual -Wcast-align -Wwrite-strings -Wnested-externs -fno-common -Dinline= -Wfatal-errors -Werror")
 set(w_flags_disable "-Wno-multichar")
 set(o_flags "-O2")
 set(d_flags "-ggdb")
@@ -28,6 +29,9 @@ if(DOXYGEN_FOUND)
     COMMENT "Generating API documentation with Doxygen" VERBATIM
     )
 endif(DOXYGEN_FOUND)
+
+# check if GMP is installed?
+find_package(GMP)
 
 
 # create targets out of all files from test, they will compile to the
@@ -59,5 +63,5 @@ foreach(bin ${bin_list})
     LANGUAGE
     CXX)
 
-  target_link_libraries(${bin} yapdes m)
+  target_link_libraries(${bin} yapdes m ${GMP_LIBRARIES})
 endforeach(bin)

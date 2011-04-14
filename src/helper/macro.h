@@ -10,7 +10,7 @@
 
 #ifndef _MACRO_H_
 #define _MACRO_H_
-
+__BEGIN_DECLS
 /** 
  * macro to wrap a malloc
  * 
@@ -77,4 +77,5 @@
  */
 #define MIN(a,b) (a>b?b:a)
 
+__END_DECLS
 #endif /* _MACRO_H_ */

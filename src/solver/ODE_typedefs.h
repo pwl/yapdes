@@ -12,16 +12,7 @@
 #define _ODE_TYPEDEFS_H_
 
 
-/** @name Default data types for solver */
-/**@{*/
-#ifdef ODE_R_LONG_DOUBLE
-typedef long double	ODE_R;  /**< type for continuous variables */
-#endif
-#ifdef ODE_R_DOUBLE
-typedef double ODE_R;
-#endif
-typedef unsigned int	ODE_uint;	/**< type for unsigned in, (mainly flags) */
-/**@}*/
+/** @todo split typedefs and move them to their respective folders */
 
 /** @name Forward declaration of structs for solver
    @{*/

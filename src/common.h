@@ -15,21 +15,20 @@
 #include "stdio.h"
 #include "stdlib.h"
 
+/** C++ guards */
+#undef __BEGIN_DECLS
+#undef __END_DECLS
+#ifdef __cplusplus
+# define __BEGIN_DECLS extern "C" {
+# define __END_DECLS }
+#else
+# define __BEGIN_DECLS /* empty */
+# define __END_DECLS /* empty */
+#endif
+
 #include "helper/macro.h"
 #include "error/ODE_error.h"
-/** @todo split typedefs and move them to their respective folders */
-
-/** define a type used by the whole library */
-#define ODE_R_LONG_DOUBLE
-
-#ifdef ODE_R_LONG_DOUBLE 
-#define ODE_FMT "% 1.1Lf"
-#endif
-
-#ifdef ODE_R_DOUBLE 
-#define ODE_FMT "% 1.1f"
-#endif
-
+#include "data_type.h"
 #include "solver/ODE_typedefs.h"
 
 /** @name boolean data types */

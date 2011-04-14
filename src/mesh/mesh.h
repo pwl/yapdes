@@ -23,6 +23,8 @@
 #ifndef _MESH_H_
 #define _MESH_H_
 
+__BEGIN_DECLS
+
 /**
  * Mesh is a predefined set of points @f$x_i@f$ (#mesh) and function
  * values associated with those points @f$f_j(x_i)@f$ (#f) with a set
@@ -79,46 +81,46 @@ struct ODE_mesh
   void * data;
 };
 
-/** 
+/**
  * use this function to get a pointer to a function with the name
  * #mc. A returned pointer can be used to access memory fast.
- * 
- * @param m 
+ *
+ * @param m
  * @param mc multicharacter name
- * 
+ *
  * @return pointer to a function with a name #mc
  */
 ODE_R * ODE_mesh_get_f_ptr(ODE_mesh * m, int mc);
 
-/** 
+/**
  * Use this to set an i-th member of the function named #mc to a value
  * #val. This way is probably slow as it has to search for a correct
  * name in a dictionary at every call.
  *
- * @param m 
+ * @param m
  * @param mc
  * @param i
- * @param val 
- * 
+ * @param val
+ *
  */
 void ODE_mesh_set_f(ODE_mesh * m, int mc, int i, ODE_R val);
 
-/** 
+/**
  * Reserves memory for all the elements of ODE_mesh. In particular it
  * allocates memory for #mesh, #f and #cache.
- * 
+ *
  * @param n number of mesh points
  * @param ind number of functions the mesh should work on
  * @param maxrk maximal rank of derivative used by the mesh
- * 
+ *
  * @return Pointer to an initialized mesh structure
  */
 ODE_mesh * ODE_mesh_init( int n, int ind, int maxrk , int * names);
 
-/** 
+/**
  * Standard free function
- * 
- * @param m 
+ *
+ * @param m
  */
 void ODE_mesh_free( ODE_mesh * m );
 
@@ -141,7 +143,7 @@ void ODE_mesh_free( ODE_mesh * m );
 /* }						\ */
 #endif
 
-
+__END_DECLS
 
 #endif /* _MESH_H_ */
 

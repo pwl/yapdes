@@ -2,16 +2,18 @@
  * @file   storage.h
  * @author Pawel Biernat <pawel.biernat@gmail.com>
  * @date   Mon Apr 11 15:59:12 2011
- * 
+ *
  * @brief  Storage.
  *
  * @sa #ODE_storage
- * 
+ *
  */
-#include "common.h"
-
 #ifndef _STORAGE_H_
 #define _STORAGE_H_
+
+#include "common.h"
+
+__BEGIN_DECLS
 
 /**
  * Structure to maintain n-dimensional table. Table entries are stored
@@ -57,88 +59,90 @@ struct ODE_storage
   int depth;
 };
 
-/** 
+/**
  * Function used to add two ODE_storages in place. This means that s1
  * holds a result of addition. Addition is realized by appending #ptrs
  * and #data of #s2 to #s1 and recalculating the pointers.
  *
  * @attention s1 is overwritten by this operation
- * 
+ *
  * @param s1 result of addition
  * @param s2 storage to be appended to s1
  */
 void ODE_storage_add( ODE_storage * s1, ODE_storage * s2 );
 
-/** 
+/**
  * Function used to print contents of s
- * 
- * @param s 
+ *
+ * @param s
  */
 void ODE_storage_print( ODE_storage * s);
 
-/** 
+/**
  * Function used to initialize an empty storage
- * 
- * @param depth 
- * @param size 
- * 
+ *
+ * @param depth
+ * @param size
+ *
  * @return ODE_storage
  */
 ODE_storage * ODE_storage_init( int depth, int * size );
 
-/** 
+/**
  * Function used to initialize ODE_storage which holds a pointer
  * structure of a #depth -dimensional matrix.
- * 
+ *
  * @param depth dimension of a matrix
  * @param dim size of each level of a matrix
- * 
+ *
  * @return ODE_storage
  */
 ODE_storage * ODE_storage_init_array( int depth, int * dim );
 
-/** 
+/**
  * Free a storage
- * 
+ *
  * @param s Storage to be freed
  */
 void ODE_storage_free( ODE_storage * s );
 
-/** 
+/**
  * Helper function used to increase a size of an ODE_storage by #size
- * 
- * @param s1 
+ *
+ * @param s1
  * @param size
  */
 void ODE_storage_realloc(ODE_storage *s1, int * size);
 
-/** 
+/**
  * Helper function used to fill the new space after applying
  * ODE_storage_reallo(s1, s2->size) with pointer structure from s2.
- * 
- * @param s1 
+ *
+ * @param s1
  * @param s2
  * @param add if 0 then recalculates pointers for addition,
  *  if 1 then recalculates pointers for copying
  */
 void ODE_storage_recalculate_pointers(ODE_storage *s1, ODE_storage *s2, int add);
 
-/** 
+/**
  * Accessor to the pointer to be casted to an array
- * 
- * @param s 
- * 
+ *
+ * @param s
+ *
  * @return pointer to be casted to an array
  */
 void * ODE_storage_get_array( ODE_storage * s );
 
-/** 
+/**
  * Creates an exact copy of the storage.
- * 
+ *
  * @param src storage to be copied
- * 
+ *
  * @return copied src
  */
 ODE_storage * ODE_storage_copy( ODE_storage * src );
+
+__END_DECLS
 
 #endif /* _STORAGE_H_ */

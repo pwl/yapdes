@@ -24,10 +24,13 @@ int ODE_dictionary_get_index( ODE_dictionary * d, int mc )
 int ODE_dictionary_set_index( ODE_dictionary * d, int index, int mc)
 {
   int * newmc;
-  
+
   /* increase the size of d->mc */
   if( index >= d->n )
     {
+      /** @bug, d->mc[i] for a span of i upto index is not
+	  initialized (see valgrind test/dictionary) */
+  
       /** @todo enclose the following with a macro */
 
       /** @bug new memory should be initialized to 0 */

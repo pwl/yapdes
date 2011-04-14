@@ -12,6 +12,7 @@
 
 #include "common.h"
 #include "mesh/mesh.h"
+#include "helper/storage.h"
 
 /**
  * Keeps a mesh and a calculated rhs of the equation together.
@@ -23,19 +24,28 @@ struct ODE_pde
   /** table of meshes */
   ODE_mesh ** mesh;
 
-  /** A place to store the function values on different meshes. The
-      memory structure is exactely the same as #rhs, in order to pass
-      #f to any marcher */
-  ODE_R *** f;
+  /* /\** A place to store the function values on different meshes. The */
+  /*     memory structure is exactely the same as #rhs, in order to pass */
+  /*     #f to any marcher *\/ */
+  /* ODE_R * f; */
 
-  /** Calculated rhs is stored here, its structure is as follows
-   rhs[i][j][k] corresponds to d/dt of mesh[i]->f[j] at
-   mesh[i]->x[k]. The underlying memory structure is a one block, so
-   that rhs[0][0] can be given to a marcher  */
-  ODE_R *** rhs;
+  /* /\** Calculated rhs is stored here, its structure is as follows */
+  /*  rhs[i][j][k] corresponds to d/dt of mesh[i]->f[j] at */
+  /*  mesh[i]->x[k]. The underlying memory structure is a one block, so */
+  /*  that rhs[0][0] can be given to a marcher  *\/ */
+  /* ODE_R * rhs; */
 
+  /**@name storages used to align memory for #f and #rhs
+     @{*/
+  ODE_storage * s_f;
+  ODE_storage * s_rhs;
+  /**@}*/
+  
   /** number of meshes assigned to ODE_pde */
   int mesh_n;
+
+  /** dictionary to hold mesh names */
+  ODE_dictionary * dict;
 };
 
 /**
@@ -54,7 +64,7 @@ void ODE_pde_free( ODE_pde * pde );
  *
  * @param m mesh to be added.
  */
-void ODE_pde_add_mesh( ODE_pde * pde, ODE_mesh * m );
+void ODE_pde_add_mesh( ODE_pde * pde, ODE_mesh * m , int name);
 
 /**
  * Calculates a size of a memory chunk (i.e. a number of values

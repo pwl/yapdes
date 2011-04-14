@@ -51,9 +51,14 @@ void ODE_mesh_free( ODE_mesh * m )
   ODE_FREE( m->mesh );
 
   /*ODE_FREE the continuous blocks */
-  ODE_FREE( m->f[0] );
-  ODE_FREE( m->f );
 
+  /* the if here is to help ODE_pde to manage memory */
+  if( m->f )
+    {
+      ODE_FREE( m->f[0] );
+      ODE_FREE( m->f );
+    }
+  
   ODE_FREE( m->cache[0][0] );
   ODE_FREE( m->cache[0] );
   ODE_FREE( m->cache );

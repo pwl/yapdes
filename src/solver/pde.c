@@ -72,10 +72,16 @@ void ODE_pde_add_mesh( ODE_pde * pde, ODE_mesh * m , int name)
   /* ODE_storage_print( s ); */
   
   if( ! pde->s_f )
-    pde->s_f = ODE_storage_copy( s );
+    {
+      pde->s_f = ODE_storage_copy( s );
+      pde->s_rhs = ODE_storage_copy( s );
+    }
   else
-    ODE_storage_add( pde->s_f, s );
-
+    {
+      ODE_storage_add( pde->s_f, s );
+      ODE_storage_add( pde->s_rhs, s );
+    }
+  
   /* here comes a tricky part, we need to move a pointer m->f to point
      to an appropriate part of a storage, but we have to free a memory
      which ODE_mesh has already allocated */
@@ -91,4 +97,42 @@ void ODE_pde_add_mesh( ODE_pde * pde, ODE_mesh * m , int name)
   /* free temporary storage */
   ODE_storage_free( s );
   ODE_FREE( dim );
+}
+
+ODE_mesh * ODE_pde_get_mesh( ODE_pde * pde, int name )
+{
+  int index = ODE_dictionary_get_index(pde->dict, name);
+
+  if( index >= 0 )
+    return
+      pde->mesh[ index ];
+  else
+    return NULL;
+}
+
+int ODE_pde_get_mesh_and_f_index( ODE_pde * pde, int mesh_name, int f_name, int * out )
+{
+  int mesh_index = ODE_dictionary_get_index(pde->dict, mesh_name);
+  int f_index = ODE_dictionary_get_index(pde->mesh[mesh_index], f_name);
+
+  out[0] = mesh_index;
+  out[1] = f_index;
+      
+  if( mesh_index < 0 ||
+      f_index < 0 )
+    return -1;
+  else
+    return 0;
+}
+
+ODE_R * ODE_pde_get_mesh_f( ODE_pde * pde, int mesh_name, int f_name )
+{
+  int indices[2];
+
+  if( ODE_pde_get_mesh_and_f_index( pde, mesh_name, f_name, indices ) < 0 )
+    return NULL;
+  /* else */
+  /*   return pde->mesh[indices[0]]->f[]; */
+    
+  
 }

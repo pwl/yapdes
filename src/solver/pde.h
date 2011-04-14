@@ -56,6 +56,11 @@ struct ODE_pde
  */
 ODE_pde * ODE_pde_init( void );
 
+/** 
+ * Standard free
+ * 
+ * @param pde 
+ */
 void ODE_pde_free( ODE_pde * pde );
 
 /**
@@ -76,6 +81,21 @@ void ODE_pde_add_mesh( ODE_pde * pde, ODE_mesh * m , int name);
  */
 int ODE_pde_size( ODE_pde * pde );
 
+/** 
+ * Get a mesh by giving its name
+ * 
+ * @param pde pde to extract a mesh from
+ * @param name name of the mesh
+ * 
+ * @return Mesh matching a #name
+ * @retval NULL no mesh of a given #name was found
+ */
+ODE_mesh * ODE_pde_get_mesh( ODE_pde * pde, int name );
 
+ODE_R * ODE_pde_get_mesh_f( ODE_pde * pde, int mesh_name, int f_name);
+
+ODE_R * ODE_pde_get_vector_f( ODE_pde * pde );
+
+ODE_R * ODE_pde_get_vector_rhs( ODE_pde * pde );
 
 #endif /* _PDE_H_ */

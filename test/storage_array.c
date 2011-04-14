@@ -4,7 +4,7 @@ int main(int argc, char *argv[])
 {
   int depth[] = {5,10};
   ODE_storage * s = ODE_storage_init_array(2, depth);
-  ODE_R ** table = (ODE_R**)s->ptrs[0];
+  ODE_R ** table = (ODE_R**)ODE_storage_get_array( s );
   int i,j;
   
   ODE_storage_print( s );

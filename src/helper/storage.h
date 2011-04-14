@@ -21,7 +21,7 @@
  * @code
  * int * a = {2,3,4};
  * ODE_storage * s = ODE_storage_init_array( 3, a );
- * ODE_R *** table = (ODE_R***)s->ptrs[0];
+ * ODE_R *** table = (ODE_R***)ODE_storage_get_array( s );
  * table[1][2][3] = (ODE_R)1.;
  * @endcode
  *
@@ -117,8 +117,28 @@ void ODE_storage_realloc(ODE_storage *s1, int * size);
  * ODE_storage_reallo(s1, s2->size) with pointer structure from s2.
  * 
  * @param s1 
- * @param s2 
+ * @param s2
+ * @param add if 0 then recalculates pointers for addition,
+ *  if 1 then recalculates pointers for copying
  */
-void ODE_storage_recalculate_pointers(ODE_storage *s1, ODE_storage *s2);
+void ODE_storage_recalculate_pointers(ODE_storage *s1, ODE_storage *s2, int add);
+
+/** 
+ * Accessor to the pointer to be casted to an array
+ * 
+ * @param s 
+ * 
+ * @return pointer to be casted to an array
+ */
+void * ODE_storage_get_array( ODE_storage * s );
+
+/** 
+ * Creates an exact copy of the storage.
+ * 
+ * @param src storage to be copied
+ * 
+ * @return copied src
+ */
+ODE_storage * ODE_storage_copy( ODE_storage * src );
 
 #endif /* _STORAGE_H_ */

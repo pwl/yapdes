@@ -15,6 +15,8 @@
 #include "solver/ODE_table.h"
 #include "common.h"
 
+__BEGIN_DECLS
+
 /** Structure designed to hold a time-dependent information on the
     function being evolved. This is a core data structure of a solver
     and is evolved by marcher using some rhs formula (@todo provide
@@ -58,5 +60,6 @@ ODE_state * ODE_state_init(int length );
 
 void ODE_state_free( ODE_state * state );
 
+__END_DECLS
 
 #endif /* _ODE_STATE_H_ */

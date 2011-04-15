@@ -15,7 +15,8 @@
 #include "stdio.h"
 #include "stdlib.h"
 
-/** C++ guards */
+/** @name C++ guards
+ @{*/
 #undef __BEGIN_DECLS
 #undef __END_DECLS
 #ifdef __cplusplus
@@ -25,6 +26,8 @@
 # define __BEGIN_DECLS /* empty */
 # define __END_DECLS /* empty */
 #endif
+/** @} */
+
 
 #include "helper/macro.h"
 #include "error/ODE_error.h"

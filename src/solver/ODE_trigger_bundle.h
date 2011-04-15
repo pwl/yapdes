@@ -15,6 +15,8 @@
 #include "solver/ODE_module.h"
 #include "solver/ODE_trigger.h"
 
+__BEGIN_DECLS
+
 /**
  * Structure analogous to ODE_module_bundle.
  *
@@ -114,5 +116,6 @@ ODE_uint ODE_trigger_bundle_count( ODE_trigger_bundle * tb );
  */
 void ODE_trigger_bundle_update( ODE_trigger_bundle * tb );
 
+__END_DECLS
 
 #endif /* _ODE_TRIGGER_BUNDLE_H_ */

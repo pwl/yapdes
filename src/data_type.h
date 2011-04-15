@@ -12,10 +12,6 @@
 #ifndef _DATA_TYPE_H_
 #define _DATA_TYPE_H_
 
-#include "gmpxx.h"
-
-__BEGIN_DECLS
-
 /** define a type used by the whole library */
 /* #define ODE_R_LONG_DOUBLE */
 /* #define ODE_R_DOUBLE */
@@ -36,6 +32,7 @@ __BEGIN_DECLS
 #endif
 
 #ifdef ODE_R_GMPF
+#include <gmpxx.h>
 #define ODE_FMT ""
 #define ODE_REAL mpf_class
 #endif
@@ -46,14 +43,14 @@ __BEGIN_DECLS
 #error "Define it in data_type.h"
 #endif
 
+/** ODE_R is a data type used thoroughout the whole yapdes and is
+    intended to store real variables */
 typedef ODE_REAL ODE_R;
 
 /** @name Default data types for solver */
 /**@{*/
-/** type for unsigned in, (mainly flags) - @bug obsolate, use int instead */
+/** type for unsigned int, (mainly flags) - @bug obsolate, use int instead */
 typedef unsigned int	ODE_uint;
 /**@}*/
-
-__END_DECLS
 
 #endif /* _DATA_TYPE_H_ */

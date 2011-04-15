@@ -10,12 +10,14 @@ set( LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR}/lib )
 set( CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/CMake )
 
 # define compile flags
-set(w_flags "-ansi -pedantic -Wall -Wshadow -Wmissing-prototypes -Wstrict-prototypes -Wpointer-arith -Wcast-qual -Wcast-align -Wwrite-strings -Wnested-externs -fno-common -Dinline=")
-set(w_flags_disable "-Wno-multichar")
+set(w_flags "-ansi -pedantic -Wall -Wshadow -Wpointer-arith -Wcast-qual -Wcast-align -Wwrite-strings -Dinline=")
+set(w_flags_c_only "-Wmissing-prototypes -Wstrict-prototypes -Wnested-externs" )
+set(w_flags_disable "-Wno-multichar -fno-common")
 set(o_flags "-O2")
 set(d_flags "-ggdb")
-
-# message( ${LIBRARY_OUTPUT_PATH} )
+set(flags "${w_flags} ${w_flags_disable} ${o_flags} ${d_flags}")
+# add c-only flags
+# set(flags "${flags} ${w_flags_c_only}")
 
 add_subdirectory( src )
 
@@ -33,6 +35,9 @@ endif(DOXYGEN_FOUND)
 # check if GMP is installed?
 find_package(GMP)
 
+# does not work with target_link_libraries
+# set(LIBS "m gmp gmpxx")
+# set(LIBS "m")
 
 # create targets out of all files from test, they will compile to the
 # test directory
@@ -56,12 +61,13 @@ foreach(bin ${bin_list})
   set_target_properties(${bin}
     PROPERTIES
     COMPILE_FLAGS
-    "${w_flags} ${w_flags_disable} ${o_flags} ${d_flags}")
-
+    ${flags})
+  
+  # compile sources with c++-compiler
   set_target_properties(${bin}
     PROPERTIES
     LANGUAGE
     CXX)
 
-  target_link_libraries(${bin} yapdes m ${GMP_LIBRARIES})
+  target_link_libraries(${bin} m gmp gmpxx yapdes)
 endforeach(bin)

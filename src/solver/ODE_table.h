@@ -12,6 +12,8 @@
 
 #include "common.h"
 
+__BEGIN_DECLS
+
 /**
  * ODE_table is a simply a table with its maximum length stored in a
  * single structure
@@ -50,5 +52,7 @@ void ODE_table_free( ODE_table * t );
  * @return @a n-th element of @c t
  */
 ODE_R ODE_table_get( ODE_table * t, int n );
+
+__END_DECLS
 
 #endif /* _ODE_TABLE_H_ */

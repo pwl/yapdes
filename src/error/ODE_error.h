@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+__BEGIN_DECLS
+
 void ODE_error ( const char * msg, const char * file, int line, const int errno );
 
 #define _ODE_ERROR(msg,errno)                   \
@@ -13,7 +15,7 @@ void ODE_error ( const char * msg, const char * file, int line, const int errno 
        } while (0)
 
 
-
+__END_DECLS
 
 #endif /* _ODE_ERROR_H_ */
 

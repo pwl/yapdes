@@ -16,6 +16,8 @@
 #include "solver/ODE_module.h"
 #include "solver/ODE_solver.h"
 
+__BEGIN_DECLS
+
 /**
  * A basic version of a module management structure consisting of a
  * list of modules and its length, to be expanded in future.
@@ -104,5 +106,7 @@ void ODE_module_bundle_step( ODE_module_bundle * mb );
  *
  */
 void ODE_module_bundle_free( ODE_module_bundle * mb );
+
+__END_DECLS
 
 #endif /* _ODE_MODULE_BUNDLE_H_ */

@@ -49,6 +49,13 @@ __BEGIN_DECLS
     case when it works as free instead of ODE_FREE */
 #define ODE_REALLOC(ptr,n,type) (type *)realloc((void * )ptr, (n) * sizeof(type))
 
+/** 
+ * Function used to print a message
+ * 
+ * @param msg 
+ * 
+ * @return 
+ */
 #define ODE_PRINT_HERE(msg)						\
   {									\
     printf("file:%s:%d in %s()\n    : ", __FILE__, __LINE__, __FUNCTION__); \

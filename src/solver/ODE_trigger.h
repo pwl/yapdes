@@ -45,6 +45,7 @@
 #include "common.h"
 #include "solver/ODE_module.h"
 
+__BEGIN_DECLS
 
 /**
  * Triggers functionality is contained in ODE_trigger structure. Its
@@ -153,5 +154,6 @@ int ODE_trigger_sanity_test( ODE_trigger * tr );
  */
 void ODE_trigger_print( ODE_trigger * t );
 
+__END_DECLS
 
 #endif /* _ODE_MODULE_TRIGGER_H_ */

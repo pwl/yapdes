@@ -1,4 +1,7 @@
 * mpreal support
+  to install mprf c++ bindings:
+  - install mpfr (for example via apt-get install libmpfr-dev)
+  - cd mpreal && sudo make install
 ** what works:
   - can be compiled using g++ 4.4.5
   - no memory leaks are present

@@ -29,10 +29,10 @@
 /** @} */
 
 
-#include "helper/macro.h"
-#include "error/ODE_error.h"
 #include "data_type.h"
 #include "solver/ODE_typedefs.h"
+#include "helper/macro.h"
+#include "error/ODE_error.h"
 
 /** @name boolean data types */
 /**@{*/

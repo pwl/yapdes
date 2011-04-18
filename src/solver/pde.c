@@ -59,7 +59,7 @@ void ODE_pde_add_mesh( ODE_pde * pde, ODE_mesh * m , int name)
   ODE_storage * s;
 
   /* add a mesh to a mesh table */
-  pde->mesh = ODE_REALLOC( pde->mesh, n + 1, ODE_mesh * );
+  pde->mesh = ODE_REALLOC( pde->mesh, n + 1, ODE_mesh *, n );
   pde->mesh[n] = m;
   pde->mesh_n++;
 

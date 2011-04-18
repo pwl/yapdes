@@ -10,10 +10,10 @@ set( LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR}/lib )
 set( CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/CMake )
 
 # define compile flags
-set(w_flags "-ansi -pedantic -Wall -Wshadow -Wpointer-arith -Wcast-qual -Wcast-align -Wwrite-strings -Dinline=")
+set(w_flags "-ansi -pedantic -Wall -Wshadow -Wpointer-arith -Wcast-qual -Wcast-align -Wwrite-strings")
 set(w_flags_c_only "-Wmissing-prototypes -Wstrict-prototypes -Wnested-externs" )
-set(w_flags_disable "-Wno-multichar -fno-common")
-set(o_flags "-O2")
+set(w_flags_disable "-Wno-multichar")
+# set(o_flags "-O2")
 set(d_flags "-ggdb")
 set(flags "${w_flags} ${w_flags_disable} ${o_flags} ${d_flags}")
 # add c-only flags
@@ -35,10 +35,6 @@ endif(DOXYGEN_FOUND)
 # check if GMP is installed?
 find_package(GMP)
 
-# does not work with target_link_libraries
-# set(LIBS "m gmp gmpxx")
-# set(LIBS "m")
-
 # create targets out of all files from test, they will compile to the
 # test directory
 
@@ -52,6 +48,11 @@ foreach(bin ${bin_list})
 
   add_executable(${bin} ${PROJECT_SOURCE_DIR}/test/${bin}.c)
 
+  set_source_files_properties(${PROJECT_SOURCE_DIR}/test/${bin}.c
+    PROPERTIES
+    LANGUAGE
+    CXX)
+
   set_target_properties(${bin}
     PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY
@@ -62,12 +63,32 @@ foreach(bin ${bin_list})
     PROPERTIES
     COMPILE_FLAGS
     ${flags})
-  
+
   # compile sources with c++-compiler
   set_target_properties(${bin}
     PROPERTIES
-    LANGUAGE
+    LINKER_LANGUAGE
     CXX)
 
-  target_link_libraries(${bin} m gmp gmpxx yapdes)
+  
+  target_link_libraries(${bin} yapdes dlmalloc mpreal gmp mpfr)
 endforeach(bin)
+
+add_executable(example ${PROJECT_SOURCE_DIR}/test/example.cpp)
+
+set_target_properties(example
+  PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY
+  ${CMAKE_CURRENT_BINARY_DIR}/test)
+
+# set_target_properties(example
+#   PROPERTIES
+#   COMPILE_FLAGS
+#   ${flags})
+
+# set_target_properties(example
+#   PROPERTIES
+#   LINKER_LANGUAGE
+#   CXX)
+
+target_link_libraries(example dlmalloc mpreal gmp mpfr)

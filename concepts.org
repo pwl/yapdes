@@ -1,11 +1,6 @@
 * Interesting libraries
 ** Memory management
    - malloc_hook
-   - allocating a multidimensional table in a single line
-     
-     int (*x)[10] = malloc(10 * 10 * sizeof(int));
-     x[2][3] = 3;
-
 ** Loading modules
    - GModule
 ** Testing
@@ -18,6 +13,8 @@
    - likely/unlikely macros (icc compatible?)
 ** Signal handling
    - http://www.gnu.org/software/libc/manual/html_mono/libc.html#Signal-Handling
+** MPACK Multiple precision arithmetic BLAS (MBLAS) and LAPACK (MLAPACK)
+** up to date libboost to be found at ppa:purplekarrot/ppa
 
 * Conventions
 ** Exit status

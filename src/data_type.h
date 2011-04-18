@@ -15,7 +15,7 @@
 /** define a type used by the whole library */
 /* #define ODE_R_LONG_DOUBLE */
 /* #define ODE_R_DOUBLE */
-#define ODE_R_GMPF
+#define ODE_R_MPREAL
 
 #undef ODE_REAL
 
@@ -31,10 +31,19 @@
 #define ODE_REAL double
 #endif
 
-#ifdef ODE_R_GMPF
-#include <gmpxx.h>
+#ifdef ODE_R_MPREAL
+#include <iostream>
+#include <mpreal.h>
+#include <dlmalloc.h>
+/* #define malloc dlmalloc */
+/* #define calloc dlcalloc */
+/* #define realloc dlrealloc */
+/* #define free dlfree */
 #define ODE_FMT ""
-#define ODE_REAL mpf_class
+#define ODE_REAL mpreal
+using namespace mpfr;
+using namespace std;
+#define ODE_INIT mpreal::set_default_prec(1000);
 #endif
 /**@}*/
 
@@ -46,6 +55,7 @@
 /** ODE_R is a data type used thoroughout the whole yapdes and is
     intended to store real variables */
 typedef ODE_REAL ODE_R;
+/* #define ODE_R ODE_REAL */
 
 /** @name Default data types for solver */
 /**@{*/

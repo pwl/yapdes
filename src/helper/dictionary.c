@@ -4,7 +4,8 @@ ODE_dictionary * ODE_dictionary_init( void )
 {
   ODE_dictionary * d = ODE_MALLOC( 1, ODE_dictionary );
   d->n = 0;
-  d->mc=NULL;
+  /* d->mc=ODE_MALLOC(0,int); */
+  d->mc=(int*)NULL;
   return d;
 }
 
@@ -24,7 +25,7 @@ int ODE_dictionary_get_index( ODE_dictionary * d, int mc )
 int ODE_dictionary_set_index( ODE_dictionary * d, int index, int mc)
 {
   int * newmc;
-
+  
   /* increase the size of d->mc */
   if( index >= d->n )
     {
@@ -34,8 +35,13 @@ int ODE_dictionary_set_index( ODE_dictionary * d, int index, int mc)
       /** @todo enclose the following with a macro */
 
       /** @bug new memory should be initialized to 0 */
-      newmc = ODE_REALLOC( d->mc, index + 1, int );
-      
+      newmc = ODE_REALLOC( d->mc, index + 1, int, d->n );
+      {
+	int i;
+	for( i = d->n; i < index; i++)
+	  newmc[i] = 0;
+      }
+            
       if( ! newmc )
 	/* error to be handled by a programmer */
 	/** @todo report! */

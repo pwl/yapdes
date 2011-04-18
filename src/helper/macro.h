@@ -11,6 +11,27 @@
 #ifndef _MACRO_H_
 #define _MACRO_H_
 __BEGIN_DECLS
+
+/** 
+ * MAXXX!!!!
+ * 
+ * @param a loose
+ * @param b win
+ * 
+ * @return win!
+ */
+#define MAX(a,b) ((a)<(b)?(b):(a))
+
+/** 
+ * MINNN!!!!
+ * 
+ * @param a loose
+ * @param b win
+ * 
+ * @return loose!
+ */
+#define MIN(a,b) ((a)>(b)?(b):(a))
+
 /** 
  * macro to wrap a malloc
  * 
@@ -22,9 +43,13 @@ __BEGIN_DECLS
  * @todo fix this to include check weather a memory has been allocated
  * successfuly
  */
+#ifdef __cplusplus
+__END_DECLS
+#include "macro.hpp"
+__BEGIN_DECLS
+#else  /* __cplusplus */
 
 #define ODE_MALLOC(size,type) (type *)calloc( size, sizeof(type))
-
 /** @todo report a double free error if ptr==NULL */
 #define ODE_FREE(ptr) {				\
     if(ptr)					\
@@ -35,7 +60,6 @@ __BEGIN_DECLS
       ODE_PRINT_HERE(("Double free: %s is NULL", #ptr));	\
     ptr=NULL;							\
 }
-
 /** 
  * Realloc
  * 
@@ -47,7 +71,8 @@ __BEGIN_DECLS
  */
 /** @bug possible bug if ODE_REALLOC is used with n=0, which is the
     case when it works as free instead of ODE_FREE */
-#define ODE_REALLOC(ptr,n,type) (type *)realloc((void * )ptr, (n) * sizeof(type))
+#define ODE_REALLOC(ptr,n,type,n_old) (type *)realloc((void*)ptr, (n) * sizeof(type))
+#endif	/* __cplusplus */
 
 /** 
  * Function used to print a message
@@ -64,25 +89,6 @@ __BEGIN_DECLS
   }									\
     
   
-/** 
- * MAXXX!!!!
- * 
- * @param a loose
- * @param b win
- * 
- * @return win!
- */
-#define MAX(a,b) (a<b?b:a)
-
-/** 
- * MINNN!!!!
- * 
- * @param a loose
- * @param b win
- * 
- * @return loose!
- */
-#define MIN(a,b) (a>b?b:a)
 
 __END_DECLS
 #endif /* _MACRO_H_ */

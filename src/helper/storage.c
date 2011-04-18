@@ -17,7 +17,7 @@ void ODE_storage_realloc(ODE_storage *s1, int * size)
 	old = s1->ptrs[i];
 	/* reallocate memory and rewrite s1->ptrs[i] */
 	s1->ptrs[i] =
-	  ODE_REALLOC( s1->ptrs[i], s1->size[i] + size[i], void ** );
+	  ODE_REALLOC( s1->ptrs[i], s1->size[i] + size[i], void **, s1->size[i] );
 
 	/* calculate new relative poistion */
 	shift = s1->ptrs[i] - old;
@@ -36,15 +36,14 @@ void ODE_storage_realloc(ODE_storage *s1, int * size)
   {
     ODE_R * old = s1->data;
     s1->data =
-      ODE_REALLOC( s1->data, s1->size[d-1] + size[d-1], ODE_R );
+      ODE_REALLOC( s1->data, s1->size[d-1] + size[d-1], ODE_R, s1->size[d-1] );
 
     /* calculate new relative poistion */
-    shift = s1->data - old;
-
+    
     /* if a memory block has moved */
-    if( shift != 0 )
+    if( s1->data != old )
       for( j = 0; j < s1->size[d-2]; j++ )
-	s1->ptrs[d-2][j] = (void**)((ODE_R*)s1->ptrs[d-2][j] + shift);
+	s1->ptrs[d-2][j] = (void**)((ODE_R*)s1->ptrs[d-2][j]-old+s1->data);
   }
 }
 
@@ -85,13 +84,17 @@ void ODE_storage_recalculate_pointers(ODE_storage *s1, ODE_storage *s2, int add 
 
 ODE_storage * ODE_storage_copy( ODE_storage * src )
 {
-  int i, d = src->depth;
+  int i, j, d = src->depth;
   ODE_storage * s = ODE_storage_init( src->depth, src->size );
   /* copy the content of src to s */
 
   for( i = 0; i < d - 1; i++ )
-    memcpy( s->ptrs[i], src->ptrs[i], src->size[i] * sizeof(void **) );
-  memcpy( s->data, src->data, src->size[d-1] * sizeof(ODE_R) );
+    for( j = 0; j < src->size[i]; j++ )
+      s->ptrs[i][j] = src->ptrs[i][j];
+    /* memcpy( s->ptrs[i], src->ptrs[i], src->size[i] * sizeof(void **) ); */
+  for( i = 0; i < src->size[d-1]; i++ )
+    s->data[i] = src->data[i];
+    /* memcpy( s->data, src->data, src->size[d-1] * sizeof(ODE_R) ); */
 
   ODE_storage_recalculate_pointers( s, src, 0 );
 
@@ -102,6 +105,7 @@ ODE_storage * ODE_storage_copy( ODE_storage * src )
 void ODE_storage_add( ODE_storage * s1, ODE_storage * s2 )
 {
   int d = s1->depth;
+  int i;
 
   /* 1. check if both storages are of the same depth */
   /** @todo this is not required since we can add two storages so that
@@ -114,18 +118,18 @@ void ODE_storage_add( ODE_storage * s1, ODE_storage * s2 )
   ODE_storage_realloc(s1, s2->size);
 
   /* 3. copy the s2->data to s1->data */
-  memcpy( s1->data + s1->size[d-1], s2->data, s2->size[d-1] * sizeof(ODE_R) );
+  for( i = 0; i < s2->size[d-1]; i++ )
+    s1->data[ s1->size[d-1] + i ] = s2->data[i];
+  
+  /* memcpy( s1->data + s1->size[d-1], s2->data, s2->size[d-1] * sizeof(ODE_R) ); */
 
   /* 4. assign pointers to data copied to s1 */
   ODE_storage_recalculate_pointers(s1, s2, TRUE);
 
 
   /* 5. alter s1->size */
-  {
-    int i;
-    for ( i = 0; i < d; i++)
-      s1->size[i]+=s2->size[i];
-  }
+  for ( i = 0; i < d; i++)
+    s1->size[i]+=s2->size[i];
 }
 
 
@@ -196,16 +200,16 @@ void ODE_storage_print( ODE_storage * s)
 
     if( s->size[s->depth-1] <= 2*offset )
       for( j = 0; j < s->size[s->depth-1]; j++ )
-    	{}/* printf(ODE_FMT " |", s->data[j]); */
+    	{cout << s->data[j].to_string()<< " |";}/* printf(ODE_FMT " |", s->data[j]); */
     else
       {
     	for( j = 0; j < offset; j++ )
-    	  {}/* printf(ODE_FMT " |", s->data[j]); */
+    	  {cout << s->data[j].to_string()<< " |";}/* printf(ODE_FMT " |", s->data[j]); */
 
     	printf("(...)|");
 
     	for( j = s->size[s->depth-1] - offset; j < s->size[s->depth-1]; j++ )
-    	  {}/* printf(ODE_FMT " |", s->data[j]); */
+    	  {cout << s->data[j].to_string()<< " |";}/* printf(ODE_FMT " |", s->data[j]); */
       }
     printf("\n");
   }
@@ -219,8 +223,13 @@ ODE_storage * ODE_storage_init( int depth, int * size )
   s->ptrs = ODE_MALLOC( depth - 1, void ***);
   s->data = ODE_MALLOC( size[depth-1], ODE_R );
 
-  memcpy( s->size, size, depth * sizeof(int) );
-
+  /* memcpy( s->size, size, depth * sizeof(int) ); */
+  {
+    int i;
+    for( i = 0; i < depth; i++ )
+      s->size[i] = size[i];
+  }
+  
   {
     int i,j;
     for( i = 0; i < depth - 1; i++ )
@@ -261,7 +270,7 @@ ODE_storage * ODE_storage_init_array( int depth, int * dim )
   if( depth > 1 )
     for( j = 0; j < size[depth-2]; j++ )
       s->ptrs[depth-2][j] = (void**)((ODE_R*)s->ptrs[depth-2][0] + j*dim[depth-1]);
-
+  
   ODE_FREE( size );
 
   return s;

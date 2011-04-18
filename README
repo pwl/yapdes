@@ -1,7 +1,8 @@
-yapdes reborn
-
-fork testing
-
-fork testing 2
-
-fork testing 28.01
+* mpreal support
+** what works:
+  - can be compiled using g++ 4.4.5
+  - no memory leaks are present
+  - test/storage works properly
+** what does not work:
+  - no unified printing interface for various data types including
+    mpreal

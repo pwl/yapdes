@@ -9,3 +9,8 @@
 ** what does not work:
   - no unified printing interface for various data types including
     mpreal
+** how did I solve it?
+   - for mpreal replace all malloc, realloc and free with new and
+     delete (this can be done using c++ specialized templates and
+     existing ODE_MALLOC like macros).
+   - replace memcpy with copying using '='

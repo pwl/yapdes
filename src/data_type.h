@@ -15,7 +15,7 @@
 /** define a type used by the whole library */
 /* #define ODE_R_LONG_DOUBLE */
 /* #define ODE_R_DOUBLE */
-#define ODE_R_MPREAL
+#define ODE_R_MPREAL		/* as for now no othe type works */
 
 #undef ODE_REAL
 
@@ -24,11 +24,13 @@
 #ifdef ODE_R_LONG_DOUBLE
 #define ODE_FMT "% 1.1Lf"
 #define ODE_REAL long double
+#define ODE_INIT()		/* empty definition */
 #endif
 
 #ifdef ODE_R_DOUBLE
 #define ODE_FMT "% 1.1f"
 #define ODE_REAL double
+#define ODE_INIT()		/* empty definition */
 #endif
 
 #ifdef ODE_R_MPREAL
@@ -43,7 +45,11 @@
 #define ODE_REAL mpreal
 using namespace mpfr;
 using namespace std;
-#define ODE_INIT mpreal::set_default_prec(1000);
+#define ODE_INIT()				\
+  {						\
+    mpreal::set_default_prec(1000);		\
+    cout.precision(15);				\
+  }
 #endif
 /**@}*/
 

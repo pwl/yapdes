@@ -200,16 +200,16 @@ void ODE_storage_print( ODE_storage * s)
 
     if( s->size[s->depth-1] <= 2*offset )
       for( j = 0; j < s->size[s->depth-1]; j++ )
-    	{cout << s->data[j].to_string()<< " |";}/* printf(ODE_FMT " |", s->data[j]); */
+    	{cout << s->data[j].to_string() << " |";}/* printf(ODE_FMT " |", s->data[j]); */
     else
       {
     	for( j = 0; j < offset; j++ )
-    	  {cout << s->data[j].to_string()<< " |";}/* printf(ODE_FMT " |", s->data[j]); */
+    	  {cout << s->data[j].to_string() << " |";}/* printf(ODE_FMT " |", s->data[j]); */
 
     	printf("(...)|");
 
     	for( j = s->size[s->depth-1] - offset; j < s->size[s->depth-1]; j++ )
-    	  {cout << s->data[j].to_string()<< " |";}/* printf(ODE_FMT " |", s->data[j]); */
+    	  {cout << s->data[j].to_string() << " |";}/* printf(ODE_FMT " |", s->data[j]); */
       }
     printf("\n");
   }
@@ -270,7 +270,7 @@ ODE_storage * ODE_storage_init_array( int depth, int * dim )
   if( depth > 1 )
     for( j = 0; j < size[depth-2]; j++ )
       s->ptrs[depth-2][j] = (void**)((ODE_R*)s->ptrs[depth-2][0] + j*dim[depth-1]);
-  
+
   ODE_FREE( size );
 
   return s;

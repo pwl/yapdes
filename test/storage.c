@@ -4,27 +4,15 @@ int main(int argc, char *argv[])
 {
   ODE_INIT();
 
-  int depth1[] = {1,1,1};
-  int depth2[] = {1,1,1};
-  int depth3[] = {2,3,4};
+  int depth1[] = {2,3,4};
+  int depth2[] = {4,3,2};
+  int depth3[] = {1000,10,4};
   
   ODE_storage * s1 = ODE_storage_init(3, depth1);
   ODE_storage * s2 = ODE_storage_init(3, depth2);
   ODE_storage * s3 = ODE_storage_init_array(3, depth3);
   ODE_storage * s4 = ODE_storage_copy( s3 );
-  ODE_R a,b,c;
-
-  /* a=1.; */
-  /* b=2.; */
-  /* c=3.; */
-	
-  /* b = b*asin(a); */
-  /* c = sin(b); */
-  /* cout << a << endl; */
-  /* cout << b << endl; */
-  /* cout << c << endl; */
-  /* return 0; */
-
+  
   printf("\nStorage n. 1\n");
   ODE_storage_print( s1);
   printf("\nStorage n. 2\n");

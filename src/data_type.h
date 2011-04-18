@@ -15,47 +15,39 @@
 /** define a type used by the whole library */
 /* #define ODE_R_LONG_DOUBLE */
 /* #define ODE_R_DOUBLE */
-#define ODE_R_MPREAL		/* as for now no othe type works */
+#define ODE_R_MPREAL
 
 #undef ODE_REAL
+
 
 /**@name predefined data types along with formatting of the output
    @{*/
 #ifdef ODE_R_LONG_DOUBLE
-#define ODE_FMT "% 1.1Lf"
-#define ODE_REAL long double
-#define ODE_INIT()		/* empty definition */
+#include "data_type/long_double.h"
 #endif
 
 #ifdef ODE_R_DOUBLE
-#define ODE_FMT "% 1.1f"
-#define ODE_REAL double
-#define ODE_INIT()		/* empty definition */
+#include "data_type/double.h"
 #endif
 
 #ifdef ODE_R_MPREAL
-#include <iostream>
-#include <mpreal.h>
-#include <dlmalloc.h>
-/* #define malloc dlmalloc */
-/* #define calloc dlcalloc */
-/* #define realloc dlrealloc */
-/* #define free dlfree */
-#define ODE_FMT ""
-#define ODE_REAL mpreal
-using namespace mpfr;
-using namespace std;
-#define ODE_INIT()				\
-  {						\
-    mpreal::set_default_prec(1000);		\
-    cout.precision(15);				\
-  }
+#include "data_type/mpreal.h"
 #endif
 /**@}*/
 
 #ifndef ODE_REAL
 #error "===ODE_REAL undefined==="
 #error "Define it in data_type.h"
+#endif
+
+/* default ODE_INIT */
+#ifndef ODE_INIT
+#define ODE_INIT() {}
+#endif
+
+/* default print */
+#ifndef ODE_RP
+#define ODE_RP() {}
 #endif
 
 /** ODE_R is a data type used thoroughout the whole yapdes and is
